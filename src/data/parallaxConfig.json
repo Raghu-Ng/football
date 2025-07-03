@@ -1,0 +1,57 @@
+[
+  {
+    "selector": ".hero-background",
+    "properties": {
+      "translateY": { "scalar": 0.2 },
+      "opacity": { "from": 1, "to": 0.8 }
+    },
+    "triggerOffset": 0,
+    "duration": "smooth"
+  },
+  {
+    "selector": ".floating-elements",
+    "properties": {
+      "translateY": { "scalar": 0.3 },
+      "translateX": { "scalar": 0.1 },
+      "rotate": { "scalar": 0.05 }
+    },
+    "triggerOffset": 100,
+    "duration": "smooth"
+  },
+  {
+    "selector": ".section-background",
+    "properties": {
+      "translateY": { "scalar": 0.15 },
+      "scale": { "from": 1, "to": 1.05 }
+    },
+    "triggerOffset": 200,
+    "duration": "smooth"
+  },
+  {
+    "selector": ".card-elements",
+    "properties": {
+      "translateY": { "scalar": 0.4 },
+      "opacity": { "from": 0.8, "to": 1 }
+    },
+    "triggerOffset": 150,
+    "duration": "smooth"
+  },
+  {
+    "selector": ".text-layers",
+    "properties": {
+      "translateY": { "scalar": 0.5 },
+      "blur": { "from": 0, "to": 2 }
+    },
+    "triggerOffset": 50,
+    "duration": "smooth"
+  },
+  {
+    "selector": ".image-layers",
+    "properties": {
+      "translateY": { "scalar": 0.25 },
+      "scale": { "from": 1, "to": 1.1 }
+    },
+    "triggerOffset": 300,
+    "duration": "smooth"
+  }
+]
