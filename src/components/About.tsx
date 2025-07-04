@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Award, Users, Trophy, Target, Zap, Shield, Cpu } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 import ParallaxSection from './ParallaxSection';
+import { supabase } from '../lib/supabase';
 
 const About = () => {
   const stats = [
@@ -10,6 +11,20 @@ const About = () => {
     { icon: <Award className="w-8 h-8" />, number: '25', label: 'Years of Excellence' },
     { icon: <Target className="w-8 h-8" />, number: '100+', label: 'Professional Players' }
   ];
+
+  const [wins, setWins] = useState<any[]>([]);
+  const [matches, setMatches] = useState<any[]>([]);
+
+  useEffect(() => {
+    // Fetch wins
+    supabase.from('wins').select('*').order('match_date', { ascending: false }).then(({ data }) => {
+      setWins(data || []);
+    });
+    // Fetch matches
+    supabase.from('upcoming_matches').select('*').order('match_date', { ascending: true }).then(({ data }) => {
+      setMatches(data || []);
+    });
+  }, []);
 
   return (
     <section id="about" className="py-20 bg-orange-50/30 dark:bg-gray-900 relative overflow-hidden transition-colors duration-300">
@@ -142,25 +157,25 @@ const About = () => {
           <div>
             <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Upcoming Matches</h3>
             <div className="flex flex-col gap-6">
-              {[{team2: 'Challengers FC', date: 'WED JUL 23', comp: 'CLUB FRIENDLIES', kickoff: '12:30', venue: 'National Stadium', time: '19:30 Local Time'}, {team2: 'Future Stars', date: 'FRI JUL 30', comp: 'PREMIER LEAGUE', kickoff: '18:00', venue: 'Stadium C', time: '21:00 Local Time'}].map((match, i) => (
-                <div key={i} className="rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden bg-white dark:bg-gray-800">
+              {matches.map((match, i) => (
+                <div key={match.id || i} className="rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden bg-white dark:bg-gray-800">
                   <div className="flex flex-col md:flex-row justify-between items-center border-b-2 border-red-500">
                     <div className="flex-1 p-4">
                       <div className="flex justify-between items-center mb-2">
-                        <span className="text-xs font-semibold text-gray-700 dark:text-gray-300">{match.date}</span>
-                        <span className="text-xs font-semibold text-gray-700 dark:text-gray-300">{match.comp}</span>
+                        <span className="text-xs font-semibold text-gray-700 dark:text-gray-300">{match.match_date}</span>
+                        <span className="text-xs font-semibold text-gray-700 dark:text-gray-300">{match.competition}</span>
                       </div>
                       <div className="flex justify-between items-center mb-2">
-                        <span className="text-xs text-gray-500">KICKOFF - {match.kickoff}</span>
+                        <span className="text-xs text-gray-500">KICKOFF - {match.kickoff_time}</span>
                         <span className="text-xs text-gray-500">{match.venue}</span>
                       </div>
                       <div className="flex justify-center items-center gap-2 my-4">
                         <span className="font-bold text-gray-700 dark:text-gray-200">United FC Kodagu</span>
                         <span className="text-xl font-bold text-gray-500">vs</span>
-                        <span className="font-bold text-gray-700 dark:text-gray-200">{match.team2}</span>
+                        <span className="font-bold text-gray-700 dark:text-gray-200">{match.opponent}</span>
                       </div>
                       <div className="flex justify-center">
-                        <span className="bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-full text-xs font-semibold text-gray-700 dark:text-gray-300">{match.time}</span>
+                        <span className="bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-full text-xs font-semibold text-gray-700 dark:text-gray-300">{match.kickoff_time}</span>
                       </div>
                     </div>
                   </div>
@@ -172,22 +187,22 @@ const About = () => {
           <div>
             <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Recent Wins</h3>
             <div className="flex flex-col gap-6">
-              {[{team2: 'Rivals FC', score: '3-1', date: 'SUN MAY 25', comp: 'PREMIER LEAGUE', kickoff: '16:00', venue: 'Stadium A'}, {team2: 'Legends United', score: '2-0', date: 'SAT MAY 17', comp: 'PREMIER LEAGUE', kickoff: '18:00', venue: 'Stadium B'}].map((win, i) => (
-                <div key={i} className="rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden bg-white dark:bg-gray-800">
+              {wins.map((win, i) => (
+                <div key={win.id || i} className="rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden bg-white dark:bg-gray-800">
                   <div className="flex flex-col md:flex-row justify-between items-center border-b-2 border-red-500">
                     <div className="flex-1 p-4">
                       <div className="flex justify-between items-center mb-2">
-                        <span className="text-xs font-semibold text-gray-700 dark:text-gray-300">{win.date}</span>
-                        <span className="text-xs font-semibold text-gray-700 dark:text-gray-300">{win.comp}</span>
+                        <span className="text-xs font-semibold text-gray-700 dark:text-gray-300">{win.match_date}</span>
+                        <span className="text-xs font-semibold text-gray-700 dark:text-gray-300">{win.competition}</span>
                       </div>
                       <div className="flex justify-between items-center mb-2">
-                        <span className="text-xs text-gray-500">KICKOFF - {win.kickoff}</span>
-                        <span className="text-xs text-gray-500">{win.venue}</span>
+                        <span className="text-xs text-gray-500">KICKOFF - </span>
+                        <span className="text-xs text-gray-500">-</span>
                       </div>
                       <div className="flex justify-center items-center gap-2 my-4">
                         <span className="font-bold text-gray-700 dark:text-gray-200">United FC Kodagu</span>
                         <span className="text-2xl font-extrabold text-red-500">{win.score}</span>
-                        <span className="font-bold text-gray-700 dark:text-gray-200">{win.team2}</span>
+                        <span className="font-bold text-gray-700 dark:text-gray-200">{win.opponent}</span>
                       </div>
                     </div>
                   </div>
