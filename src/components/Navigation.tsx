@@ -102,7 +102,7 @@ const Navigation: React.FC<NavigationProps> = ({ onCartOpen }) => {
               
               {/* Cart Button */}
               <button
-                onClick={onCartOpen}
+                onClick={() => navigate('/cart')}
                 className="relative p-2 rounded-full transition-all text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-cyan-400 hover:bg-orange-400/10 dark:hover:bg-cyan-400/10"
               >
                 <ShoppingCart size={20} />
@@ -142,7 +142,7 @@ const Navigation: React.FC<NavigationProps> = ({ onCartOpen }) => {
           <div className="md:hidden flex items-center gap-2">
             <ThemeToggle />
             <button
-              onClick={onCartOpen}
+              onClick={() => navigate('/cart')}
               className="relative p-2 rounded-full text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-cyan-400"
             >
               <ShoppingCart size={20} />

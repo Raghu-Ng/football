@@ -20,6 +20,7 @@ import SuccessPage from "./components/SuccessPage";
 import FloatingElements from "./components/FloatingElements";
 import SignIn from "./components/SignIn";
 import ProductPage from "./components/ProductPage";
+import CartPage from "./components/CartPage";
 
 function App() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -92,29 +93,31 @@ function App() {
                 <Route
                   path="/"
                   element={
-                    <main className="relative flex-1 flex flex-col overflow-x-clip">
-                      <div className="hero-background parallax-element">
-                        <Hero />
-                      </div>
-                      <div className="section-background parallax-element">
-                        <About />
-                      </div>
-                      <div className="section-background parallax-element">
-                        <Players />
-                      </div>
-                      <div className="section-background parallax-element">
-                        <News />
-                      </div>
-                      <div className="section-background parallax-element">
-                        <Gallery />
-                      </div>
-                      <div className="section-background parallax-element">
-                        <Store />
-                      </div>
-                      <div className="section-background parallax-element">
-                        <Contact />
-                      </div>
-                    </main>
+                    <div className="section-background parallax-element">
+                      <main className="relative flex-1 flex flex-col overflow-x-clip">
+                        <div className="hero-background parallax-element">
+                          <Hero />
+                        </div>
+                        <div className="section-background parallax-element">
+                          <About />
+                        </div>
+                        <div className="section-background parallax-element">
+                          <Players />
+                        </div>
+                        <div className="section-background parallax-element">
+                          <News />
+                        </div>
+                        <div className="section-background parallax-element">
+                          <Gallery />
+                        </div>
+                        <div className="section-background parallax-element">
+                          <Store />
+                        </div>
+                        <div className="section-background parallax-element">
+                          <Contact />
+                        </div>
+                      </main>
+                    </div>
                   }
                 />
                 <Route
@@ -125,7 +128,22 @@ function App() {
                     </div>
                   }
                 />
-                <Route path="/product/:id" element={<div className="section-background parallax-element" ><ProductPage /></div>} />
+                <Route
+                  path="/product/:id"
+                  element={
+                    <div className="section-background parallax-element">
+                      <ProductPage />
+                    </div>
+                  }
+                />
+                <Route
+                  path="/cart"
+                  element={
+                    <div className="section-background parallax-element">
+                      <CartPage />
+                    </div>
+                  }
+                />
               </Routes>
               <div className="section-background parallax-element">
                 <Footer />
