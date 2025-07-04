@@ -21,6 +21,7 @@ import FloatingElements from "./components/FloatingElements";
 import SignIn from "./components/SignIn";
 import ProductPage from "./components/ProductPage";
 import CartPage from "./components/CartPage";
+import AdminPage from "./components/AdminPage";
 
 function App() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -66,7 +67,7 @@ function App() {
       <ThemeProvider>
         <AuthProvider>
           <CartProvider>
-            <div className="min-h-screen bg-cream-light dark:bg-gray-900 transition-colors duration-300">
+            <div className="min-h-screen bg-cream-light  transition-colors duration-300">
               <SuccessPage />
               <Toaster position="top-right" />
             </div>
@@ -81,7 +82,7 @@ function App() {
       <ThemeProvider>
         <AuthProvider>
           <CartProvider>
-            <div className="min-h-screen flex flex-col w-full bg-cream-gradient dark:bg-gray-900 transition-colors duration-300">
+            <div className="min-h-screen flex flex-col overflow-x-clip w-full  transition-colors duration-300">
               <div className="floating-elements parallax-element fixed inset-0 pointer-events-none z-10">
                 <FloatingElements />
               </div>
@@ -93,7 +94,7 @@ function App() {
                 <Route
                   path="/"
                   element={
-                    <div className="section-background parallax-element">
+                    
                       <main className="relative flex-1 flex flex-col overflow-x-clip">
                         <div className="hero-background parallax-element">
                           <Hero />
@@ -117,7 +118,7 @@ function App() {
                           <Contact />
                         </div>
                       </main>
-                    </div>
+                    
                   }
                 />
                 <Route
@@ -141,6 +142,14 @@ function App() {
                   element={
                     <div className="section-background parallax-element">
                       <CartPage />
+                    </div>
+                  }
+                />
+                <Route
+                  path="/admin"
+                  element={
+                    <div className="section-background parallax-element">
+                      <AdminPage />
                     </div>
                   }
                 />

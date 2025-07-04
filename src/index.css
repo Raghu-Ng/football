@@ -49,6 +49,12 @@
   --shadow-accent: rgba(34, 211, 238, 0.2);
 }
 
+html,#root,body{
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+
 /* Professional cream background utilities */
 .bg-cream-light {
   background-color: #f8f5f0;

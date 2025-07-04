@@ -44,7 +44,7 @@ const ProductPage: React.FC = () => {
       },
     });
     toast.success('Added to cart!');
-    navigate('/store');
+    navigate('/cart');
   };
 
   return (
