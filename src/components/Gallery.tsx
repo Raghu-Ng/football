@@ -220,10 +220,10 @@ const Gallery = () => {
     const currentImage = selectedCategory.images[currentImageIndex];
 
     return (
-      <div className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50">
+      <div className="fixed inset-0 bg-black/90 h-[85vh] overflow-hidden w-[calc(100%-64px)] rounded-2xl p-4 left-1/2 -translate-x-1/2 backdrop-blur-sm flex items-center justify-center z-50">
         {/* Header */}
         <div className="absolute top-0 left-0 right-0 bg-gradient-to-b from-gray-900/80 to-transparent p-6 z-10">
-          <div className="flex items-center justify-between max-w-7xl mx-auto">
+          <div className="flex items-center justify-between   max-w-7xl mx-auto">
             <div className="flex items-center gap-3">
               <div className={`w-10 h-10 bg-gradient-to-r ${selectedCategory.color} rounded-full flex items-center justify-center`}>
                 <selectedCategory.icon className="w-5 h-5 text-white" />
@@ -258,15 +258,15 @@ const Gallery = () => {
         </button>
 
         {/* Main content area */}
-        <div className="flex items-center justify-center w-full h-full p-20">
-          <div className="grid grid-cols-12 gap-6 max-w-7xl w-full h-full">
+        <div className="flex items-center p-2 px-20 justify-center w-full overflow-hidden ">
+          <div className="grid grid-cols-12 gap-6 max-w-7xl w-full h-[60vh]">
             {/* Main image */}
             <div className="col-span-8 h-full flex items-center justify-center">
-              <div className="relative max-w-full max-h-full">
+              <div className="relative size-full  rounded-lg shadow-2xl overflow-hidden flex flex-col justify-start">
                 <img 
                   src={currentImage.src}
                   alt={currentImage.caption}
-                  className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                  className="object-cover absolute size-full top-0"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-900/90 to-transparent p-4 rounded-b-lg">
                   <p className="text-white font-medium">{currentImage.caption}</p>
