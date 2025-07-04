@@ -1,14 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import { X, ChevronLeft, ChevronRight, Play, Zap, Shield, Grid, Camera, Users, Trophy, Target, Award } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 import ParallaxSection from './ParallaxSection';
 
 const Gallery = () => {
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  // Add types for selectedCategory, direction, category, and index
+  const [selectedCategory, setSelectedCategory] = useState<{
+    id: string;
+    title: string;
+    icon: React.ElementType;
+    color: string;
+    coverImage: string;
+    description: string;
+    images: { src: string; caption: string }[];
+  } | null>(null);
+
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isCollageOpen, setIsCollageOpen] = useState(false);
+  const revealTriggered = React.useRef(false);
 
-  const galleryCategories = [
+  const galleryCategories = useMemo(() => [
     {
       id: 'training',
       title: 'Training Sessions',
@@ -121,9 +132,9 @@ const Gallery = () => {
         }
       ]
     }
-  ];
+  ], []);
 
-  const openCollage = (category, imageIndex = 0) => {
+  const openCollage = (category: typeof galleryCategories[0], imageIndex = 0) => {
     setSelectedCategory(category);
     setCurrentImageIndex(imageIndex);
     setIsCollageOpen(true);
@@ -135,7 +146,7 @@ const Gallery = () => {
     setCurrentImageIndex(0);
   };
 
-  const navigateImage = (direction) => {
+  const navigateImage = (direction: 'next' | 'prev') => {
     if (!selectedCategory) return;
     
     const totalImages = selectedCategory.images.length;
@@ -146,8 +157,17 @@ const Gallery = () => {
     }
   };
 
-  const CategoryCard = ({ category, index }) => (
-    <ScrollReveal direction="up" delay={200 + index * 100}>
+  const CategoryCard = ({ category, index }: { category: typeof galleryCategories[0]; index: number }) => {
+    console.log("Gallery render", category.id);
+    return (
+    <ScrollReveal
+      direction="up"
+      delay={200 + index * 100}
+      playOnce={!revealTriggered.current}
+      onReveal={() => {
+        revealTriggered.current = true;
+      }}
+    >
       <div 
         className="group relative bg-white/90 dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden transition-all hover:scale-105 border border-gray-200/50 dark:border-gray-700 hover:border-orange-400/50 dark:hover:border-cyan-400/50 hover:shadow-orange-500/20 dark:hover:shadow-cyan-500/20 cursor-pointer"
         onClick={() => openCollage(category)}
@@ -212,7 +232,8 @@ const Gallery = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-orange-500/5 to-red-600/5 dark:from-cyan-500/5 dark:to-blue-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
       </div>
     </ScrollReveal>
-  );
+  )
+  };
 
   const CollageModal = () => {
     if (!isCollageOpen || !selectedCategory) return null;
@@ -220,7 +241,7 @@ const Gallery = () => {
     const currentImage = selectedCategory.images[currentImageIndex];
 
     return (
-      <div className="fixed inset-0 bg-black/90 h-[85vh] overflow-hidden w-[calc(100%-64px)] rounded-2xl p-4 left-1/2 -translate-x-1/2 backdrop-blur-sm flex items-center justify-center z-50">
+      <div className="fixed inset-0 bg-black/90 h-[85vh] overflow-hidden w-[80vw] rounded-2xl p-4 left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 backdrop-blur-sm flex items-center justify-center z-50">
         {/* Header */}
         <div className="absolute top-0 left-0 right-0 bg-gradient-to-b from-gray-900/80 to-transparent p-6 z-10">
           <div className="flex items-center justify-between   max-w-7xl mx-auto">
@@ -283,14 +304,14 @@ const Gallery = () => {
                     onClick={() => setCurrentImageIndex(index)}
                     className={`relative aspect-square cursor-pointer rounded-lg overflow-hidden transition-all ${
                       index === currentImageIndex 
-                        ? 'ring-2 ring-orange-400 dark:ring-cyan-400 scale-105' 
-                        : 'hover:scale-105 opacity-70 hover:opacity-100'
+                        ? ' border-2 dark:border-cyan-400' 
+                        : 'opacity-70 hover:opacity-100'
                     }`}
                   >
                     <img 
                       src={image.src}
                       alt={image.caption}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover absolute size-full"
                     />
                     {index === currentImageIndex && (
                       <div className="absolute inset-0 bg-orange-400/20 dark:bg-cyan-400/20 flex items-center justify-center">
@@ -367,7 +388,7 @@ const Gallery = () => {
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <ScrollReveal direction="up" delay={100}>
+        <ScrollReveal  direction="up" delay={100}>
           <div className="text-center mb-16">
             <div className="flex justify-center mb-6">
               <div className="p-3 bg-gradient-to-br from-orange-400/20 to-red-600/20 dark:from-cyan-400/20 dark:to-blue-600/20 rounded-full border border-orange-400/30 dark:border-cyan-400/30 shadow-2xl shadow-orange-400/20 dark:shadow-cyan-400/20 relative group">
@@ -390,7 +411,7 @@ const Gallery = () => {
         {/* Category Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {galleryCategories.map((category, index) => (
-            <CategoryCard key={category.id} category={category} index={index} />
+            <CategoryCard key={index + "gallery"} category={category} index={index} />
           ))}
         </div>
 

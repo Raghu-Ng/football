@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "./contexts/AuthContext";
 import { CartProvider } from "./contexts/CartContext";
@@ -17,6 +18,7 @@ import AuthModal from "./components/AuthModal";
 import Cart from "./components/Cart";
 import SuccessPage from "./components/SuccessPage";
 import FloatingElements from "./components/FloatingElements";
+import SignIn from "./components/SignIn";
 
 function App() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -73,76 +75,70 @@ function App() {
   }
 
   return (
-    <ThemeProvider>
-      <AuthProvider>
-        <CartProvider>
-          <div className="min-h-screen flex flex-col w-full bg-cream-gradient dark:bg-gray-900 transition-colors duration-300">
-            <div className="floating-elements parallax-element fixed inset-0 pointer-events-none z-10">
-              <FloatingElements />
+    <Router>
+      <ThemeProvider>
+        <AuthProvider>
+          <CartProvider>
+            <div className="min-h-screen flex flex-col w-full bg-cream-gradient dark:bg-gray-900 transition-colors duration-300">
+              <div className="floating-elements parallax-element fixed inset-0 pointer-events-none z-10">
+                <FloatingElements />
+              </div>
+              <Navigation
+                onCartOpen={() => setIsCartOpen(true)}
+                onAuthOpen={() => setIsAuthModalOpen(true)}
+              />
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <main className="relative flex-1 flex flex-col overflow-x-clip">
+                      <div className="hero-background parallax-element">
+                        <Hero />
+                      </div>
+                      <div className="section-background parallax-element">
+                        <About />
+                      </div>
+                      <div className="section-background parallax-element">
+                        <Players />
+                      </div>
+                      <div className="section-background parallax-element">
+                        <News />
+                      </div>
+                      <div className="section-background parallax-element">
+                        <Gallery />
+                      </div>
+                      <div className="section-background parallax-element">
+                        <Store />
+                      </div>
+                      <div className="section-background parallax-element">
+                        <Contact />
+                      </div>
+                    </main>
+                  }
+                />
+                <Route path="/signin" element={<div className="section-background parallax-element"><SignIn /></div>} />
+              </Routes>
+              <div className="section-background parallax-element">
+                <Footer />
+              </div>
+              <AuthModal
+                isOpen={isAuthModalOpen}
+                onClose={() => setIsAuthModalOpen(false)}
+              />
+              <Cart
+                isOpen={isCartOpen}
+                onClose={() => setIsCartOpen(false)}
+                onAuthRequired={() => {
+                  setIsCartOpen(false);
+                  setIsAuthModalOpen(true);
+                }}
+              />
+              <Toaster position="top-right" />
             </div>
-
-            <Navigation
-              onCartOpen={() => setIsCartOpen(true)}
-              onAuthOpen={() => setIsAuthModalOpen(true)}
-            />
-
-            {/* Main content container */}
-            <main className="relative flex-1 flex flex-col">
-              <div className="hero-background parallax-element">
-                <Hero />
-              </div>
-
-              <div className="section-background parallax-element">
-                <About />
-              </div>
-
-              <div className="section-background parallax-element">
-                <Players />
-              </div>
-
-              <div className="section-background parallax-element">
-                <News />
-              </div>
-
-              <div className="section-background parallax-element">
-                <Gallery />
-              </div>
-
-              <div className="section-background parallax-element">
-                <Store />
-              </div>
-
-              {/* Contact section - last section before footer */}
-              <div className="section-background parallax-element">
-                <Contact />
-              </div>
-            </main>
-
-            {/* Footer positioned at the bottom */}
-            <div className="section-background parallax-element">
-              <Footer />
-            </div>
-
-            <AuthModal
-              isOpen={isAuthModalOpen}
-              onClose={() => setIsAuthModalOpen(false)}
-            />
-
-            <Cart
-              isOpen={isCartOpen}
-              onClose={() => setIsCartOpen(false)}
-              onAuthRequired={() => {
-                setIsCartOpen(false);
-                setIsAuthModalOpen(true);
-              }}
-            />
-
-            <Toaster position="top-right" />
-          </div>
-        </CartProvider>
-      </AuthProvider>
-    </ThemeProvider>
-    // <div>test</div>
+          </CartProvider>
+        </AuthProvider>
+      </ThemeProvider>
+    </Router>
   );
 }
 

@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ShoppingCart, User, LogOut, Zap } from 'lucide-react';
+import { Menu, X, ShoppingCart, User, LogOut } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useCart } from '../contexts/CartContext';
 import ThemeToggle from './ThemeToggle';
+import { useNavigate } from "react-router-dom";
 
 interface NavigationProps {
   onCartOpen: () => void;
-  onAuthOpen: () => void;
 }
 
-const Navigation: React.FC<NavigationProps> = ({ onCartOpen, onAuthOpen }) => {
+const Navigation: React.FC<NavigationProps> = ({ onCartOpen }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { user, signOut } = useAuth();
   const { state } = useCart();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,21 +25,35 @@ const Navigation: React.FC<NavigationProps> = ({ onCartOpen, onAuthOpen }) => {
   }, []);
 
   const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Players', href: '#players' },
-    { name: 'News', href: '#news' },
-    { name: 'Gallery', href: '#gallery' },
-    { name: 'Store', href: '#store' },
-    { name: 'Contact', href: '#contact' }
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/#about' },
+    { name: 'Players', href: '/#players' },
+    { name: 'News', href: '/#news' },
+    { name: 'Gallery', href: '/#gallery' },
+    { name: 'Store', href: '/#store' },
+    { name: 'Contact', href: '/#contact' }
   ];
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  const handleNavClick = (href: string) => {
+    if (href === '/') {
+      navigate('/');
       setIsOpen(false);
+      return;
     }
+    if (href.startsWith('/#')) {
+      navigate('/');
+      setTimeout(() => {
+        const id = href.replace('/#', '#');
+        const element = document.querySelector(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 50);
+      setIsOpen(false);
+      return;
+    }
+    navigate(href);
+    setIsOpen(false);
   };
 
   const handleSignOut = async () => {
@@ -74,7 +89,7 @@ const Navigation: React.FC<NavigationProps> = ({ onCartOpen, onAuthOpen }) => {
               {navItems.map((item) => (
                 <button
                   key={item.name}
-                  onClick={() => scrollToSection(item.href)}
+                  onClick={() => handleNavClick(item.href)}
                   className="px-3 py-2 text-sm font-medium transition-all hover:text-orange-500 dark:hover:text-cyan-400 text-gray-700 dark:text-gray-300 relative group"
                 >
                   {item.name}
@@ -113,7 +128,7 @@ const Navigation: React.FC<NavigationProps> = ({ onCartOpen, onAuthOpen }) => {
                 </div>
               ) : (
                 <button
-                  onClick={onAuthOpen}
+                  onClick={() => navigate("/signin")}
                   className="bg-gradient-to-r from-orange-500 to-red-600 dark:from-cyan-500 dark:to-blue-600 hover:from-orange-400 hover:to-red-500 dark:hover:from-cyan-400 dark:hover:to-blue-500 text-white px-6 py-2 rounded-full font-medium transition-all flex items-center gap-2 shadow-lg shadow-orange-500/25 dark:shadow-cyan-500/25"
                 >
                   <User size={16} />
@@ -154,7 +169,7 @@ const Navigation: React.FC<NavigationProps> = ({ onCartOpen, onAuthOpen }) => {
             {navItems.map((item) => (
               <button
                 key={item.name}
-                onClick={() => scrollToSection(item.href)}
+                onClick={() => handleNavClick(item.href)}
                 className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-cyan-400 hover:bg-orange-400/10 dark:hover:bg-cyan-400/10 w-full text-left rounded-lg transition-all"
               >
                 {item.name}
@@ -172,7 +187,7 @@ const Navigation: React.FC<NavigationProps> = ({ onCartOpen, onAuthOpen }) => {
               </div>
             ) : (
               <button
-                onClick={onAuthOpen}
+                onClick={() => navigate("/signin")}
                 className="w-full mt-4 bg-gradient-to-r from-orange-500 to-red-600 dark:from-cyan-500 dark:to-blue-600 text-white px-6 py-3 rounded-full font-medium transition-all"
               >
                 Sign In
