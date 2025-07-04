@@ -104,7 +104,7 @@ const News = () => {
                   alt={item.title}
                   className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t group-hover:scale-110 duration-500 transition-transform from-gray-900/80 via-transparent to-transparent" />
                 <div className="absolute top-4 left-4">
                   <span className={`px-3 py-1 rounded-full text-xs font-semibold border backdrop-blur-sm ${getCategoryColor(item.category)}`}>
                     {item.category}
