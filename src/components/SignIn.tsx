@@ -23,7 +23,7 @@ const SignIn: React.FC = () => {
       } else {
         await signUp(email, password);
         toast.success('Account created successfully!');
-        navigate('/');
+        navigate('/get-started');
       }
     } catch (error: any) {
       toast.error(error.message || 'An error occurred');
