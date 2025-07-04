@@ -19,6 +19,7 @@ import Cart from "./components/Cart";
 import SuccessPage from "./components/SuccessPage";
 import FloatingElements from "./components/FloatingElements";
 import SignIn from "./components/SignIn";
+import ProductPage from "./components/ProductPage";
 
 function App() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -116,7 +117,15 @@ function App() {
                     </main>
                   }
                 />
-                <Route path="/signin" element={<div className="section-background parallax-element"><SignIn /></div>} />
+                <Route
+                  path="/signin"
+                  element={
+                    <div className="section-background parallax-element">
+                      <SignIn />
+                    </div>
+                  }
+                />
+                <Route path="/product/:id" element={<div className="section-background parallax-element" ><ProductPage /></div>} />
               </Routes>
               <div className="section-background parallax-element">
                 <Footer />

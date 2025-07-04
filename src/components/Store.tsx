@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { ShoppingCart, Star, Plus, Zap, Shield, Sparkles } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { mockJerseys } from './mockJerseys';
 import { useCart } from '../contexts/CartContext';
 import toast from 'react-hot-toast';
 import ScrollReveal from './ScrollReveal';
 import ParallaxSection from './ParallaxSection';
+import { useNavigate } from 'react-router-dom';
 
 interface Jersey {
   id: string;
@@ -28,88 +29,11 @@ const Store = () => {
   const categories = ['All', 'Home', 'Away', 'Third', 'Goalkeeper', 'Training'];
 
   useEffect(() => {
-    fetchJerseys();
+    setJerseys(mockJerseys);
+    setLoading(false);
   }, []);
 
-  const fetchJerseys = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('jerseys')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-      setJerseys(data || []);
-    } catch (error) {
-      console.error('Error fetching jerseys:', error);
-      // Fallback to mock data if database is not set up
-      setJerseys([
-        {
-          id: '1',
-          name: 'United FC Kodagu Home Jersey 2024',
-          price: 89,
-          image_url: 'https://images.pexels.com/photos/1337386/pexels-photo-1337386.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',
-          description: 'Official home jersey featuring our iconic blue and white design with premium moisture-wicking fabric.',
-          category: 'Home',
-          sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
-          stock: 50
-        },
-        {
-          id: '2',
-          name: 'United FC Kodagu Away Jersey 2024',
-          price: 89,
-          image_url: 'https://images.pexels.com/photos/163452/basketball-dunk-blue-game-163452.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',
-          description: 'Sleek away jersey in elegant black with gold accents. Perfect for showing your support on the road.',
-          category: 'Away',
-          sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
-          stock: 45
-        },
-        {
-          id: '3',
-          name: 'United FC Kodagu Third Jersey 2024',
-          price: 89,
-          image_url: 'https://images.pexels.com/photos/1407322/pexels-photo-1407322.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',
-          description: 'Limited edition third jersey with unique gradient design and sustainable materials.',
-          category: 'Third',
-          sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
-          stock: 30
-        },
-        {
-          id: '4',
-          name: 'United FC Kodagu Goalkeeper Jersey',
-          price: 79,
-          image_url: 'https://images.pexels.com/photos/2905238/pexels-photo-2905238.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',
-          description: 'Professional goalkeeper jersey with enhanced padding and grip technology.',
-          category: 'Goalkeeper',
-          sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-          stock: 25
-        },
-        {
-          id: '5',
-          name: 'United FC Kodagu Training Jersey',
-          price: 65,
-          image_url: 'https://images.pexels.com/photos/1756013/pexels-photo-1756013.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',
-          description: 'Lightweight training jersey designed for optimal performance during practice sessions.',
-          category: 'Training',
-          sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
-          stock: 60
-        },
-        {
-          id: '6',
-          name: 'United FC Kodagu Retro Jersey',
-          price: 95,
-          image_url: 'https://images.pexels.com/photos/1337386/pexels-photo-1337386.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',
-          description: 'Vintage-inspired jersey celebrating our club\'s rich history with classic design elements.',
-          category: 'Home',
-          sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-          stock: 20
-        }
-      ]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
+  const navigate = useNavigate()
   const filteredJerseys = selectedCategory === 'All' 
     ? jerseys 
     : jerseys.filter(jersey => jersey.category === selectedCategory);
@@ -135,6 +59,12 @@ const Store = () => {
     toast.success('Added to cart!');
     setSelectedJersey(null);
     setSelectedSize('');
+  };
+
+  const handleProductClick = (jersey: Jersey) => {
+    console.log(jersey)
+    navigate(`/product/${jersey.id}`);
+    // window.location.href = `/product/${jersey.id}`;
   };
 
   if (loading) {
@@ -274,12 +204,12 @@ const Store = () => {
                   </div>
                   
                   <button
-                    onClick={() => setSelectedJersey(jersey)}
+                    onClick={() => handleProductClick(jersey)}
                     className="w-full bg-gradient-to-r from-orange-500 to-red-600 dark:from-cyan-500 dark:to-blue-600 hover:from-orange-400 hover:to-red-500 dark:hover:from-cyan-400 dark:hover:to-blue-500 text-white px-4 py-3 rounded-full font-semibold transition-all flex items-center justify-center gap-2 shadow-lg shadow-orange-500/25 dark:shadow-cyan-500/25 group-hover:shadow-orange-400/40 dark:group-hover:shadow-cyan-400/40 relative overflow-hidden"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <Zap size={16} className="group-hover:animate-pulse relative z-10" />
-                    <span className="relative z-10">Select Size & Add to Cart</span>
+                    <span className="relative z-10">View Product</span>
                   </button>
                 </div>
                 
@@ -291,7 +221,7 @@ const Store = () => {
         </div>
 
         {/* Enhanced Jersey Selection Modal - Reduced Size */}
-        {selectedJersey && (
+        {selectedJersey && false && (
           <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
             <ScrollReveal direction="scale">
               <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-lg w-full max-h-[85vh] overflow-y-auto border border-orange-400/30 dark:border-cyan-400/30 shadow-2xl shadow-orange-500/20 dark:shadow-cyan-500/20 relative">
