@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Mail, Lock, Zap } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const SignIn: React.FC = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -9,6 +10,7 @@ const SignIn: React.FC = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const { signIn, signUp } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,87 +19,16 @@ const SignIn: React.FC = () => {
       if (isLogin) {
         await signIn(email, password);
         toast.success('Welcome back!');
+        navigate('/');
       } else {
         await signUp(email, password);
         toast.success('Account created successfully!');
+        navigate('/');
       }
     } catch (error: any) {
       toast.error(error.message || 'An error occurred');
     } finally {
-      setLoading(false);(
-    <ScrollReveal
-      direction="up"
-      delay={200 + index * 100}
-      playOnce={!revealTriggered.current}
-      onReveal={() => {
-        revealTriggered.current = true;
-      }}
-    >
-      <div 
-        className="group relative bg-white/90 dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden transition-all hover:scale-105 border border-gray-200/50 dark:border-gray-700 hover:border-orange-400/50 dark:hover:border-cyan-400/50 hover:shadow-orange-500/20 dark:hover:shadow-cyan-500/20 cursor-pointer"
-        onClick={() => openCollage(category)}
-      >
-        <div className="relative h-80 overflow-hidden">
-          <img 
-            src={category.coverImage}
-            alt={category.title}
-            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-          />
-          
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/50 to-transparent" />
-          
-          {/* Category icon */}
-          <div className="absolute top-4 left-4">
-            <div className={`w-12 h-12 bg-gradient-to-r ${category.color} rounded-full flex items-center justify-center shadow-lg border border-white/20`}>
-              <category.icon className="w-6 h-6 text-white" />
-            </div>
-          </div>
-          
-          {/* Image count badge */}
-          <div className="absolute top-4 right-4">
-            <div className="bg-gray-900/80 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-semibold border border-gray-600 flex items-center gap-1">
-              <Camera className="w-4 h-4" />
-              {category.images.length}
-            </div>
-          </div>
-          
-          {/* Hover overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 to-red-600/10 dark:from-cyan-500/10 dark:to-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          
-          {/* Play icon overlay */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
-            <div className="w-16 h-16 bg-gradient-to-r from-orange-500/20 to-red-600/20 dark:from-cyan-500/20 dark:to-blue-600/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-orange-400/30 dark:border-cyan-400/30 group-hover:scale-110 transition-transform">
-              <Grid className="w-8 h-8 text-orange-500 dark:text-cyan-400" />
-            </div>
-          </div>
-        </div>
-        
-        <div className="p-6">
-          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-orange-500 dark:group-hover:text-cyan-400 transition-colors">
-            {category.title}
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
-            {category.description}
-          </p>
-          
-          <div className="flex items-center justify-between">
-            <span className="text-orange-500 dark:text-cyan-400 font-semibold text-sm flex items-center gap-1">
-              <Zap className="w-4 h-4" />
-              View Collection
-            </span>
-            <div className="flex items-center gap-1 text-gray-500 dark:text-gray-500 text-xs">
-              <Grid className="w-3 h-3" />
-              {category.images.length} photos
-            </div>
-          </div>
-        </div>
-        
-        {/* Card glow effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-orange-500/5 to-red-600/5 dark:from-cyan-500/5 dark:to-blue-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
-      </div>
-    </ScrollReveal>
-  )
+      setLoading(false);
     }
   };
 
