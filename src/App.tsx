@@ -22,6 +22,7 @@ import SignIn from "./components/SignIn";
 import ProductPage from "./components/ProductPage";
 import CartPage from "./components/CartPage";
 import AdminPage from "./components/AdminPage";
+import CheckoutPage from "./components/CheckoutPage";
 
 function App() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -150,6 +151,14 @@ function App() {
                   element={
                     <div className="section-background parallax-element">
                       <AdminPage />
+                    </div>
+                  }
+                />
+                <Route
+                  path="/checkout"
+                  element={
+                    <div className="section-background parallax-element">
+                      <CheckoutPage />
                     </div>
                   }
                 />

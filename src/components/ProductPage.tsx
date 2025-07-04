@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ShoppingCart, Zap, Star } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -25,6 +25,10 @@ const ProductPage: React.FC = () => {
   const jersey = mockJerseys.find(j => j.id === id);
   const [selectedSize, setSelectedSize] = useState('');
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   if (!jersey) return <div className="text-center py-20">Product not found.</div>;
 
   const addToCart = () => {
@@ -45,6 +49,7 @@ const ProductPage: React.FC = () => {
     });
     toast.success('Added to cart!');
     navigate('/cart');
+    window.scrollTo(0, 0);
   };
 
   return (
