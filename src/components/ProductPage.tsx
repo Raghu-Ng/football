@@ -3,6 +3,7 @@ import { ShoppingCart, Zap, Star } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
 import { useNavigate, useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { supabase } from '../lib/supabase';
 
 interface Jersey {
   id: string;
@@ -15,20 +16,36 @@ interface Jersey {
   stock: number;
 }
 
-// This should be replaced with a fetch from context or API in a real app
-import { mockJerseys } from './mockJerseys';
-
 const ProductPage: React.FC = () => {
   const { id } = useParams();
   const { dispatch } = useCart();
   const navigate = useNavigate();
-  const jersey = mockJerseys.find(j => j.id === id);
+  const [jersey, setJersey] = useState<Jersey | null>(null);
+  const [loading, setLoading] = useState(true);
   const [selectedSize, setSelectedSize] = useState('');
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    setLoading(true);
+    supabase
+      .from('jerseys')
+      .select('*')
+      .eq('id', id)
+      .single()
+      .then(({ data, error }) => {
+        if (error || !data) {
+          setJersey(null);
+        } else {
+          setJersey(data);
+        }
+        setLoading(false);
+      });
+  }, [id]);
+
+  if (loading) return <div className="text-center py-20">Loading...</div>;
   if (!jersey) return <div className="text-center py-20">Product not found.</div>;
 
   const addToCart = () => {

@@ -36,19 +36,13 @@ const Navigation: React.FC<NavigationProps> = ({ onCartOpen }) => {
 
   const handleNavClick = (href: string) => {
     if (href === '/') {
-      navigate('/');
+      navigate('/?scroll=top');
       setIsOpen(false);
       return;
     }
     if (href.startsWith('/#')) {
-      navigate('/');
-      setTimeout(() => {
-        const id = href.replace('/#', '#');
-        const element = document.querySelector(id);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 50);
+      const section = href.split('#')[1];
+      navigate(`/?scroll=${section}`);
       setIsOpen(false);
       return;
     }

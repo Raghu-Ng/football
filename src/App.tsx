@@ -23,6 +23,7 @@ import CartPage from "./components/CartPage";
 import AdminPage from "./components/AdminPage";
 import CheckoutPage from "./components/CheckoutPage";
 import GetStarted from "./components/GetStarted";
+import ScrollHandler from "./components/ScrollHandler";
 
 function App() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -53,6 +54,7 @@ function App() {
       <ThemeProvider>
         <AuthProvider>
           <CartProvider>
+            <ScrollHandler />
             <div className="min-h-screen flex flex-col overflow-x-clip w-full  transition-colors duration-300">
               <div className="floating-elements fixed inset-0 pointer-events-none z-10">
                 <FloatingElements />
