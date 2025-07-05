@@ -63,7 +63,7 @@ function App() {
           <CartProvider>
             
             <ScrollHandler />
-            <div className="min-h-screen flex flex-col overflow-x-clip w-full  transition-colors duration-300">
+            <div className="min-h-screen flex flex-col  w-full  transition-colors duration-300">
               <div className="floating-elements fixed inset-0 pointer-events-none z-10">
                 <FloatingElements />
               </div>
@@ -74,7 +74,7 @@ function App() {
                 <Route
                   path="/"
                   element={
-                    <main className="relative flex flex-col flex-1 overflow-x-clip">
+                    <main className="relative flex flex-col flex-1">
                       <div className="hero-background">
                         <Hero />
                       </div>
