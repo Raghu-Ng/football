@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ShoppingCart, Star, Plus, Zap, Shield, Sparkles } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { useCart } from '../contexts/CartContext';
+import { useAuth } from '../contexts/AuthContext';
 import toast from 'react-hot-toast';
 import ScrollReveal from './ScrollReveal';
 import ParallaxSection from './ParallaxSection';
@@ -25,6 +26,8 @@ const Store = () => {
   const [selectedJersey, setSelectedJersey] = useState<Jersey | null>(null);
   const [selectedSize, setSelectedSize] = useState('');
   const { dispatch } = useCart();
+  const { user, loading: authLoading } = useAuth();
+  const navigate = useNavigate();
 
   const categories = ['All', 'Home', 'Away', 'Third', 'Goalkeeper', 'Training'];
 
@@ -44,12 +47,15 @@ const Store = () => {
       });
   }, []);
 
-  const navigate = useNavigate();
   const filteredJerseys = selectedCategory === 'All' 
     ? jerseys 
     : jerseys.filter(jersey => jersey.category === selectedCategory);
 
   const addToCart = (jersey: Jersey, size: string) => {
+    if (!user && !authLoading) {
+      navigate('/login');
+      return;
+    }
     if (!size) {
       toast.error('Please select a size');
       return;

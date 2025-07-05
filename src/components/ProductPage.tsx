@@ -4,6 +4,7 @@ import { useCart } from '../contexts/CartContext';
 import { useNavigate, useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { supabase } from '../lib/supabase';
+import { useAuth } from '../contexts/AuthContext';
 
 interface Jersey {
   id: string;
@@ -23,6 +24,7 @@ const ProductPage: React.FC = () => {
   const [jersey, setJersey] = useState<Jersey | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedSize, setSelectedSize] = useState('');
+  const {user, loading : isLoading} = useAuth()
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -49,6 +51,11 @@ const ProductPage: React.FC = () => {
   if (!jersey) return <div className="text-center py-20">Product not found.</div>;
 
   const addToCart = () => {
+    if(!user) {
+      navigate('/signin');
+      toast.error('Please sign in to add items to your cart');
+      return;
+    }
     if (!selectedSize) {
       toast.error('Please select a size');
       return;

@@ -1,10 +1,16 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { X, MapPin, Calendar, Zap, Shield, Target, Star, Trophy, Award } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 import ParallaxSection from './ParallaxSection';
 
 const Players = () => {
   const [selectedPlayer, setSelectedPlayer] = useState(null);
+
+  useEffect(() => {
+    window.addEventListener("DOMContentLoaded", () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    })
+  }, [])
 
   const players = [
     {

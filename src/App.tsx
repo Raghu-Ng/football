@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useLayoutEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route, ScrollRestoration } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "./contexts/AuthContext";
 import { CartProvider } from "./contexts/CartContext";
@@ -24,10 +24,16 @@ import AdminPage from "./components/AdminPage";
 import CheckoutPage from "./components/CheckoutPage";
 import GetStarted from "./components/GetStarted";
 import ScrollHandler from "./components/ScrollHandler";
+import AllNews from "./components/AllNews";
+import NewsArticle from "./components/NewsArticle";
+import People from "./components/People";
+import { useLocation } from "react-router-dom";
 
 function App() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+
+   
 
   // Check if we're on the success page
   const isSuccessPage =
@@ -51,9 +57,11 @@ function App() {
 
   return (
     <Router>
+      
       <ThemeProvider>
         <AuthProvider>
           <CartProvider>
+            
             <ScrollHandler />
             <div className="min-h-screen flex flex-col overflow-x-clip w-full  transition-colors duration-300">
               <div className="floating-elements fixed inset-0 pointer-events-none z-10">
@@ -66,16 +74,16 @@ function App() {
                 <Route
                   path="/"
                   element={
-                    <main className="relative flex-1 flex flex-col overflow-x-clip">
+                    <main className="relative flex flex-col flex-1 overflow-x-clip">
                       <div className="hero-background">
                         <Hero />
                       </div>
                       <div className="section-background">
                         <About />
                       </div>
-                      <div className="section-background">
+                      {/* <div className="section-background">
                         <Players />
-                      </div>
+                      </div> */}
                       <div className="section-background">
                         <News />
                       </div>
@@ -139,6 +147,10 @@ function App() {
                     </div>
                   }
                 />
+                {/* News routes */}
+                <Route path="/news" element={<AllNews />} />
+                <Route path="/news/:id" element={<NewsArticle />} />
+                <Route path="/people" element={<People />} />
               </Routes>
               <div className="section-background">
                 <Footer />

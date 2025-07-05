@@ -8,7 +8,9 @@ interface SponsorshipModalProps {
 }
 
 interface SponsorshipForm {
+  sponsorType: 'company' | 'individual';
   companyName: string;
+  fullName: string;
   contactName: string;
   email: string;
   phone: string;
@@ -25,7 +27,9 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
   const [currentStep, setCurrentStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<SponsorshipForm>({
+    sponsorType: 'company',
     companyName: '',
+    fullName: '',
     contactName: '',
     email: '',
     phone: '',
@@ -97,7 +101,11 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
   const validateStep = (step: number) => {
     switch (step) {
       case 1:
-        return formData.companyName && formData.contactName && formData.email && formData.phone;
+        if (formData.sponsorType === 'company') {
+          return formData.companyName && formData.contactName && formData.email && formData.phone;
+        } else {
+          return formData.fullName && formData.email && formData.phone;
+        }
       case 2:
         return formData.sponsorshipType && formData.budget && formData.duration;
       case 3:
@@ -143,7 +151,9 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
   const resetForm = () => {
     setCurrentStep(1);
     setFormData({
+      sponsorType: 'company',
       companyName: '',
+      fullName: '',
       contactName: '',
       email: '',
       phone: '',
@@ -214,29 +224,54 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
               <div>
                 <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
                   <Building className="w-5 h-5 text-yellow-400" />
-                  Company Information
+                  Sponsor Information
                 </h3>
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">I am a *</label>
+                  <select
+                    value={formData.sponsorType}
+                    onChange={e => handleInputChange('sponsorType', e.target.value)}
+                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white"
+                  >
+                    <option value="company">Company</option>
+                    <option value="individual">Individual</option>
+                  </select>
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {formData.sponsorType === 'company' ? (
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">Company Name *</label>
+                      <input
+                        type="text"
+                        value={formData.companyName}
+                        onChange={e => handleInputChange('companyName', e.target.value)}
+                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white placeholder-gray-400"
+                        placeholder="Your Company Name"
+                        required={formData.sponsorType === 'company'}
+                      />
+                    </div>
+                  ) : (
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">Full Name *</label>
+                      <input
+                        type="text"
+                        value={formData.fullName}
+                        onChange={e => handleInputChange('fullName', e.target.value)}
+                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white placeholder-gray-400"
+                        placeholder="Your Full Name"
+                        required={formData.sponsorType === 'individual'}
+                      />
+                    </div>
+                  )}
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Company Name *</label>
-                    <input
-                      type="text"
-                      value={formData.companyName}
-                      onChange={(e) => handleInputChange('companyName', e.target.value)}
-                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white placeholder-gray-400"
-                      placeholder="Your Company Name"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Contact Name *</label>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">Contact Name {formData.sponsorType === 'company' ? '*' : '(Optional)'}</label>
                     <input
                       type="text"
                       value={formData.contactName}
-                      onChange={(e) => handleInputChange('contactName', e.target.value)}
+                      onChange={e => handleInputChange('contactName', e.target.value)}
                       className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white placeholder-gray-400"
-                      placeholder="John Doe"
-                      required
+                      placeholder="Contact Person (if different)"
+                      required={formData.sponsorType === 'company'}
                     />
                   </div>
                   <div>
@@ -246,7 +281,7 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
                       <input
                         type="email"
                         value={formData.email}
-                        onChange={(e) => handleInputChange('email', e.target.value)}
+                        onChange={e => handleInputChange('email', e.target.value)}
                         className="w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white placeholder-gray-400"
                         placeholder="john@company.com"
                         required
@@ -260,7 +295,7 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
                       <input
                         type="tel"
                         value={formData.phone}
-                        onChange={(e) => handleInputChange('phone', e.target.value)}
+                        onChange={e => handleInputChange('phone', e.target.value)}
                         className="w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white placeholder-gray-400"
                         placeholder="+1 (555) 123-4567"
                         required
@@ -268,23 +303,23 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Website</label>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">Website (Optional)</label>
                     <div className="relative">
                       <Globe className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
                       <input
                         type="url"
                         value={formData.website}
-                        onChange={(e) => handleInputChange('website', e.target.value)}
+                        onChange={e => handleInputChange('website', e.target.value)}
                         className="w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white placeholder-gray-400"
                         placeholder="https://company.com"
                       />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Industry</label>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">Industry (Optional)</label>
                     <select
                       value={formData.industry}
-                      onChange={(e) => handleInputChange('industry', e.target.value)}
+                      onChange={e => handleInputChange('industry', e.target.value)}
                       className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white"
                     >
                       <option value="">Select Industry</option>

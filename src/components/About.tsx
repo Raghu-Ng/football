@@ -152,64 +152,79 @@ const About = () => {
       </div>
       {/* Wins & Upcoming Matches Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Upcoming Matches */}
-          <div>
-            <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Upcoming Matches</h3>
-            <div className="flex flex-col gap-6">
-              {matches.map((match, i) => (
-                <div key={match.id || i} className="rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden bg-white dark:bg-gray-800">
-                  <div className="flex flex-col md:flex-row justify-between items-center border-b-2 border-red-500">
-                    <div className="flex-1 p-4">
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-xs font-semibold text-gray-700 dark:text-gray-300">{match.match_date}</span>
-                        <span className="text-xs font-semibold text-gray-700 dark:text-gray-300">{match.competition}</span>
-                      </div>
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-xs text-gray-500">KICKOFF - {match.kickoff_time}</span>
-                        <span className="text-xs text-gray-500">{match.venue}</span>
-                      </div>
-                      <div className="flex justify-center items-center gap-2 my-4">
-                        <span className="font-bold text-gray-700 dark:text-gray-200">United FC Kodagu</span>
-                        <span className="text-xl font-bold text-gray-500">vs</span>
-                        <span className="font-bold text-gray-700 dark:text-gray-200">{match.opponent}</span>
-                      </div>
-                      <div className="flex justify-center">
-                        <span className="bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-full text-xs font-semibold text-gray-700 dark:text-gray-300">{match.kickoff_time}</span>
-                      </div>
-                    </div>
-                  </div>
+      <div className="mb-4 text-2xl font-bold">Recent wins and matches</div>
+        <div className="flex flex-col md:flex-row gap-8 justify-center items-stretch">
+          {/* Most Recent Win */}
+          {wins[0] && (
+            <div className="flex-1 min-w-[260px] max-w-sm bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 flex flex-col justify-between">
+              <div className="flex flex-col items-center p-6 h-full">
+                <span className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{wins[0].match_date}</span>
+                <span className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">{wins[0].competition}</span>
+                <div className="flex items-center justify-center gap-4 my-4">
+                  {/* Club logos with placeholder images */}
+                  <img
+                    src="https://placehold.co/56x56/orange/white?text=UFC"
+                    alt="United FC Kodagu logo"
+                    className="w-14 h-14 rounded-full border-2 border-orange-400 dark:border-cyan-400 bg-white object-cover"
+                  />
+                  <span className="text-3xl font-extrabold text-blue-700 dark:text-blue-400 bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-lg shadow">{wins[0].score}</span>
+                  <img
+                    src="https://placehold.co/56x56/gray/white?text=OPP"
+                    alt={`${wins[0].opponent} logo`}
+                    className="w-14 h-14 rounded-full border-2 border-gray-400 dark:border-gray-500 bg-white object-cover"
+                  />
                 </div>
-              ))}
-            </div>
-          </div>
-          {/* Wins */}
-          <div>
-            <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Recent Wins</h3>
-            <div className="flex flex-col gap-6">
-              {wins.map((win, i) => (
-                <div key={win.id || i} className="rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden bg-white dark:bg-gray-800">
-                  <div className="flex flex-col md:flex-row justify-between items-center border-b-2 border-red-500">
-                    <div className="flex-1 p-4">
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-xs font-semibold text-gray-700 dark:text-gray-300">{win.match_date}</span>
-                        <span className="text-xs font-semibold text-gray-700 dark:text-gray-300">{win.competition}</span>
-                      </div>
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-xs text-gray-500">KICKOFF - </span>
-                        <span className="text-xs text-gray-500">-</span>
-                      </div>
-                      <div className="flex justify-center items-center gap-2 my-4">
-                        <span className="font-bold text-gray-700 dark:text-gray-200">United FC Kodagu</span>
-                        <span className="text-2xl font-extrabold text-red-500">{win.score}</span>
-                        <span className="font-bold text-gray-700 dark:text-gray-200">{win.opponent}</span>
-                      </div>
-                    </div>
-                  </div>
+                <div className="flex justify-between w-full mt-2">
+                  <span className="text-sm font-bold text-orange-600 dark:text-cyan-400 flex items-center gap-2">
+                    United FC Kodagu
+                  </span>
+                  <span className="text-sm font-bold text-gray-700 dark:text-gray-200 flex items-center gap-2">
+                    {wins[0].opponent}
+                  </span>
                 </div>
-              ))}
+                {/* <button className="mt-6 w-full bg-blue-900 text-white py-2 rounded-lg font-semibold hover:bg-blue-800 transition">Match Centre →</button> */}
+              </div>
             </div>
-          </div>
+          )}
+          {/* Next 2 Upcoming Matches */}
+          {matches.slice(0, 2).map((match, i) => {
+            // Format time to HH:MM
+            let time = match.kickoff_time;
+            if (typeof time === 'string' && time.length >= 5) {
+              time = time.slice(0, 5);
+            }
+            return (
+              <div key={match.id || i} className="flex-1 min-w-[260px] max-w-sm bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 flex flex-col justify-between">
+                <div className="flex flex-col items-center p-6 h-full">
+                  <span className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{match.match_date}</span>
+                  <span className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">{match.competition}</span>
+                  <div className="flex items-center justify-center gap-4 my-4">
+                    {/* Club logos with placeholder images */}
+                    <img
+                      src="https://placehold.co/56x56/orange/white?text=UFC"
+                      alt="United FC Kodagu logo"
+                      className="w-14 h-14 rounded-full border-2 border-orange-400 dark:border-cyan-400 bg-white object-cover"
+                    />
+                    <span className="text-3xl font-extrabold text-blue-700 dark:text-blue-400 bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-lg shadow">{time || '19:00'}</span>
+                    <img
+                      src="https://placehold.co/56x56/gray/white?text=OPP"
+                      alt={`${match.opponent} logo`}
+                      className="w-14 h-14 rounded-full border-2 border-gray-400 dark:border-gray-500 bg-white object-cover"
+                    />
+                  </div>
+                  <div className="flex justify-between w-full mt-2">
+                    <span className="text-sm font-bold text-orange-600 dark:text-cyan-400 flex items-center gap-2">
+                      United FC Kodagu
+                    </span>
+                    <span className="text-sm font-bold text-gray-700 dark:text-gray-200 flex items-center gap-2">
+                      {match.opponent}
+                    </span>
+                  </div>
+                  {/* <button className="mt-6 w-full bg-blue-900 text-white py-2 rounded-lg font-semibold hover:bg-blue-800 transition">Match Centre →</button> */}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
       {/* End Wins & Upcoming Matches Section */}

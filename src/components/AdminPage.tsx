@@ -22,6 +22,16 @@ const AdminPage = () => {
   const [newMatch, setNewMatch] = useState({ opponent: '', match_date: '', kickoff_time: '', competition: '', venue: '' });
   const [loadingWins, setLoadingWins] = useState(false);
   const [loadingMatches, setLoadingMatches] = useState(false);
+  const [newsTab, setNewsTab] = useState({
+    title: '',
+    content: '',
+    imageFile: null as File | null,
+    uploading: false,
+    error: '',
+    success: '',
+    newsList: [] as any[],
+    loading: false,
+  });
 
   // Fetch wins helper
   const fetchWins = async () => {
@@ -40,9 +50,49 @@ const AdminPage = () => {
     setLoadingMatches(false);
   };
 
+  // Fetch news for admin view
+  const fetchNewsList = async () => {
+    setNewsTab((prev) => ({ ...prev, loading: true }));
+    const { data, error } = await supabase.from('news').select('*').order('date_posted', { ascending: false });
+    setNewsTab((prev) => ({ ...prev, newsList: data || [], loading: false }));
+  };
+
+  // Add news handler
+  const handleAddNews = async () => {
+    setNewsTab((prev) => ({ ...prev, uploading: true, error: '', success: '' }));
+    let image_url = '';
+    if (newsTab.imageFile) {
+      // Upload image to Supabase Storage (images bucket, news/ folder)
+      const fileExt = newsTab.imageFile.name.split('.').pop();
+      const fileName = `news/${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${fileExt}`;
+      const { data: uploadData, error: uploadError } = await supabase.storage.from('images').upload(fileName, newsTab.imageFile);
+      if (uploadError) {
+        console.error('Image upload error:', uploadError);
+        setNewsTab((prev) => ({ ...prev, uploading: false, error: 'Image upload failed' }));
+        return;
+      }
+      // Get public URL
+      const { data: publicUrlData } = supabase.storage.from('images').getPublicUrl(fileName);
+      image_url = publicUrlData?.publicUrl || '';
+    }
+    // Insert news row
+    const { error: insertError } = await supabase.from('news').insert({
+      title: newsTab.title,
+      content: newsTab.content,
+      image_url,
+    });
+    if (insertError) {
+      setNewsTab((prev) => ({ ...prev, uploading: false, error: 'Failed to add news' }));
+      return;
+    }
+    setNewsTab((prev) => ({ ...prev, uploading: false, success: 'News added!', title: '', content: '', imageFile: null }));
+    fetchNewsList();
+  };
+
   useEffect(() => {
     fetchWins();
     fetchMatches();
+    fetchNewsList();
   }, []);
 
   const handleAddJersey = () => {
@@ -76,6 +126,7 @@ const AdminPage = () => {
           <button onClick={() => setTab('wins')} className={`px-4 py-2 rounded-full font-semibold transition-colors duration-200 ${tab === 'wins' ? 'bg-orange-500 dark:bg-blue-500 text-white shadow-lg' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'}`}>Wins</button>
           <button onClick={() => setTab('matches')} className={`px-4 py-2 rounded-full font-semibold transition-colors duration-200 ${tab === 'matches' ? 'bg-orange-500 dark:bg-blue-500 text-white shadow-lg' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'}`}>Matches</button>
           <button onClick={() => setTab('transactions')} className={`px-4 py-2 rounded-full font-semibold transition-colors duration-200 ${tab === 'transactions' ? 'bg-orange-500 dark:bg-blue-500 text-white shadow-lg' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'}`}>Transactions</button>
+          <button onClick={() => setTab('news')} className={`px-4 py-2 rounded-full font-semibold transition-colors duration-200 ${tab === 'news' ? 'bg-orange-500 dark:bg-blue-500 text-white shadow-lg' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'}`}>News</button>
         </div>
         {/* Store Tab */}
         {tab === 'store' && (
@@ -224,6 +275,55 @@ const AdminPage = () => {
                 ))}
               </tbody>
             </table>
+          </div>
+        )}
+        {/* News Tab */}
+        {tab === 'news' && (
+          <div>
+            <h2 className="text-xl font-bold text-orange-500 dark:text-blue-400 mb-4">Add News</h2>
+            <div className="flex flex-col gap-3 mb-6">
+              {/* Banner Image Upload */}
+              <label className="flex flex-col items-center justify-center border-2 border-dashed border-orange-400 dark:border-blue-400 rounded-xl p-6 cursor-pointer bg-orange-50/40 dark:bg-blue-900/40 mb-2 transition hover:bg-orange-100/60 dark:hover:bg-blue-800/60">
+                {newsTab.imageFile ? (
+                  <img
+                    src={URL.createObjectURL(newsTab.imageFile)}
+                    alt="Banner Preview"
+                    className="w-full max-w-2xl h-48 object-cover rounded-lg mb-2 shadow"
+                  />
+                ) : (
+                  <div className="flex flex-col items-center justify-center h-48 w-full max-w-2xl">
+                    <span className="text-4xl text-orange-300 dark:text-blue-400 mb-2">🖼️</span>
+                    <span className="text-gray-500 dark:text-gray-400">Click or drag to upload banner image</span>
+                  </div>
+                )}
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={e => setNewsTab(prev => ({ ...prev, imageFile: e.target.files ? e.target.files[0] : null }))}
+                />
+              </label>
+              <input type="text" placeholder="Title" className="p-2 rounded bg-orange-50 dark:bg-blue-900 text-gray-900 dark:text-white" value={newsTab.title} onChange={e => setNewsTab(prev => ({ ...prev, title: e.target.value }))} />
+              <textarea placeholder="Content" className="p-2 rounded bg-orange-50 dark:bg-blue-900 text-gray-900 dark:text-white min-h-[100px]" value={newsTab.content} onChange={e => setNewsTab(prev => ({ ...prev, content: e.target.value }))} />
+              <button onClick={handleAddNews} disabled={newsTab.uploading} className="bg-orange-500 dark:bg-blue-500 text-white px-4 py-2 rounded-full font-semibold mt-2 disabled:opacity-60">{newsTab.uploading ? 'Uploading...' : 'Add News'}</button>
+              {newsTab.error && <div className="text-red-500 text-sm">{newsTab.error}</div>}
+              {newsTab.success && <div className="text-green-600 text-sm">{newsTab.success}</div>}
+            </div>
+            <h3 className="text-lg font-bold mb-2 text-orange-500 dark:text-blue-400">Recent News</h3>
+            {newsTab.loading ? <div>Loading...</div> : (
+              <ul className="space-y-2">
+                {newsTab.newsList.map((n) => (
+                  <li key={n.id} className="bg-orange-50 dark:bg-blue-900 rounded p-3 flex items-center gap-4">
+                    {n.image_url && <img src={n.image_url} alt={n.title} className="w-16 h-16 object-cover rounded" />}
+                    <div>
+                      <div className="font-semibold">{n.title}</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">{n.content}</div>
+                      <div className="text-xs text-gray-400">{n.date_posted ? new Date(n.date_posted).toLocaleString() : ''}</div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         )}
       </div>
