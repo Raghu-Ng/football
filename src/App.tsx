@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "./contexts/AuthContext";
 import { CartProvider } from "./contexts/CartContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import { useParallax } from "./hooks/useParallax";
 import Navigation from "./components/Navigation";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -22,40 +21,13 @@ import SignIn from "./components/SignIn";
 import ProductPage from "./components/ProductPage";
 import CartPage from "./components/CartPage";
 import AdminPage from "./components/AdminPage";
+import CheckoutPage from "./components/CheckoutPage";
+import GetStarted from "./components/GetStarted";
+import ScrollHandler from "./components/ScrollHandler";
 
 function App() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
-
-  // Initialize parallax engine
-  const { addParallaxElement } = useParallax();
-
-  useEffect(() => {
-    // Add parallax elements after component mount
-    addParallaxElement(".hero-background", {
-      properties: { translateY: { scalar: 0.2 } },
-      triggerOffset: 0,
-      duration: "smooth",
-    });
-
-    addParallaxElement(".floating-elements", {
-      properties: {
-        translateY: { scalar: 0.3 },
-        rotate: { scalar: 0.05 },
-      },
-      triggerOffset: 100,
-      duration: "smooth",
-    });
-
-    addParallaxElement(".section-background", {
-      properties: {
-        translateY: { scalar: 0.15 },
-        opacity: { from: 0.8, to: 1 },
-      },
-      triggerOffset: 200,
-      duration: "smooth",
-    });
-  }, [addParallaxElement]);
 
   // Check if we're on the success page
   const isSuccessPage =
@@ -82,49 +54,47 @@ function App() {
       <ThemeProvider>
         <AuthProvider>
           <CartProvider>
+            <ScrollHandler />
             <div className="min-h-screen flex flex-col overflow-x-clip w-full  transition-colors duration-300">
-              <div className="floating-elements parallax-element fixed inset-0 pointer-events-none z-10">
+              <div className="floating-elements fixed inset-0 pointer-events-none z-10">
                 <FloatingElements />
               </div>
               <Navigation
                 onCartOpen={() => setIsCartOpen(true)}
-                onAuthOpen={() => setIsAuthModalOpen(true)}
               />
               <Routes>
                 <Route
                   path="/"
                   element={
-                    
-                      <main className="relative flex-1 flex flex-col overflow-x-clip">
-                        <div className="hero-background parallax-element">
-                          <Hero />
-                        </div>
-                        <div className="section-background parallax-element">
-                          <About />
-                        </div>
-                        <div className="section-background parallax-element">
-                          <Players />
-                        </div>
-                        <div className="section-background parallax-element">
-                          <News />
-                        </div>
-                        <div className="section-background parallax-element">
-                          <Gallery />
-                        </div>
-                        <div className="section-background parallax-element">
-                          <Store />
-                        </div>
-                        <div className="section-background parallax-element">
-                          <Contact />
-                        </div>
-                      </main>
-                    
+                    <main className="relative flex-1 flex flex-col overflow-x-clip">
+                      <div className="hero-background">
+                        <Hero />
+                      </div>
+                      <div className="section-background">
+                        <About />
+                      </div>
+                      <div className="section-background">
+                        <Players />
+                      </div>
+                      <div className="section-background">
+                        <News />
+                      </div>
+                      <div className="section-background">
+                        <Gallery />
+                      </div>
+                      <div className="section-background">
+                        <Store />
+                      </div>
+                      <div className="section-background">
+                        <Contact />
+                      </div>
+                    </main>
                   }
                 />
                 <Route
                   path="/signin"
                   element={
-                    <div className="section-background parallax-element">
+                    <div className="section-background">
                       <SignIn />
                     </div>
                   }
@@ -132,7 +102,7 @@ function App() {
                 <Route
                   path="/product/:id"
                   element={
-                    <div className="section-background parallax-element">
+                    <div className="section-background">
                       <ProductPage />
                     </div>
                   }
@@ -140,7 +110,7 @@ function App() {
                 <Route
                   path="/cart"
                   element={
-                    <div className="section-background parallax-element">
+                    <div className="section-background">
                       <CartPage />
                     </div>
                   }
@@ -148,13 +118,29 @@ function App() {
                 <Route
                   path="/admin"
                   element={
-                    <div className="section-background parallax-element">
+                    <div className="section-background">
                       <AdminPage />
                     </div>
                   }
                 />
+                <Route
+                  path="/checkout"
+                  element={
+                    <div className="section-background">
+                      <CheckoutPage />
+                    </div>
+                  }
+                />
+                <Route
+                  path="/get-started"
+                  element={
+                    <div className="section-background">
+                      <GetStarted />
+                    </div>
+                  }
+                />
               </Routes>
-              <div className="section-background parallax-element">
+              <div className="section-background">
                 <Footer />
               </div>
               <AuthModal

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ShoppingCart, Star, Plus, Zap, Shield, Sparkles } from 'lucide-react';
-import { mockJerseys } from './mockJerseys';
+import { supabase } from '../lib/supabase';
 import { useCart } from '../contexts/CartContext';
 import toast from 'react-hot-toast';
 import ScrollReveal from './ScrollReveal';
@@ -29,11 +29,22 @@ const Store = () => {
   const categories = ['All', 'Home', 'Away', 'Third', 'Goalkeeper', 'Training'];
 
   useEffect(() => {
-    setJerseys(mockJerseys);
-    setLoading(false);
+    setLoading(true);
+    supabase
+      .from('jerseys')
+      .select('*')
+      .then(({ data, error }: { data: any; error: any }) => {
+        if (error) {
+          toast.error('Failed to load jerseys');
+          setJerseys([]);
+        } else {
+          setJerseys(data || []);
+        }
+        setLoading(false);
+      });
   }, []);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const filteredJerseys = selectedCategory === 'All' 
     ? jerseys 
     : jerseys.filter(jersey => jersey.category === selectedCategory);
@@ -62,9 +73,7 @@ const Store = () => {
   };
 
   const handleProductClick = (jersey: Jersey) => {
-    console.log(jersey)
     navigate(`/product/${jersey.id}`);
-    // window.location.href = `/product/${jersey.id}`;
   };
 
   if (loading) {
@@ -246,7 +255,7 @@ const Store = () => {
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{selectedJersey.name}</h3>
                   <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">{selectedJersey.description}</p>
-                  <p className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-red-400 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent mb-6">${selectedJersey.price}</p>
+                  <p className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-red-400 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent mb-6">${selectedJersey?.price}</p>
 
                   <div className="mb-6">
                     <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
@@ -277,7 +286,7 @@ const Store = () => {
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <ShoppingCart size={20} className="relative z-10" />
-                    <span className="relative z-10">Add to Cart - ${selectedJersey.price}</span>
+                    <span className="relative z-10">Add to Cart - ${selectedJersey?.price}</span>
                   </button>
                 </div>
               </div>
