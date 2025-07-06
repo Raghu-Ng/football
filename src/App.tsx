@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, ScrollRestoration } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, ScrollRestoration } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "./contexts/AuthContext";
 import { CartProvider } from "./contexts/CartContext";
