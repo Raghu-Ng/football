@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ShoppingCart, Star, Plus, Zap, Shield, Sparkles } from 'lucide-react';
+import { ShoppingCart, Plus, Zap, Shield, Sparkles } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
@@ -13,6 +13,7 @@ interface Jersey {
   name: string;
   price: number;
   image_url: string;
+  image_urls?: string[];
   description: string;
   category: string;
   sizes: string[];
@@ -146,7 +147,7 @@ const Store = () => {
               <div className="group bg-white/90 dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden transition-all hover:scale-105 border border-gray-200/50 dark:border-gray-700 hover:border-orange-400/50 dark:hover:border-cyan-400/50 hover:shadow-orange-500/20 dark:hover:shadow-cyan-500/20 relative">
                 <div className="relative overflow-hidden">
                   <img 
-                    src={jersey.image_url}
+                    src={jersey.image_urls && jersey.image_urls.length > 0 ? jersey.image_urls[0] : jersey.image_url}
                     alt={jersey.name}
                     className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
                   />
@@ -180,16 +181,7 @@ const Store = () => {
                   
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-red-400 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent">${jersey.price}</span>
-                    <div className="flex items-center">
-                      {[...Array(5)].map((_, i) => (
-                        <Star 
-                          key={i} 
-                          size={16} 
-                          className="text-yellow-400 fill-current"
-                        />
-                      ))}
-                      <span className="text-sm text-gray-500 dark:text-gray-400 ml-1">(4.9)</span>
-                    </div>
+                    {/* Rating removed */}
                   </div>
                   
                   <button

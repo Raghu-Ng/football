@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ShoppingCart, Zap, Star } from "lucide-react";
+import { ShoppingCart, Zap } from "lucide-react";
 import { useCart } from "../contexts/CartContext";
 import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -12,6 +12,7 @@ interface Jersey {
   name: string;
   price: number;
   image_url: string;
+  image_urls?: string[];
   description: string;
   category: string;
   sizes: string[];
@@ -52,8 +53,11 @@ const ProductPage: React.FC = () => {
   if (!jersey)
     return <div className="text-center py-20">Product not found.</div>;
 
-  // Prepare up to 4 images (repeat the same if only one exists)
-  const images = Array(4).fill(jersey.image_url).slice(0, 4);
+  // Prepare images: use image_urls if available, else fallback to image_url
+  const images =
+    jersey.image_urls && jersey.image_urls.length > 0
+      ? jersey.image_urls
+      : [jersey.image_url];
 
   const addToCart = (size: string, color: string) => {
     if (!user) {
@@ -131,18 +135,6 @@ const ProductPage: React.FC = () => {
           <p className="text-gray-600 dark:text-gray-400 mb-4 text-base">
             {jersey.description}
           </p>
-          <div className="flex items-center gap-2 mb-4">
-            {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                size={18}
-                className="text-yellow-400 fill-current"
-              />
-            ))}
-            <span className="text-sm text-gray-500 dark:text-gray-400">
-              (4.9)
-            </span>
-          </div>
           <div className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-red-400 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent mb-6">
             ${jersey.price}
           </div>
