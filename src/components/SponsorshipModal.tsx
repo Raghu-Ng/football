@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { X, Crown, Handshake, Trophy, Target, Users, Star, Building, Mail, Phone, Globe, DollarSign, Calendar, CheckCircle } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { supabase } from '../lib/supabase';
+import { loadRazorpayScript } from '../../public/razorpay.js';
 
 interface SponsorshipModalProps {
   isOpen: boolean;
@@ -8,7 +10,9 @@ interface SponsorshipModalProps {
 }
 
 interface SponsorshipForm {
+  sponsorType: 'company' | 'individual';
   companyName: string;
+  fullName: string;
   contactName: string;
   email: string;
   phone: string;
@@ -25,7 +29,9 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
   const [currentStep, setCurrentStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<SponsorshipForm>({
+    sponsorType: 'company',
     companyName: '',
+    fullName: '',
     contactName: '',
     email: '',
     phone: '',
@@ -97,7 +103,11 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
   const validateStep = (step: number) => {
     switch (step) {
       case 1:
-        return formData.companyName && formData.contactName && formData.email && formData.phone;
+        if (formData.sponsorType === 'company') {
+          return formData.companyName && formData.contactName && formData.email && formData.phone;
+        } else {
+          return formData.fullName && formData.email && formData.phone;
+        }
       case 2:
         return formData.sponsorshipType && formData.budget && formData.duration;
       case 3:
@@ -119,22 +129,70 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
     setCurrentStep(prev => Math.max(prev - 1, 1));
   };
 
+  const handleRazorpayPayment = async () => {
+    // Load Razorpay script if not already loaded
+    const loaded = await loadRazorpayScript();
+    if (!loaded || !window.Razorpay) {
+      toast.error('Failed to load Razorpay. Please try again.');
+      return;
+    }
+    // Calculate amount (use budget or a fixed value for demo)
+    const amount = Number(formData.budget.replace(/[^\d]/g, '')) || 5000;
+    const options = {
+      key: 'rzp_test_BUPmwKeaWpaWM3', // Replace with your Razorpay test key
+      amount: amount * 100, // in paise
+      currency: 'INR',
+      name: 'United FC Kodagu',
+      description: 'Sponsorship Payment',
+      handler: async function (response: any) {
+        // Insert sponsorship application
+        const { data: appData, error: appError } = await supabase.from('sponsorship_applications').insert({
+          company_name: formData.companyName,
+          contact_name: formData.contactName || formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          website: formData.website,
+          industry: formData.industry,
+          sponsorship_type: formData.sponsorshipType,
+          budget: formData.budget,
+          duration: formData.duration,
+          goals: formData.goals,
+          message: formData.message,
+        }).select().single();
+        // Insert transaction
+        await supabase.from('transactions').insert({
+          razorpay_payment_id: response.razorpay_payment_id,
+          amount: amount,
+          currency: 'INR',
+          status: 'success',
+          sponsorship_application_id: appData?.id || null,
+        });
+        setCurrentStep(4);
+        toast.success('Sponsorship application submitted and payment successful!');
+      },
+      prefill: {
+        name: formData.companyName || formData.fullName,
+        email: formData.email,
+        contact: formData.phone,
+      },
+      theme: { color: '#f59e42' },
+    };
+    // @ts-ignore
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  };
+
   const handleSubmit = async () => {
     if (!validateStep(3)) {
       toast.error('Please complete all required fields');
       return;
     }
-
     setLoading(true);
-    
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      setCurrentStep(4);
-      toast.success('Sponsorship application submitted successfully!');
+      await handleRazorpayPayment();
     } catch (error) {
-      toast.error('Failed to submit application. Please try again.');
+      console.log(error)
+      toast.error('Failed to process payment. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -143,7 +201,9 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
   const resetForm = () => {
     setCurrentStep(1);
     setFormData({
+      sponsorType: 'company',
       companyName: '',
+      fullName: '',
       contactName: '',
       email: '',
       phone: '',
@@ -214,29 +274,54 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
               <div>
                 <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
                   <Building className="w-5 h-5 text-yellow-400" />
-                  Company Information
+                  Sponsor Information
                 </h3>
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">I am a *</label>
+                  <select
+                    value={formData.sponsorType}
+                    onChange={e => handleInputChange('sponsorType', e.target.value)}
+                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white"
+                  >
+                    <option value="company">Company</option>
+                    <option value="individual">Individual</option>
+                  </select>
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {formData.sponsorType === 'company' ? (
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">Company Name *</label>
+                      <input
+                        type="text"
+                        value={formData.companyName}
+                        onChange={e => handleInputChange('companyName', e.target.value)}
+                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white placeholder-gray-400"
+                        placeholder="Your Company Name"
+                        required={formData.sponsorType === 'company'}
+                      />
+                    </div>
+                  ) : (
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">Full Name *</label>
+                      <input
+                        type="text"
+                        value={formData.fullName}
+                        onChange={e => handleInputChange('fullName', e.target.value)}
+                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white placeholder-gray-400"
+                        placeholder="Your Full Name"
+                        required={formData.sponsorType === 'individual'}
+                      />
+                    </div>
+                  )}
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Company Name *</label>
-                    <input
-                      type="text"
-                      value={formData.companyName}
-                      onChange={(e) => handleInputChange('companyName', e.target.value)}
-                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white placeholder-gray-400"
-                      placeholder="Your Company Name"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Contact Name *</label>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">Contact Name {formData.sponsorType === 'company' ? '*' : '(Optional)'}</label>
                     <input
                       type="text"
                       value={formData.contactName}
-                      onChange={(e) => handleInputChange('contactName', e.target.value)}
+                      onChange={e => handleInputChange('contactName', e.target.value)}
                       className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white placeholder-gray-400"
-                      placeholder="John Doe"
-                      required
+                      placeholder="Contact Person (if different)"
+                      required={formData.sponsorType === 'company'}
                     />
                   </div>
                   <div>
@@ -246,7 +331,7 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
                       <input
                         type="email"
                         value={formData.email}
-                        onChange={(e) => handleInputChange('email', e.target.value)}
+                        onChange={e => handleInputChange('email', e.target.value)}
                         className="w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white placeholder-gray-400"
                         placeholder="john@company.com"
                         required
@@ -260,7 +345,7 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
                       <input
                         type="tel"
                         value={formData.phone}
-                        onChange={(e) => handleInputChange('phone', e.target.value)}
+                        onChange={e => handleInputChange('phone', e.target.value)}
                         className="w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white placeholder-gray-400"
                         placeholder="+1 (555) 123-4567"
                         required
@@ -268,23 +353,23 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Website</label>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">Website (Optional)</label>
                     <div className="relative">
                       <Globe className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
                       <input
                         type="url"
                         value={formData.website}
-                        onChange={(e) => handleInputChange('website', e.target.value)}
+                        onChange={e => handleInputChange('website', e.target.value)}
                         className="w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white placeholder-gray-400"
                         placeholder="https://company.com"
                       />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">Industry</label>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">Industry (Optional)</label>
                     <select
                       value={formData.industry}
-                      onChange={(e) => handleInputChange('industry', e.target.value)}
+                      onChange={e => handleInputChange('industry', e.target.value)}
                       className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white"
                     >
                       <option value="">Select Industry</option>

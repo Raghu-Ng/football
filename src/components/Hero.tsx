@@ -6,16 +6,20 @@ import ParallaxSection from './ParallaxSection';
 import SponsorshipModal from './SponsorshipModal';
 import footballVideo from '../assets/Football Animation.mp4';
 import heroImage from '../assets/Hero.jpg';
-import heroImage1 from '../assets/Hero1.jpg';
+// import heroImage1 from '../assets/Hero1.jpg';
+import heroImage1 from '../assets/images/hero_team.jpeg';
 
 const Hero = () => {
   const [scrollY, setScrollY] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const [showSponsorshipModal, setShowSponsorshipModal] = useState(false);
   const [isSoundEnabled, setIsSoundEnabled] = useState(false);
+  const [currentImage, setCurrentImage] = useState(0);
   const heroRef = useRef<HTMLDivElement>(null);
   const particlesRef = useRef<HTMLDivElement>(null);
   const floatingImageRef = useRef<HTMLDivElement>(null);
+
+  const heroImages = [heroImage, heroImage1];
 
   useEffect(() => {
     setIsLoaded(true);
@@ -286,19 +290,31 @@ const Hero = () => {
     </div>
   );
 
+  // Slideshow effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % heroImages.length);
+    }, 4000); // 4 seconds per image
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section 
       ref={heroRef}
       id="home" 
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-warm-light via-orange-50/20 to-red-50/15 dark:from-gray-900 dark:via-green-900/20 dark:to-blue-900/15 transition-colors duration-300"
     >
-      {/* Hero Image Background */}
-      <img
-        src={heroImage}
-        alt="Hero Background"
-        className="absolute inset-0 w-full h-full object-cover z-0"
-        draggable="false"
-      />
+      {/* Hero Image Background - Slideshow */}
+      {heroImages.map((img, idx) => (
+        <img
+          key={idx}
+          src={img}
+          alt={`Hero Background ${idx + 1}`}
+          className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-1000 ${currentImage === idx ? 'opacity-100' : 'opacity-0'}`}
+          draggable="false"
+          style={{ transitionProperty: 'opacity' }}
+        />
+      ))}
       {/* Vintage black overlay */}
       <div className="absolute inset-0 z-10 pointer-events-none" style={{
         background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.75) 100%)',

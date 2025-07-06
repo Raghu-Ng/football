@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { CheckCircle, Package, ArrowRight, Zap } from 'lucide-react';
+import { CheckCircle } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
+import { Package } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const SuccessPage = () => {
   const { dispatch } = useCart();
@@ -22,6 +24,8 @@ const SuccessPage = () => {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  const navigate = useNavigate()
 
   return (
     <div className="min-h-screen bg-gray-900 flex items-center justify-center px-4 relative overflow-hidden">
@@ -64,16 +68,7 @@ const SuccessPage = () => {
 
         <div className="space-y-3">
           <button
-            onClick={() => scrollToSection('#store')}
-            className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white py-3 rounded-full font-semibold transition-all flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/25"
-          >
-            <Zap size={16} />
-            Continue Shopping
-            <ArrowRight size={16} />
-          </button>
-          
-          <button
-            onClick={() => scrollToSection('#home')}
+            onClick={() => navigate("/")}
             className="w-full border border-gray-600 text-gray-300 hover:text-white hover:border-cyan-400 py-3 rounded-full font-semibold transition-all"
           >
             Back to Home

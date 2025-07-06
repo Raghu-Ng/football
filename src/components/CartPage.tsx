@@ -2,14 +2,19 @@ import React, { useEffect } from 'react';
 import { useCart } from '../contexts/CartContext';
 import { useNavigate } from 'react-router-dom';
 import { ShoppingBag, CreditCard } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 
 const CartPage: React.FC = () => {
   const { state, dispatch } = useCart();
   const navigate = useNavigate();
+  const { user, loading } = useAuth();
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+    if (!loading && !user) {
+      navigate('/signin');
+    }
+  }, [user, loading, navigate]);
 
   const updateQuantity = (id: string, quantity: number) => {
     if (quantity <= 0) {

@@ -27,8 +27,8 @@ const Navigation: React.FC<NavigationProps> = ({ onCartOpen }) => {
   const navItems = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '/#about' },
-    { name: 'Players', href: '/#players' },
-    { name: 'News', href: '/#news' },
+    { name: 'Players', href: '/people' },
+    { name: 'News', href: '/news' },
     { name: 'Gallery', href: '/#gallery' },
     { name: 'Store', href: '/#store' },
     { name: 'Contact', href: '/#contact' }

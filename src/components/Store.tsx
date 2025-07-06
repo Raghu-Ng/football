@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { ShoppingCart, Star, Plus, Zap, Shield, Sparkles } from 'lucide-react';
+import { ShoppingCart, Plus, Zap, Shield, Sparkles } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { useCart } from '../contexts/CartContext';
+import { useAuth } from '../contexts/AuthContext';
 import toast from 'react-hot-toast';
 import ScrollReveal from './ScrollReveal';
 import ParallaxSection from './ParallaxSection';
@@ -12,6 +13,7 @@ interface Jersey {
   name: string;
   price: number;
   image_url: string;
+  image_urls?: string[];
   description: string;
   category: string;
   sizes: string[];
@@ -21,12 +23,11 @@ interface Jersey {
 const Store = () => {
   const [jerseys, setJerseys] = useState<Jersey[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedJersey, setSelectedJersey] = useState<Jersey | null>(null);
   const [selectedSize, setSelectedSize] = useState('');
   const { dispatch } = useCart();
-
-  const categories = ['All', 'Home', 'Away', 'Third', 'Goalkeeper', 'Training'];
+  const { user, loading: authLoading } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -44,12 +45,13 @@ const Store = () => {
       });
   }, []);
 
-  const navigate = useNavigate();
-  const filteredJerseys = selectedCategory === 'All' 
-    ? jerseys 
-    : jerseys.filter(jersey => jersey.category === selectedCategory);
+  const filteredJerseys = jerseys.slice(0, 3); // Show only 3 max
 
   const addToCart = (jersey: Jersey, size: string) => {
+    if (!user && !authLoading) {
+      navigate('/login');
+      return;
+    }
     if (!size) {
       toast.error('Please select a size');
       return;
@@ -138,27 +140,6 @@ const Store = () => {
           </div>
         </ScrollReveal>
 
-        {/* Enhanced Category Filter */}
-        <ScrollReveal direction="up" delay={200}>
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            {categories.map((category, index) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-3 rounded-full font-medium transition-all transform hover:scale-105 relative overflow-hidden group ${
-                  selectedCategory === category
-                    ? 'bg-gradient-to-r from-orange-500 to-red-600 dark:from-cyan-500 dark:to-blue-600 text-white shadow-2xl shadow-orange-500/25 dark:shadow-cyan-500/25'
-                    : 'bg-white/80 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-600 dark:hover:from-cyan-500 dark:hover:to-blue-600 hover:text-white border border-gray-200 dark:border-gray-700 hover:border-transparent'
-                }`}
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <span className="relative z-10">{category}</span>
-              </button>
-            ))}
-          </div>
-        </ScrollReveal>
-
         {/* Enhanced Jerseys Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredJerseys.map((jersey, index) => (
@@ -166,7 +147,7 @@ const Store = () => {
               <div className="group bg-white/90 dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden transition-all hover:scale-105 border border-gray-200/50 dark:border-gray-700 hover:border-orange-400/50 dark:hover:border-cyan-400/50 hover:shadow-orange-500/20 dark:hover:shadow-cyan-500/20 relative">
                 <div className="relative overflow-hidden">
                   <img 
-                    src={jersey.image_url}
+                    src={jersey.image_urls && jersey.image_urls.length > 0 ? jersey.image_urls[0] : jersey.image_url}
                     alt={jersey.name}
                     className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
                   />
@@ -200,16 +181,7 @@ const Store = () => {
                   
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-red-400 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent">${jersey.price}</span>
-                    <div className="flex items-center">
-                      {[...Array(5)].map((_, i) => (
-                        <Star 
-                          key={i} 
-                          size={16} 
-                          className="text-yellow-400 fill-current"
-                        />
-                      ))}
-                      <span className="text-sm text-gray-500 dark:text-gray-400 ml-1">(4.9)</span>
-                    </div>
+                    {/* Rating removed */}
                   </div>
                   
                   <button
