@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 
 const AdminPage = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
+
   const [tab, setTab] = useState('store');
   const [showJerseyModal, setShowJerseyModal] = useState(false);
   const [jerseys, setJerseys] = useState<any[]>([]);
@@ -199,6 +204,50 @@ const AdminPage = () => {
 
   // Jersey sizes options
   const SIZE_OPTIONS = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+
+  // Admin login handler
+  const handleAdminLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoginError("");
+    const { data, error } = await supabase.from("admin").select("password").eq("email", loginEmail).single();
+    if (error || !data) {
+      setLoginError("Invalid email or password");
+      return;
+    }
+    if (data.password !== loginPassword) {
+      setLoginError("Invalid email or password");
+      return;
+    }
+    setIsAuthenticated(true);
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
+        <form onSubmit={handleAdminLogin} className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl w-full max-w-sm border border-orange-400/30 dark:border-blue-400/30 flex flex-col gap-4">
+          <h2 className="text-2xl font-bold text-orange-500 dark:text-blue-400 mb-4 text-center">Admin Login</h2>
+          <input
+            type="email"
+            placeholder="Email"
+            className="w-full p-2 rounded bg-orange-50 dark:bg-blue-900 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700"
+            value={loginEmail}
+            onChange={e => setLoginEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            className="w-full p-2 rounded bg-orange-50 dark:bg-blue-900 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700"
+            value={loginPassword}
+            onChange={e => setLoginPassword(e.target.value)}
+            required
+          />
+          {loginError && <div className="text-red-500 text-sm text-center">{loginError}</div>}
+          <button type="submit" className="bg-orange-500 dark:bg-blue-500 text-white px-4 py-2 rounded-full font-semibold mt-2">Login</button>
+        </form>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen pt-[200px] bg-gray-100 dark:bg-gray-900 p-8">
