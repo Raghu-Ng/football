@@ -22,14 +22,11 @@ interface Jersey {
 const Store = () => {
   const [jerseys, setJerseys] = useState<Jersey[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedJersey, setSelectedJersey] = useState<Jersey | null>(null);
   const [selectedSize, setSelectedSize] = useState('');
   const { dispatch } = useCart();
   const { user, loading: authLoading } = useAuth();
   const navigate = useNavigate();
-
-  const categories = ['All', 'Home', 'Away', 'Third', 'Goalkeeper', 'Training'];
 
   useEffect(() => {
     setLoading(true);
@@ -47,9 +44,7 @@ const Store = () => {
       });
   }, []);
 
-  const filteredJerseys = selectedCategory === 'All' 
-    ? jerseys 
-    : jerseys.filter(jersey => jersey.category === selectedCategory);
+  const filteredJerseys = jerseys.slice(0, 3); // Show only 3 max
 
   const addToCart = (jersey: Jersey, size: string) => {
     if (!user && !authLoading) {
@@ -141,27 +136,6 @@ const Store = () => {
               Show your United FC Kodagu pride with our premium collection of official jerseys. Each jersey is crafted with the 
               <span className="text-orange-500 dark:text-cyan-400 font-semibold"> highest quality materials</span> and cutting-edge technology.
             </p>
-          </div>
-        </ScrollReveal>
-
-        {/* Enhanced Category Filter */}
-        <ScrollReveal direction="up" delay={200}>
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            {categories.map((category, index) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-3 rounded-full font-medium transition-all transform hover:scale-105 relative overflow-hidden group ${
-                  selectedCategory === category
-                    ? 'bg-gradient-to-r from-orange-500 to-red-600 dark:from-cyan-500 dark:to-blue-600 text-white shadow-2xl shadow-orange-500/25 dark:shadow-cyan-500/25'
-                    : 'bg-white/80 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-orange-500 hover:to-red-600 dark:hover:from-cyan-500 dark:hover:to-blue-600 hover:text-white border border-gray-200 dark:border-gray-700 hover:border-transparent'
-                }`}
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <span className="relative z-10">{category}</span>
-              </button>
-            ))}
           </div>
         </ScrollReveal>
 

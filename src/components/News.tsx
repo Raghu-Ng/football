@@ -98,7 +98,7 @@ const News = () => {
             ))}
           </div>
         )}
-        <div className="text-center mt-12">
+        <div className="text-center mt-12 ">
           <Link to="/news" className="group bg-gradient-to-r from-orange-500 to-red-600 dark:from-cyan-500 dark:to-blue-600 hover:from-orange-400 hover:to-red-500 dark:hover:from-cyan-400 dark:hover:to-blue-500 text-white px-8 py-3 rounded-full font-semibold transition-all transform hover:scale-105 shadow-lg shadow-orange-500/25 dark:shadow-cyan-500/25 flex items-center gap-2 mx-auto">
             <Shield className="w-5 h-5 group-hover:rotate-12 transition-transform" />
             View All News
