@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { X, Crown, Handshake, Trophy, Target, Users, Star, Building, Mail, Phone, Globe, DollarSign, Calendar, CheckCircle } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { supabase } from '../lib/supabase';
+import { loadRazorpayScript } from '../../public/razorpay.js';
 
 interface SponsorshipModalProps {
   isOpen: boolean;
@@ -127,22 +129,70 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
     setCurrentStep(prev => Math.max(prev - 1, 1));
   };
 
+  const handleRazorpayPayment = async () => {
+    // Load Razorpay script if not already loaded
+    const loaded = await loadRazorpayScript();
+    if (!loaded || !window.Razorpay) {
+      toast.error('Failed to load Razorpay. Please try again.');
+      return;
+    }
+    // Calculate amount (use budget or a fixed value for demo)
+    const amount = Number(formData.budget.replace(/[^\d]/g, '')) || 5000;
+    const options = {
+      key: 'rzp_test_BUPmwKeaWpaWM3', // Replace with your Razorpay test key
+      amount: amount * 100, // in paise
+      currency: 'INR',
+      name: 'United FC Kodagu',
+      description: 'Sponsorship Payment',
+      handler: async function (response: any) {
+        // Insert sponsorship application
+        const { data: appData, error: appError } = await supabase.from('sponsorship_applications').insert({
+          company_name: formData.companyName,
+          contact_name: formData.contactName || formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          website: formData.website,
+          industry: formData.industry,
+          sponsorship_type: formData.sponsorshipType,
+          budget: formData.budget,
+          duration: formData.duration,
+          goals: formData.goals,
+          message: formData.message,
+        }).select().single();
+        // Insert transaction
+        await supabase.from('transactions').insert({
+          razorpay_payment_id: response.razorpay_payment_id,
+          amount: amount,
+          currency: 'INR',
+          status: 'success',
+          sponsorship_application_id: appData?.id || null,
+        });
+        setCurrentStep(4);
+        toast.success('Sponsorship application submitted and payment successful!');
+      },
+      prefill: {
+        name: formData.companyName || formData.fullName,
+        email: formData.email,
+        contact: formData.phone,
+      },
+      theme: { color: '#f59e42' },
+    };
+    // @ts-ignore
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  };
+
   const handleSubmit = async () => {
     if (!validateStep(3)) {
       toast.error('Please complete all required fields');
       return;
     }
-
     setLoading(true);
-    
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      setCurrentStep(4);
-      toast.success('Sponsorship application submitted successfully!');
+      await handleRazorpayPayment();
     } catch (error) {
-      toast.error('Failed to submit application. Please try again.');
+      console.log(error)
+      toast.error('Failed to process payment. Please try again.');
     } finally {
       setLoading(false);
     }

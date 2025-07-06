@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Facebook, Twitter, Instagram, Youtube, Mail, Phone, MapPin, Zap, Shield, Cpu } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 
 const Footer = () => {
+  const [subscribed, setSubscribed] = useState(false);
+  const [subEmail, setSubEmail] = useState('');
+  const [subLoading, setSubLoading] = useState(false);
+  const [subError, setSubError] = useState<string | null>(null);
+
   const quickLinks = [
     { name: 'About Us', href: '#about' },
     { name: 'Academy Programs', href: '#academy' },
@@ -48,16 +54,42 @@ const Footer = () => {
               <p className="text-orange-100 dark:text-cyan-100">Get the latest news and updates from United FC Kodagu</p>
             </div>
             <div className="flex w-full md:w-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 md:w-80 px-4 py-3 rounded-l-full text-gray-900 focus:outline-none bg-white/90 backdrop-blur-sm"
-              />
-              <button className="bg-gray-900 hover:bg-gray-800 px-6 py-3 rounded-r-full font-semibold transition-colors flex items-center gap-2 text-white">
-                <Shield className="w-4 h-4" />
-                Subscribe
-              </button>
+              {subscribed ? (
+                <div className="flex items-center justify-center w-full md:w-80 h-[52px] bg-white/90 backdrop-blur-sm rounded-full text-center">
+                  <span className="text-green-600 font-semibold w-full">Thank you for subscribing!</span>
+                </div>
+              ) : (
+                <>
+                  <input
+                    type="email"
+                    value={subEmail}
+                    onChange={e => setSubEmail(e.target.value)}
+                    placeholder="Enter your email"
+                    className="flex-1 md:w-80 px-4 py-3 rounded-l-full text-gray-900 focus:outline-none bg-white/90 backdrop-blur-sm"
+                  />
+                  <button
+                    className="bg-gray-900 hover:bg-gray-800 px-6 py-3 rounded-r-full font-semibold transition-colors flex items-center gap-2 text-white"
+                    onClick={async (e) => {
+                      e.preventDefault();
+                      setSubLoading(true);
+                      setSubError(null);
+                      const { error } = await supabase.from('subscriptions').insert({ email: subEmail });
+                      setSubLoading(false);
+                      if (error) {
+                        setSubError('Failed to subscribe. Please try again.');
+                        return;
+                      }
+                      setSubscribed(true);
+                    }}
+                    disabled={subLoading || !subEmail}
+                  >
+                    <Shield className="w-4 h-4" />
+                    {subLoading ? 'Subscribing...' : 'Subscribe'}
+                  </button>
+                </>
+              )}
             </div>
+            {subError && <div className="text-red-500 text-sm mt-2">{subError}</div>}
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@ import { Award, Users, Trophy, Target, Zap, Shield, Cpu } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 import ParallaxSection from "./ParallaxSection";
 import { supabase } from "../lib/supabase";
+import logo from "../assets/images/logo.png"
 
 const About = () => {
   const stats = [
@@ -198,14 +199,14 @@ const About = () => {
         <div className="flex flex-col md:flex-row gap-8 justify-center items-stretch">
           {/* Show at most 3 cards: 1 win + 2 matches */}
           {wins.slice(0, 1).map((win, idx) => (
-            <div key={win.id || idx} className="w-full md:flex-1 min-w-0 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 flex flex-col justify-between">
+            <div key={win.id || idx} className="w-full md:flex-1 min-w-0 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white/90 dark:bg-gray-800 shadow-2xl flex flex-col justify-between transition-all duration-300">
               <div className="flex flex-col items-center p-6 h-full">
                 <span className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{win.match_date}</span>
                 <span className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">{win.competition}</span>
                 <div className="flex items-center justify-center gap-4 my-4">
-                  <img src="https://placehold.co/56x56/orange/white?text=UFC" alt="United FC Kodagu logo" className="w-14 h-14 rounded-full border-2 border-orange-400 dark:border-cyan-400 bg-white object-cover" />
+                  <img src={logo} alt="United FC Kodagu logo" className="w-20 h-20 rounded-full object-cover" />
                   <span className="text-3xl font-extrabold text-blue-700 dark:text-blue-400 bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-lg shadow">{win.score}</span>
-                  <img src="https://placehold.co/56x56/gray/white?text=OPP" alt={`${win.opponent} logo`} className="w-14 h-14 rounded-full border-2 border-gray-400 dark:border-gray-500 bg-white object-cover" />
+                  <img src="https://placehold.co/80x80/gray/white?text=OPP" alt={`${win.opponent} logo`} className="w-20 h-20 rounded-full object-cover" />
                 </div>
                 <div className="flex justify-between w-full mt-2">
                   <span className="text-sm font-bold text-orange-600 dark:text-cyan-400 flex items-center gap-2">United FC Kodagu</span>
@@ -218,14 +219,14 @@ const About = () => {
             let time = match.kickoff_time;
             if (typeof time === "string" && time.length >= 5) time = time.slice(0, 5);
             return (
-              <div key={match.id || i} className="w-full md:flex-1 min-w-0 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 flex flex-col justify-between">
+              <div key={match.id || i} className="w-full md:flex-1 min-w-0 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white/90 dark:bg-gray-800 shadow-2xl flex flex-col justify-between transition-all duration-300">
                 <div className="flex flex-col items-center p-6 h-full">
                   <span className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{match.match_date}</span>
                   <span className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">{match.competition}</span>
                   <div className="flex items-center justify-center gap-4 my-4">
-                    <img src="https://placehold.co/56x56/orange/white?text=UFC" alt="United FC Kodagu logo" className="w-14 h-14 rounded-full border-2 border-orange-400 dark:border-cyan-400 bg-white object-cover" />
+                    <img src={logo} alt="United FC Kodagu logo" className="w-20 h-20 rounded-full object-cover" />
                     <span className="text-3xl font-extrabold text-blue-700 dark:text-blue-400 bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-lg shadow">{time || "19:00"}</span>
-                    <img src="https://placehold.co/56x56/gray/white?text=OPP" alt={`${match.opponent} logo`} className="w-14 h-14 rounded-full border-2 border-gray-400 dark:border-gray-500 bg-white object-cover" />
+                    <img src="https://placehold.co/80x80/gray/white?text=OPP" alt={`${match.opponent} logo`} className="w-20 h-20 rounded-full object-cover" />
                   </div>
                   <div className="flex justify-between w-full mt-2">
                     <span className="text-sm font-bold text-orange-600 dark:text-cyan-400 flex items-center gap-2">United FC Kodagu</span>
