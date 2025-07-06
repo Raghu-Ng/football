@@ -4,6 +4,7 @@ import ScrollReveal from "./ScrollReveal";
 import ParallaxSection from "./ParallaxSection";
 import { supabase } from "../lib/supabase";
 import logo from "../assets/images/logo.png"
+import { useNavigate } from "react-router-dom";
 
 const About = () => {
   const stats = [
@@ -29,27 +30,47 @@ const About = () => {
     },
   ];
 
-  const [wins, setWins] = useState<any[]>([]);
-  const [matches, setMatches] = useState<any[]>([]);
+  const [latestWin, setLatestWin] = useState<any | null>(null);
+  const [allMatches, setAllMatches] = useState<any[]>([]);
+  const [upcomingMatches, setUpcomingMatches] = useState<any[]>([]);
 
   useEffect(() => {
-    // Fetch wins
+    // Fetch all matches
     supabase
-      .from("wins")
+      .from("matches")
       .select("*")
       .order("match_date", { ascending: false })
       .then(({ data }) => {
-        setWins(data || []);
+        // Sort all matches by match_date descending (already sorted by Supabase, but ensure in JS)
+        const sorted = (data || []).slice().sort((a, b) => new Date(b.match_date).getTime() - new Date(a.match_date).getTime());
+        setAllMatches(sorted);
+        // Find latest win using result column
+        if (sorted.length > 0) {
+          const win = sorted.find((m: any) => m.result === "win");
+          setLatestWin(win || null);
+        }
       });
-    // Fetch matches
+    // Fetch upcoming matches
     supabase
       .from("upcoming_matches")
       .select("*")
       .order("match_date", { ascending: true })
       .then(({ data }) => {
-        setMatches(data || []);
+        // Sort by match_date ascending, then by kickoff_time ascending if available
+        const sorted = (data || []).slice().sort((a, b) => {
+          const dateA = new Date(a.match_date).getTime();
+          const dateB = new Date(b.match_date).getTime();
+          if (dateA !== dateB) return dateA - dateB;
+          if (a.kickoff_time && b.kickoff_time) {
+            return a.kickoff_time.localeCompare(b.kickoff_time);
+          }
+          return 0;
+        });
+        setUpcomingMatches(sorted);
       });
   }, []);
+
+  const navigate = useNavigate()
 
   return (
     <section
@@ -57,7 +78,7 @@ const About = () => {
       className="py-20 bg-orange-50/30 dark:bg-gray-900 relative overflow-hidden transition-colors duration-300"
     >
       {/* Enhanced Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-br from-orange-50/50 via-red-50/30 to-yellow-50/20 dark:from-gray-900 dark:via-blue-900/10 dark:to-purple-900/10" />
+      <div className="absolute inset-0 bg-gr`ad`ient-to-br from-orange-50/50 via-red-50/30 to-yellow-50/20 dark:from-gray-900 dark:via-blue-900/10 dark:to-purple-900/10" />
 
       <ParallaxSection speed={0.2}>
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/5 dark:bg-cyan-500/5 rounded-full blur-3xl animate-pulse" />
@@ -195,27 +216,32 @@ const About = () => {
 
       {/* Wins & Upcoming Matches Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 relative z-10">
-        <div className="mb-4 text-2xl font-bold">Recent wins and matches</div>
+        <div className="mb-4 text-2xl font-bold">Recent matches and upcoming matches</div>
         <div className="flex flex-col md:flex-row gap-8 justify-center items-stretch">
-          {/* Show at most 3 cards: 1 win + 2 matches */}
-          {wins.slice(0, 1).map((win, idx) => (
-            <div key={win.id || idx} className="w-full md:flex-1 min-w-0 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white/90 dark:bg-gray-800 shadow-2xl flex flex-col justify-between transition-all duration-300">
+          {/* Show latest win from matches */}
+          {latestWin && (
+            <div key={latestWin.id} className="w-full md:flex-1 min-w-0 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white/90 dark:bg-gray-800 shadow-2xl flex flex-col justify-between transition-all duration-300">
               <div className="flex flex-col items-center p-6 h-full">
-                <span className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{win.match_date}</span>
-                <span className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">{win.competition}</span>
+                <span className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{latestWin.match_date}</span>
+                <span className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">{latestWin.competition}</span>
                 <div className="flex items-center justify-center gap-4 my-4">
-                  <img src={logo} alt="United FC Kodagu logo" className="w-20 h-20 rounded-full object-cover" />
-                  <span className="text-3xl font-extrabold text-blue-700 dark:text-blue-400 bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-lg shadow">{win.score}</span>
-                  <img src="https://placehold.co/80x80/gray/white?text=OPP" alt={`${win.opponent} logo`} className="w-20 h-20 rounded-full object-cover" />
+                  <div className="relative w-20 h-20">
+                    <img src={logo} alt="United FC Kodagu logo" className="absolute inset-0 w-20 h-20 object-cover rounded-full" />
+                  </div>
+                  <span className="text-3xl font-extrabold text-blue-700 dark:text-blue-400 bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-lg shadow">{latestWin.score}</span>
+                  <div className="relative w-20 h-20">
+                    <img src={latestWin.image_url} alt={`${latestWin.opponent} logo`} className="absolute inset-0 w-20 h-20 object-fit rounded-full" />
+                  </div>
                 </div>
                 <div className="flex justify-between w-full mt-2">
                   <span className="text-sm font-bold text-orange-600 dark:text-cyan-400 flex items-center gap-2">United FC Kodagu</span>
-                  <span className="text-sm font-bold text-gray-700 dark:text-gray-200 flex items-center gap-2">{win.opponent}</span>
+                  <span className="text-sm font-bold text-gray-700 dark:text-gray-200 flex items-center gap-2">{latestWin.opponent}</span>
                 </div>
               </div>
             </div>
-          ))}
-          {matches.slice(0, 2).map((match, i) => {
+          )}
+          {/* Show 2 upcoming matches */}
+          {upcomingMatches.slice(0, 2).map((match, i) => {
             let time = match.kickoff_time;
             if (typeof time === "string" && time.length >= 5) time = time.slice(0, 5);
             return (
@@ -224,9 +250,13 @@ const About = () => {
                   <span className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">{match.match_date}</span>
                   <span className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">{match.competition}</span>
                   <div className="flex items-center justify-center gap-4 my-4">
-                    <img src={logo} alt="United FC Kodagu logo" className="w-20 h-20 rounded-full object-cover" />
+                    <div className="relative w-20 h-20">
+                      <img src={logo} alt="United FC Kodagu logo" className="absolute inset-0 w-20 h-20 object-cover rounded-full" />
+                    </div>
                     <span className="text-3xl font-extrabold text-blue-700 dark:text-blue-400 bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-lg shadow">{time || "19:00"}</span>
-                    <img src="https://placehold.co/80x80/gray/white?text=OPP" alt={`${match.opponent} logo`} className="w-20 h-20 rounded-full object-cover" />
+                    <div className="relative w-20 h-20">
+                      <img src={match.image_url || "https://placehold.co/80x80/gray/white?text=OPP"} alt={`${match.opponent} logo`} className="absolute inset-0 w-20 h-20 object-cover rounded-full" />
+                    </div>
                   </div>
                   <div className="flex justify-between w-full mt-2">
                     <span className="text-sm font-bold text-orange-600 dark:text-cyan-400 flex items-center gap-2">United FC Kodagu</span>
@@ -236,6 +266,12 @@ const About = () => {
               </div>
             );
           })}
+        </div>
+        {/* All Matches Section Link */}
+        <div className="mt-8 flex justify-center">
+          <button onClick={() => navigate("/all-matches")}  className="inline-block px-6 py-2 rounded-full font-semibold bg-gradient-to-r from-orange-400 to-red-400 dark:from-cyan-400 dark:to-blue-400 text-white shadow hover:from-orange-500 hover:to-red-500 dark:hover:from-cyan-500 dark:hover:to-blue-500 transition-all duration-200">
+            View All Matches
+          </button>
         </div>
       </div>
       {/* End Wins & Upcoming Matches Section */}

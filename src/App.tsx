@@ -27,6 +27,7 @@ import ScrollHandler from "./components/ScrollHandler";
 import AllNews from "./components/AllNews";
 import NewsArticle from "./components/NewsArticle";
 import People from "./components/People";
+import AllMatchesPage from "./components/AllMatchesPage";
 import { useLocation } from "react-router-dom";
 
 function App() {
@@ -154,6 +155,10 @@ function App() {
                 <Route
                   path="/success"
                   element={<SuccessPage />}
+                />
+                <Route
+                  path="/all-matches"
+                  element={<AllMatchesPage />}
                 />
               </Routes>
               <div className="section-background">
