@@ -1,5 +1,6 @@
 import React from 'react';
 import { MapPin, Phone, Mail, Clock, Send, Zap, Shield, Cpu } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 
 const Contact = () => {
   const contactInfo = [
@@ -24,6 +25,42 @@ const Contact = () => {
       details: ['Mon-Fri: 8:00 AM - 8:00 PM', 'Sat-Sun: 9:00 AM - 6:00 PM']
     }
   ];
+
+  const [form, setForm] = React.useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    subject: '',
+    message: ''
+  });
+  const [loading, setLoading] = React.useState(false);
+  const [success, setSuccess] = React.useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setForm({ ...form, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setSuccess(false);
+    const { error } = await supabase.from('messages').insert([
+      {
+        name: form.firstName + ' ' + form.lastName,
+        email: form.email,
+        subject: form.subject,
+        message: form.message
+      }
+    ]);
+    setLoading(false);
+    if (!error) {
+      setSuccess(true);
+      setForm({ firstName: '', lastName: '', email: '', phone: '', subject: '', message: '' });
+    } else {
+      alert('Failed to send message. Please try again.');
+    }
+  };
 
   return (
     <section id="contact" className="py-20 pb-32 bg-orange-50/30 dark:bg-gray-900 relative overflow-hidden transition-colors duration-300">
@@ -56,7 +93,7 @@ const Contact = () => {
               <Zap className="w-6 h-6 text-orange-500 dark:text-cyan-400" />
               Send us a message
             </h3>
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -65,8 +102,11 @@ const Contact = () => {
                   <input
                     type="text"
                     id="firstName"
+                    value={form.firstName}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-400 dark:focus:ring-cyan-400 focus:border-transparent text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
                     placeholder="John"
+                    required
                   />
                 </div>
                 <div>
@@ -76,12 +116,14 @@ const Contact = () => {
                   <input
                     type="text"
                     id="lastName"
+                    value={form.lastName}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-400 dark:focus:ring-cyan-400 focus:border-transparent text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
                     placeholder="Doe"
+                    required
                   />
                 </div>
               </div>
-              
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Email
@@ -89,30 +131,23 @@ const Contact = () => {
                 <input
                   type="email"
                   id="email"
+                  value={form.email}
+                  onChange={handleChange}
                   className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-400 dark:focus:ring-cyan-400 focus:border-transparent text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
                   placeholder="john@example.com"
+                  required
                 />
               </div>
-              
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Phone
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-400 dark:focus:ring-cyan-400 focus:border-transparent text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
-                  placeholder="+1 (555) 123-4567"
-                />
-              </div>
-              
               <div>
                 <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Subject
                 </label>
                 <select
                   id="subject"
+                  value={form.subject}
+                  onChange={handleChange}
                   className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-400 dark:focus:ring-cyan-400 focus:border-transparent text-gray-900 dark:text-white"
+                  required
                 >
                   <option value="">Select a subject</option>
                   <option value="academy">Academy Registration</option>
@@ -121,26 +156,31 @@ const Contact = () => {
                   <option value="facilities">Facility Rental</option>
                 </select>
               </div>
-              
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Message
                 </label>
                 <textarea
                   id="message"
+                  value={form.message}
+                  onChange={handleChange}
                   rows={5}
                   className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-400 dark:focus:ring-cyan-400 focus:border-transparent text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
                   placeholder="Tell us about your interest in United FC Kodagu..."
+                  required
                 ></textarea>
               </div>
-              
               <button
                 type="submit"
                 className="w-full bg-gradient-to-r from-orange-500 to-red-600 dark:from-cyan-500 dark:to-blue-600 hover:from-orange-400 hover:to-red-500 dark:hover:from-cyan-400 dark:hover:to-blue-500 text-white py-3 px-6 rounded-full font-semibold transition-all flex items-center justify-center gap-2 shadow-lg shadow-orange-500/25 dark:shadow-cyan-500/25"
+                disabled={loading}
               >
-                Send Message
+                {loading ? 'Sending...' : 'Send Message'}
                 <Send size={20} />
               </button>
+              {success && (
+                <div className="text-green-600 dark:text-green-400 mt-4 text-center font-semibold">Message sent successfully!</div>
+              )}
             </form>
           </div>
 

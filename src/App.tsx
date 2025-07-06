@@ -33,43 +33,17 @@ function App() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-   
-
-  // Check if we're on the success page
-  const isSuccessPage =
-    window.location.pathname === "/success" ||
-    window.location.search.includes("session_id");
-
-  if (isSuccessPage) {
-    return (
-      <ThemeProvider>
-        <AuthProvider>
-          <CartProvider>
-            <div className="min-h-screen bg-cream-light  transition-colors duration-300">
-              <SuccessPage />
-              <Toaster position="top-right" />
-            </div>
-          </CartProvider>
-        </AuthProvider>
-      </ThemeProvider>
-    );
-  }
-
   return (
     <Router>
-      
       <ThemeProvider>
         <AuthProvider>
           <CartProvider>
-            
             <ScrollHandler />
             <div className="min-h-screen flex flex-col  w-full  transition-colors duration-300">
               <div className="floating-elements fixed inset-0 pointer-events-none z-10">
                 <FloatingElements />
               </div>
-              <Navigation
-                onCartOpen={() => setIsCartOpen(true)}
-              />
+              <Navigation onCartOpen={() => setIsCartOpen(true)} />
               <Routes>
                 <Route
                   path="/"
@@ -151,22 +125,16 @@ function App() {
                 <Route path="/news" element={<AllNews />} />
                 <Route path="/news/:id" element={<NewsArticle />} />
                 <Route path="/people" element={<People />} />
+                <Route path="/success" element={<SuccessPage />} />
               </Routes>
               <div className="section-background">
                 <Footer />
               </div>
-              <AuthModal
-                isOpen={isAuthModalOpen}
-                onClose={() => setIsAuthModalOpen(false)}
-              />
-              <Cart
-                isOpen={isCartOpen}
-                onClose={() => setIsCartOpen(false)}
-                onAuthRequired={() => {
-                  setIsCartOpen(false);
-                  setIsAuthModalOpen(true);
-                }}
-              />
+              <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
+              <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} onAuthRequired={() => {
+                setIsCartOpen(false);
+                setIsAuthModalOpen(true);
+              }} />
               <Toaster position="top-right" />
             </div>
           </CartProvider>

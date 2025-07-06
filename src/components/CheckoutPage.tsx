@@ -3,6 +3,8 @@ import { useCart } from '../contexts/CartContext';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
+// @ts-ignore
+import { loadRazorpayScript } from '../../public/razorpay.js';
 
 const CheckoutPage: React.FC = () => {
   const { state } = useCart();
@@ -43,10 +45,77 @@ const CheckoutPage: React.FC = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Dummy submit, just go to home for now
-    navigate('/');
+  const handleRazorpay = async () => {
+    const loaded = await loadRazorpayScript();
+    if (!loaded) {
+      console.error('Razorpay SDK failed to load.');
+      return;
+    }
+    const options = {
+      key: 'rzp_test_BUPmwKeaWpaWM3', // Use your Razorpay test key here
+      amount: state.total * 100, // in paise
+      currency: 'INR',
+      name: 'United FC Kodagu',
+      description: 'Order Payment',
+      handler: async function (response: any) {
+        // Save order to Supabase
+        const { data: order, error: orderError } = await supabase
+          .from('orders')
+          .insert([{
+            user_id: user?.id || null,
+            razorpay_order_id: response.razorpay_order_id || null,
+            razorpay_payment_id: response.razorpay_payment_id,
+            status: 'paid',
+            total_amount: state.total,
+            first_name: form.firstName,
+            last_name: form.lastName,
+            email: form.email,
+            phone: form.phone,
+            address: form.address,
+            city: form.city,
+            zip_code: form.zipCode,
+            items: state.items,
+          }])
+          .select()
+          .single();
+
+        if (orderError) {
+          console.error('Order save error:', orderError);
+          // alert('Order save failed!');
+          return;
+        }
+
+        // Save transaction to Supabase
+        await supabase
+          .from('transactions')
+          .insert([{
+            order_id: order.id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_order_id: response.razorpay_order_id || null,
+            amount: state.total,
+            currency: 'INR',
+            status: 'success',
+            payment_method: 'razorpay',
+          }]);
+
+        console.log('Payment successful! Payment ID: ' + response.razorpay_payment_id);
+        navigate('/success');
+      },
+      prefill: {
+        name: form.firstName + ' ' + form.lastName,
+        email: form.email,
+        contact: form.phone,
+      },
+      notes: {
+        address: form.address + ', ' + form.city + ', ' + form.zipCode,
+      },
+      theme: {
+        color: '#f97316',
+      },
+    };
+    // @ts-ignore
+    const rzp = new window.Razorpay(options);
+    rzp.open();
   };
 
   return (
@@ -55,7 +124,7 @@ const CheckoutPage: React.FC = () => {
         {/* Checkout Form Left */}
         <div className="md:w-1/2 flex flex-col p-8 gap-4">
           <h2 className="text-2xl font-bold text-orange-500 dark:text-blue-400 mb-8">Checkout</h2>
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <input name="firstName" value={form.firstName} onChange={handleChange} required placeholder="First Name" className="p-3 rounded border border-orange-300 dark:border-blue-500 bg-orange-50 dark:bg-blue-900 text-gray-900 dark:text-white placeholder-orange-300 dark:placeholder-blue-300" />
               <input name="lastName" value={form.lastName} onChange={handleChange} required placeholder="Last Name" className="p-3 rounded border border-orange-300 dark:border-blue-500 bg-orange-50 dark:bg-blue-900 text-gray-900 dark:text-white placeholder-orange-300 dark:placeholder-blue-300" />
@@ -68,7 +137,13 @@ const CheckoutPage: React.FC = () => {
               <input name="zipCode" value={form.zipCode} onChange={handleChange} required placeholder="ZIP Code" className="p-3 rounded border border-orange-300 dark:border-blue-500 bg-orange-50 dark:bg-blue-900 text-gray-900 dark:text-white placeholder-orange-300 dark:placeholder-blue-300" />
             </div>
             <div className="flex justify-end">
-              <button type="submit" className="bg-gradient-to-r from-orange-500 to-red-600 dark:from-blue-500 dark:to-cyan-600 hover:from-orange-400 hover:to-red-500 dark:hover:from-blue-400 dark:hover:to-cyan-500 text-white py-3 px-8 rounded-full font-semibold transition-all shadow-lg shadow-orange-500/25 dark:shadow-blue-500/25">Place Order</button>
+              <button
+                type="button"
+                onClick={handleRazorpay}
+                className="w-full bg-gradient-to-r from-orange-500 to-red-600 dark:from-blue-500 dark:to-cyan-600 hover:from-orange-400 hover:to-red-500 dark:hover:from-blue-400 dark:hover:to-cyan-500 text-white py-3 px-8 rounded-full font-semibold transition-all shadow-lg shadow-orange-500/25 dark:shadow-blue-500/25 mt-6"
+              >
+                Pay with Razorpay
+              </button>
             </div>
           </form>
         </div>
