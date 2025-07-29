@@ -81,7 +81,7 @@ const Store = () => {
   if (loading) {
     return (
       <section id="store" className="py-20 bg-orange-50/30 dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className=" mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 dark:border-cyan-400 mx-auto"></div>
             <p className="mt-4 text-gray-600 dark:text-gray-400">Loading jerseys...</p>
@@ -92,7 +92,7 @@ const Store = () => {
   }
 
   return (
-    <section id="store" className="py-20 bg-orange-50/30 dark:bg-gray-900 relative overflow-hidden transition-colors duration-300">
+    <section id="store" className="py-20  bg-white dark:bg-gray-900 relative overflow-hidden transition-colors duration-300">
       {/* Enhanced Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-orange-50/50 via-red-50/30 to-yellow-50/20 dark:from-gray-900 dark:via-purple-900/10 dark:to-blue-900/10" />
       
@@ -121,9 +121,15 @@ const Store = () => {
         ))}
       </div>
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className=" mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <ScrollReveal direction="up" delay={100}>
-          <div className="text-center mb-16">
+          <div className='flex justify-between mb-10' >
+            <div className='flex flex-col' >
+              <div className='text-4xl font-bold text-gray-900 dark:text-white' >Our official jerseys</div>
+              <div className='text-2xl font-semibold opacity-70' >Buy our jerseys!</div>
+            </div>
+          </div>
+          {/* <div className="text-center mb-16">
             <div className="flex justify-center mb-6">
               <div className="p-3 bg-gradient-to-br from-orange-400/20 to-red-600/20 dark:from-cyan-400/20 dark:to-blue-600/20 rounded-full border border-orange-400/30 dark:border-cyan-400/30 shadow-2xl shadow-orange-400/20 dark:shadow-cyan-400/20 relative group">
                 <Shield className="w-8 h-8 text-orange-500 dark:text-cyan-400 group-hover:animate-pulse" />
@@ -137,7 +143,7 @@ const Store = () => {
               Show your United FC Kodagu pride with our premium collection of official jerseys. Each jersey is crafted with the 
               <span className="text-orange-500 dark:text-cyan-400 font-semibold"> highest quality materials</span> and cutting-edge technology.
             </p>
-          </div>
+          </div> */}
         </ScrollReveal>
 
         {/* Enhanced Jerseys Grid */}
