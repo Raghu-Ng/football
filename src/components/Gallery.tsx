@@ -49,7 +49,7 @@ const CategoryCard = ({
         }}
       >
         <div
-          className="group relative h-full bg-white/90 dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden transition-all hover:scale-105 border border-gray-200/50 dark:border-gray-700 hover:border-orange-400/50 dark:hover:border-cyan-400/50 hover:shadow-orange-500/20 dark:hover:shadow-cyan-500/20 cursor-pointer"
+          className="group relative h-full bg-white/90 dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden transition-all hover:scale-105 border border-gray-200/50 dark:border-gray-700 hover:border-blue-400/50 dark:hover:border-cyan-400/50 hover:shadow-blue-500/20 dark:hover:shadow-cyan-500/20 cursor-pointer"
           onClick={() => openCollage(category)}
         >
           <div className="relative h-80 overflow-hidden flex flex-col">
@@ -80,18 +80,18 @@ const CategoryCard = ({
             </div>
 
             {/* Hover overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 to-red-600/10 dark:from-cyan-500/10 dark:to-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-red-600/10 dark:from-cyan-500/10 dark:to-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
             {/* Play icon overlay */}
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
-              <div className="w-16 h-16 bg-gradient-to-r from-orange-500/20 to-red-600/20 dark:from-cyan-500/20 dark:to-blue-600/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-orange-400/30 dark:border-cyan-400/30 group-hover:scale-110 transition-transform">
-                <Grid className="w-8 h-8 text-orange-500 dark:text-cyan-400" />
+              <div className="w-16 h-16 bg-gradient-to-r from-blue-500/20 to-red-600/20 dark:from-cyan-500/20 dark:to-blue-600/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-blue-400/30 dark:border-cyan-400/30 group-hover:scale-110 transition-transform">
+                <Grid className="w-8 h-8 text-blue-500 dark:text-cyan-400" />
               </div>
             </div>
           </div>
 
           <div className="p-6 flex flex-col">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-orange-500 dark:group-hover:text-cyan-400 transition-colors">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-500 dark:group-hover:text-cyan-400 transition-colors">
               {category.title}
             </h3>
             <p className=" dark:text-gray-400 text-sm mb-4 line-clamp-2">
@@ -99,7 +99,7 @@ const CategoryCard = ({
             </p>
 
             <div className="flex items-center justify-between mt-auto">
-              <span className="text-orange-500 dark:text-cyan-400 font-semibold text-sm flex items-center gap-1">
+              <span className="text-blue-500 dark:text-cyan-400 font-semibold text-sm flex items-center gap-1">
                 <Zap className="w-4 h-4" />
                 View Collection
               </span>
@@ -111,7 +111,7 @@ const CategoryCard = ({
           </div>
 
           {/* Card glow effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-orange-500/5 to-red-600/5 dark:from-cyan-500/5 dark:to-blue-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-red-600/5 dark:from-cyan-500/5 dark:to-blue-600/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
         </div>
       </ScrollReveal>
     );
@@ -174,7 +174,7 @@ const Gallery = () => {
         id: "media-coverage",
         title: "MEDIA COVERAGE",
         icon: Award,
-        color: "from-yellow-500 to-orange-600",
+        color: "from-yellow-500 to-blue-600",
         coverImage: image17,
         description:
           "Our journey has been featured in various newspapers and media outlets, highlighting the achievements, spirit, and progress of our team.",
@@ -268,14 +268,14 @@ const Gallery = () => {
         {/* Navigation arrows */}
         <button
           onClick={() => navigateImage("prev")}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2  p-3 hover:bg-orange-500/20 dark:hover:bg-cyan-500/20 rounded-full transition-colors border border-gray-600 hover:border-orange-400 dark:hover:border-cyan-400 z-10"
+          className="absolute left-4 top-1/2 transform -translate-y-1/2  p-3 hover:bg-blue-500/20 dark:hover:bg-cyan-500/20 rounded-full transition-colors border border-gray-600 hover:border-blue-400 dark:hover:border-cyan-400 z-10"
         >
           <ChevronLeft size={24} />
         </button>
 
         <button
           onClick={() => navigateImage("next")}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2  p-3 hover:bg-orange-500/20 dark:hover:bg-cyan-500/20 rounded-full transition-colors border border-gray-600 hover:border-orange-400 dark:hover:border-cyan-400 z-10"
+          className="absolute right-4 top-1/2 transform -translate-y-1/2  p-3 hover:bg-blue-500/20 dark:hover:bg-cyan-500/20 rounded-full transition-colors border border-gray-600 hover:border-blue-400 dark:hover:border-cyan-400 z-10"
         >
           <ChevronRight size={24} />
         </button>
@@ -318,8 +318,8 @@ const Gallery = () => {
                       className="w-full h-full object-cover absolute size-full"
                     />
                     {index === currentImageIndex && (
-                      <div className="absolute inset-0 bg-orange-400/20 dark:bg-cyan-400/20 flex items-center justify-center">
-                        <div className="w-8 h-8 bg-orange-400 dark:bg-cyan-400 rounded-full flex items-center justify-center">
+                      <div className="absolute inset-0 bg-blue-400/20 dark:bg-cyan-400/20 flex items-center justify-center">
+                        <div className="w-8 h-8 bg-blue-400 dark:bg-cyan-400 rounded-full flex items-center justify-center">
                           <Play className="w-4 h-4 text-white" />
                         </div>
                       </div>
@@ -349,7 +349,7 @@ const Gallery = () => {
                       key={index}
                       className={`w-2 h-2 rounded-full transition-all ${
                         index === currentImageIndex
-                          ? "bg-orange-400 dark:bg-cyan-400"
+                          ? "bg-blue-400 dark:bg-cyan-400"
                           : "bg-gray-600"
                       }`}
                     />
@@ -369,10 +369,10 @@ const Gallery = () => {
       className="py-12 bg-white dark:bg-gray-900 relative overflow-hidden transition-colors duration-300"
     >
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-br from-orange-50/30 via-red-50/20 to-yellow-50/10 dark:from-gray-900 dark:via-purple-900/10 dark:to-blue-900/10" />
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-red-50/20 to-yellow-50/10 dark:from-gray-900 dark:via-purple-900/10 dark:to-blue-900/10" />
 
       <ParallaxSection speed={0.2}>
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-orange-500/5 dark:bg-cyan-500/5 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-blue-500/5 dark:bg-cyan-500/5 rounded-full blur-3xl animate-pulse" />
       </ParallaxSection>
       <ParallaxSection speed={0.3}>
         <div
@@ -394,7 +394,7 @@ const Gallery = () => {
               animationDuration: `${8 + Math.random() * 4}s`,
             }}
           >
-            <Camera className="w-6 h-6 text-orange-500 dark:text-cyan-400" />
+            <Camera className="w-6 h-6 text-blue-500 dark:text-cyan-400" />
           </div>
         ))}
       </div>
@@ -447,7 +447,7 @@ const Gallery = () => {
                     contactSection.scrollIntoView({ behavior: "smooth" });
                   }
                 }}
-                className="border-2 border-orange-300 rounded-xl w-full hover:bg-orange-400 ml-20 text-white text-3xl bg-orange-500 font-bold"
+                className="border-2 border-blue-300 rounded-xl w-full hover:bg-blue-400 ml-20 text-white text-3xl bg-blue-500 font-bold"
               >
                 Join Our Team
               </button>
@@ -456,7 +456,7 @@ const Gallery = () => {
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Want to be part of our story?</h3>
               <p className="text-gray-700 dark:text-gray-300 mb-6">Join United FC Kodagu and create your own memorable moments on the field.</p>
               <button
-                className="group bg-gradient-to-r from-orange-500 to-red-600 dark:from-cyan-500 dark:to-blue-600 hover:from-orange-400 hover:to-red-500 dark:hover:from-cyan-400 dark:hover:to-blue-500 text-white px-8 py-3 rounded-full font-semibold transition-all transform hover:scale-105 shadow-lg shadow-orange-500/25 dark:shadow-cyan-500/25 flex items-center gap-2 mx-auto"
+                className="group bg-gradient-to-r from-blue-500 to-red-600 dark:from-cyan-500 dark:to-blue-600 hover:from-blue-400 hover:to-red-500 dark:hover:from-cyan-400 dark:hover:to-blue-500 text-white px-8 py-3 rounded-full font-semibold transition-all transform hover:scale-105 shadow-lg shadow-blue-500/25 dark:shadow-cyan-500/25 flex items-center gap-2 mx-auto"
                 onClick={() => {
                   const contactSection = document.getElementById('contact');
                   if (contactSection) {

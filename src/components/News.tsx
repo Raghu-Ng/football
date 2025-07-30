@@ -30,7 +30,7 @@ const News = () => {
   const getCategoryColor = (category: string) => {
     const colors: Record<string, string> = {
       Achievement:
-        "bg-gradient-to-r from-yellow-400/20 to-orange-500/20 text-yellow-600 dark:text-yellow-400 border-yellow-400/30",
+        "bg-gradient-to-r from-yellow-400/20 to-blue-500/20 text-yellow-600 dark:text-yellow-400 border-yellow-400/30",
       Facility:
         "bg-gradient-to-r from-blue-400/20 to-cyan-500/20 text-blue-600 dark:text-blue-400 border-blue-400/30",
       Interview:
@@ -54,8 +54,8 @@ const News = () => {
       className=" bg-white dark:bg-gray-900 relative overflow-hidden transition-colors duration-300"
     >
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-br from-orange-50/30 via-red-50/20 to-yellow-50/10 dark:from-gray-900 dark:via-blue-900/10 dark:to-purple-900/10" />
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/5 dark:bg-cyan-500/5 rounded-full blur-3xl" />
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-red-50/20 to-yellow-50/10 dark:from-gray-900 dark:via-blue-900/10 dark:to-purple-900/10" />
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/5 dark:bg-cyan-500/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-red-500/5 dark:bg-purple-500/5 rounded-full blur-3xl" />
       <div className=" mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="mb-16 flex justify-between w-full">
@@ -69,7 +69,7 @@ const News = () => {
           </div>
           <Link
             to="/news"
-            className="group h-12 bg-gradient-to-r from-orange-500 to-red-600 dark:from-cyan-500 dark:to-blue-600 hover:from-orange-400 hover:to-red-500 dark:hover:from-cyan-400 dark:hover:to-blue-500 text-white px-8  rounded-full font-semibold transition-all transform hover:scale-105 shadow-lg shadow-orange-500/25 dark:shadow-cyan-500/25 flex items-center gap-2 text-sm"
+            className="group h-12 bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-400 hover:to-blue-600 text-white px-8 rounded-full font-semibold transition-all transform hover:scale-105 shadow-lg shadow-blue-500/25 flex items-center gap-2 text-sm"
           >
             {/* <Shield className="w-5 h-5 group-hover:rotate-12 transition-transform" /> */}
             View All News
@@ -77,7 +77,7 @@ const News = () => {
 
           {/* <p className="text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
             Stay updated with the latest happenings at United FC Kodagu. From 
-            <span className="text-orange-500 dark:text-cyan-400 font-semibold"> match results</span> to 
+            <span className="text-blue-500 dark:text-cyan-400 font-semibold"> match results</span> to 
             <span className="text-red-500 dark:text-blue-400 font-semibold"> player achievements</span>.
           </p> */}
         </div>
@@ -100,7 +100,7 @@ const News = () => {
                   type: "tween",
                   ease: "easeInOut",
                 }}
-                className="group bg-white/80 dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden transition-scale  hover:scale-105 border border-gray-200/50 dark:border-gray-700 hover:border-orange-400/50 dark:hover:border-cyan-400/50 hover:shadow-orange-500/20 dark:hover:shadow-cyan-500/20"
+                className="group bg-white/80 dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden transition-scale  hover:scale-105 border border-gray-200/50 dark:border-gray-700 hover:border-blue-400/50 dark:hover:border-cyan-400/50 hover:shadow-blue-500/20 dark:hover:shadow-cyan-500/20"
               >
                 <Link to={`/news/${item.id}`} className="group-hover:scale-105" key={item.id}>
                   <div className="relative">
@@ -115,7 +115,7 @@ const News = () => {
                     <div className="absolute inset-0 bg-gradient-to-t group-hover:scale-110 duration-500 transition-transform from-gray-900/80 via-transparent to-transparent" />
                   </div>
                   <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-2 group-hover:text-orange-500 dark:group-hover:text-cyan-400 transition-colors">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-2 group-hover:text-blue-500 dark:group-hover:text-cyan-400 transition-colors">
                       {item.title}
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
@@ -126,11 +126,11 @@ const News = () => {
                         : ""}
                     </p>
                     <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-500 mb-4">
-                      <div className="flex items-center gap-1 hover:text-orange-500 dark:hover:text-cyan-400 transition-colors">
+                      <div className="flex items-center gap-1 hover:text-blue-500 dark:hover:text-cyan-400 transition-colors">
                         <User size={16} />
                         <span>United FC Kodagu</span>
                       </div>
-                      <div className="flex items-center gap-1 hover:text-orange-500 dark:hover:text-cyan-400 transition-colors">
+                      <div className="flex items-center gap-1 hover:text-blue-500 dark:hover:text-cyan-400 transition-colors">
                         <Calendar size={16} />
                         <span>
                           {item.date_posted
@@ -139,7 +139,7 @@ const News = () => {
                         </span>
                       </div>
                     </div>
-                    <span className="flex items-center gap-2 text-orange-500 dark:text-cyan-400 font-semibold hover:text-orange-600 dark:hover:text-cyan-300 transition-colors group cursor-pointer">
+                    <span className="flex items-center gap-2 text-blue-500 dark:text-cyan-400 font-semibold hover:text-blue-600 dark:hover:text-cyan-300 transition-colors group cursor-pointer">
                       Read More
                       <ArrowRight
                         size={16}

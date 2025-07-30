@@ -7,609 +7,82 @@
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Professional cream theme variables */
+/* White and Blue Gradient Theme Variables */
 :root {
-  --cream-primary: #f8f5f0;
-  --cream-secondary: #faf7f2;
-  --cream-accent: #f5f1ea;
-  --warm-orange: #f97316;
-  --rich-orange: #ea580c;
-  --soft-brown: #92400e;
+  --gradient-blue-light: linear-gradient(135deg, #ffffff 0%, #e0f2ff 100%);
+  --gradient-blue-dark: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  --blue-primary: #1e3a8a;
+  --blue-secondary: #3b82f6;
+  --blue-accent: #60a5fa;
+  --white: #ffffff;
 }
 
-/* Light theme with professional cream colors */
+/* Light theme: white to soft blue gradient */
 .light {
-  --bg-primary: #f8f5f0;
+  --bg-primary: var(--gradient-blue-light);
   --bg-secondary: #ffffff;
-  --bg-accent: #faf7f2;
-  --text-primary: #1f2937;
-  --text-secondary: #6b7280;
-  --text-accent: #374151;
-  --accent-primary: #f97316;
-  --accent-secondary: #ea580c;
-  --border-primary: #e5e7eb;
-  --border-accent: #f97316;
-  --shadow-primary: rgba(249, 115, 22, 0.1);
-  --shadow-accent: rgba(249, 115, 22, 0.2);
+  --bg-accent: #e0f2ff;
+  --text-primary: #1e3a8a;
+  --text-secondary: #3b82f6;
+  --text-accent: #2563eb;
+  --accent-primary: #3b82f6;
+  --accent-secondary: #1e3a8a;
+  --border-primary: #3b82f6;
+  --border-accent: #60a5fa;
+  --shadow-primary: rgba(59, 130, 246, 0.1);
+  --shadow-accent: rgba(59, 130, 246, 0.2);
 }
 
-/* Dark theme specific styles */
+/* Dark theme: deep blue gradient */
 .dark {
-  --bg-primary: #111827;
-  --bg-secondary: #1f2937;
-  --bg-accent: #374151;
-  --text-primary: #f9fafb;
-  --text-secondary: #d1d5db;
-  --text-accent: #e5e7eb;
-  --accent-primary: #22d3ee;
+  --bg-primary: var(--gradient-blue-dark);
+  --bg-secondary: #1e3a8a;
+  --bg-accent: #2563eb;
+  --text-primary: #ffffff;
+  --text-secondary: #e0f2ff;
+  --text-accent: #93c5fd;
+  --accent-primary: #60a5fa;
   --accent-secondary: #3b82f6;
-  --border-primary: #374151;
-  --border-accent: #22d3ee;
-  --shadow-primary: rgba(34, 211, 238, 0.1);
-  --shadow-accent: rgba(34, 211, 238, 0.2);
+  --border-primary: #60a5fa;
+  --border-accent: #3b82f6;
+  --shadow-primary: rgba(96, 165, 250, 0.1);
+  --shadow-accent: rgba(96, 165, 250, 0.2);
 }
 
-html,#root,body{
+html, #root, body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
 }
 
-
-/* Professional cream background utilities */
-.bg-cream-light {
-  background-color: #f8f5f0;
-}
-
-.bg-cream-soft {
-  background-color: #faf7f2;
-}
-
-.bg-cream-rich {
-  background-color: #f5f1ea;
-}
-
-.bg-cream-gradient {
-  background: linear-gradient(135deg, #faf7f2 0%, #f5f1ea 50%, #f0ebe2 100%);
-}
-
-.bg-warm-gradient {
-  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 50%, #fed7aa 100%);
-}
-
-/* Enhanced parallax utilities */
-.parallax-element {
-  will-change: transform;
-  transform: translate3d(0, 0, 0);
-}
-
-.parallax-bg {
-  will-change: transform, opacity;
-  transform: translate3d(0, 0, 0);
-}
-
-.parallax-float {
-  animation: parallax-float 6s ease-in-out infinite;
-}
-
-/* Professional sports-themed animations with cream theme support */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-15px);
-  }
-}
-
-@keyframes gradient-x {
-  0%, 100% {
-    background-size: 200% 200%;
-    background-position: left center;
-  }
-  50% {
-    background-size: 200% 200%;
-    background-position: right center;
-  }
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 20px var(--shadow-primary);
-  }
-  50% {
-    box-shadow: 0 0 40px var(--shadow-accent);
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -200% center;
-  }
-  100% {
-    background-position: 200% center;
-  }
-}
-
-@keyframes card-float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-@keyframes hologram {
-  0%, 100% {
-    opacity: 0.8;
-    transform: translateZ(0px);
-  }
-  50% {
-    opacity: 1;
-    transform: translateZ(10px);
-  }
-}
-
-@keyframes particle-float {
-  0% {
-    transform: translateY(0) rotate(0deg) scale(1);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-100vh) rotate(360deg) scale(0);
-    opacity: 0;
-  }
-}
-
-@keyframes football-float {
-  0% {
-    transform: translateY(0) rotate(0deg) scale(1);
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.6;
-  }
-  90% {
-    opacity: 0.6;
-  }
-  100% {
-    transform: translateY(-120vh) rotate(360deg) scale(0.5);
-    opacity: 0;
-  }
-}
-
-@keyframes ripple {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(4);
-    opacity: 0;
-  }
-}
-
-@keyframes glow-pulse {
-  0%, 100% {
-    box-shadow: 0 0 20px var(--shadow-primary);
-  }
-  50% {
-    box-shadow: 0 0 40px var(--shadow-accent), 0 0 60px var(--shadow-primary);
-  }
-}
-
-@keyframes text-glow {
-  0%, 100% {
-    text-shadow: 0 0 10px var(--shadow-primary);
-  }
-  50% {
-    text-shadow: 0 0 20px var(--shadow-accent), 0 0 30px var(--shadow-primary);
-  }
-}
-
-@keyframes bounce-in {
-  0% {
-    transform: scale(0.3) rotate(-10deg);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.05) rotate(5deg);
-  }
-  70% {
-    transform: scale(0.9) rotate(-2deg);
-  }
-  100% {
-    transform: scale(1) rotate(0deg);
-    opacity: 1;
-  }
-}
-
-@keyframes slide-up {
-  0% {
-    transform: translateY(100px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes rotate-3d {
-  0% {
-    transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
-  }
-  25% {
-    transform: perspective(1000px) rotateX(2deg) rotateY(2deg);
-  }
-  50% {
-    transform: perspective(1000px) rotateX(0deg) rotateY(4deg);
-  }
-  75% {
-    transform: perspective(1000px) rotateX(-2deg) rotateY(2deg);
-  }
-  100% {
-    transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
-  }
-}
-
-/* Professional football-specific animations */
-@keyframes football-spin {
-  0% {
-    transform: rotateY(0deg) rotateX(0deg);
-  }
-  100% {
-    transform: rotateY(360deg) rotateX(360deg);
-  }
-}
-
-@keyframes stadium-lights {
-  0%, 100% {
-    opacity: 0.2;
-    transform: scaleY(1);
-  }
-  50% {
-    opacity: 0.4;
-    transform: scaleY(1.1);
-  }
-}
-
-@keyframes trophy-shine {
-  0% {
-    transform: translateX(-100%) skewX(-15deg);
-  }
-  100% {
-    transform: translateX(200%) skewX(-15deg);
-  }
-}
-
-@keyframes field-lines {
-  0% {
-    opacity: 0.1;
-  }
-  50% {
-    opacity: 0.2;
-  }
-  100% {
-    opacity: 0.1;
-  }
-}
-
-@keyframes goal-celebration {
-  0%, 100% {
-    transform: scale(1) rotate(0deg);
-  }
-  25% {
-    transform: scale(1.05) rotate(2deg);
-  }
-  75% {
-    transform: scale(1.05) rotate(-2deg);
-  }
-}
-
-@keyframes crowd-cheer {
-  0%, 100% {
-    transform: scaleY(1);
-  }
-  50% {
-    transform: scaleY(1.3);
-  }
-}
-
-@keyframes crowd-wave {
-  0% {
-    transform: translateX(-100px) scaleX(0);
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(calc(100vw + 100px)) scaleX(1);
-    opacity: 0;
-  }
-}
-
-@keyframes football-bounce {
-  0%, 100% {
-    transform: translateY(0) rotateZ(0deg);
-  }
-  50% {
-    transform: translateY(-20px) rotateZ(180deg);
-  }
-}
-
-@keyframes stadium-atmosphere {
-  0%, 100% {
-    opacity: 0.2;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.3;
-    transform: scale(1.05);
-  }
-}
-
-@keyframes goal-net-shake {
-  0%, 100% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-1px);
-  }
-  75% {
-    transform: translateX(1px);
-  }
-}
-
-@keyframes football-trail {
-  0% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0.3);
-  }
-}
-
-/* Cream theme specific animations */
-@keyframes cream-glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(249, 115, 22, 0.2);
-  }
-  50% {
-    box-shadow: 0 0 40px rgba(249, 115, 22, 0.4);
-  }
-}
-
-@keyframes warm-pulse {
-  0%, 100% {
-    background-color: rgba(249, 115, 22, 0.1);
-  }
-  50% {
-    background-color: rgba(249, 115, 22, 0.2);
-  }
-}
-
-@keyframes parallax-float {
-  0%, 100% { 
-    transform: translateY(0px) rotate(0deg); 
-  }
-  33% { 
-    transform: translateY(-10px) rotate(1deg); 
-  }
-  66% { 
-    transform: translateY(5px) rotate(-1deg); 
-  }
-}
-
-/* Enhanced parallax-specific animations */
-@keyframes hero-parallax {
-  0% {
-    transform: translateY(0px) scale(1) rotate(0deg);
-  }
-  100% {
-    transform: translateY(-50px) scale(1.1) rotate(5deg);
-  }
-}
-
-@keyframes floating-image-grow {
-  0% {
-    transform: scale(1) rotate(0deg);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(2) rotate(180deg);
-    opacity: 0.7;
-  }
-  100% {
-    transform: scale(3) rotate(360deg);
-    opacity: 0.3;
-  }
-}
-
-/* Animation utility classes */
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-.animate-gradient-x {
-  animation: gradient-x 3s ease infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
-}
-
-.animate-shimmer {
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-  background-size: 200% 100%;
-  animation: shimmer 2s infinite;
-}
-
-.animate-card-float {
-  animation: card-float 8s ease-in-out infinite;
-}
-
-.animate-hologram {
-  animation: hologram 4s ease-in-out infinite;
-}
-
-.animate-particle-float {
-  animation: particle-float 6s linear infinite;
-}
-
-.animate-football-float {
-  animation: football-float 8s linear infinite;
-}
-
-.animate-ripple {
-  animation: ripple 0.6s ease-out;
-}
-
-.animate-glow-pulse {
-  animation: glow-pulse 2s ease-in-out infinite;
-}
-
-.animate-text-glow {
-  animation: text-glow 3s ease-in-out infinite;
-}
-
-.animate-bounce-in {
-  animation: bounce-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.animate-slide-up {
-  animation: slide-up 0.6s ease-out;
-}
-
-.animate-rotate-3d {
-  animation: rotate-3d 12s ease-in-out infinite;
-}
-
-.animate-football-spin {
-  animation: football-spin 30s linear infinite;
-}
-
-.animate-stadium-lights {
-  animation: stadium-lights 4s ease-in-out infinite;
-}
-
-.animate-trophy-shine {
-  animation: trophy-shine 2s ease-in-out infinite;
-}
-
-.animate-field-lines {
-  animation: field-lines 6s ease-in-out infinite;
-}
-
-.animate-goal-celebration {
-  animation: goal-celebration 1s ease-in-out;
-}
-
-.animate-crowd-cheer {
-  animation: crowd-cheer 3s ease-in-out infinite;
-}
-
-.animate-crowd-wave {
-  animation: crowd-wave 4s ease-out forwards;
-}
-
-.animate-football-bounce {
-  animation: football-bounce 3s ease-in-out infinite;
-}
-
-.animate-stadium-atmosphere {
-  animation: stadium-atmosphere 6s ease-in-out infinite;
-}
-
-.animate-goal-net-shake {
-  animation: goal-net-shake 0.5s ease-in-out;
-}
-
-.animate-football-trail {
-  animation: football-trail 1s ease-out forwards;
-}
-
-.animate-cream-glow {
-  animation: cream-glow 3s ease-in-out infinite;
-}
-
-.animate-warm-pulse {
-  animation: warm-pulse 2s ease-in-out infinite;
-}
-
-.animate-parallax-float {
-  animation: parallax-float 6s ease-in-out infinite;
-}
-
-.animate-hero-parallax {
-  animation: hero-parallax 20s ease-in-out infinite alternate;
-}
-
-.animate-floating-image-grow {
-  animation: floating-image-grow 10s ease-out forwards;
-}
-
-/* Enhanced 3D Transform utilities */
-.perspective-1000 {
-  perspective: 1000px;
-}
-
-.perspective-1500 {
-  perspective: 1500px;
-}
-
-.perspective-2000 {
-  perspective: 2000px;
-}
-
-.preserve-3d {
-  transform-style: preserve-3d;
-}
-
-.backface-hidden {
-  backface-visibility: hidden;
-}
-
-.translate-z-10 {
-  transform: translateZ(10px);
-}
-
-.translate-z-20 {
-  transform: translateZ(20px);
-}
-
-.translate-z-30 {
-  transform: translateZ(30px);
-}
-
-.translate-z-50 {
-  transform: translateZ(50px);
-}
-
-/* Professional cream theme glass morphism */
-.glass-card-cream {
-  background: rgba(248, 245, 240, 0.8);
+/* Blue-themed glass card */
+.glass-card-blue {
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(249, 115, 22, 0.2);
-  box-shadow: 0 8px 32px rgba(249, 115, 22, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.1);
 }
 
-.glass-card-cream:hover {
-  background: rgba(248, 245, 240, 0.9);
-  border: 1px solid rgba(249, 115, 22, 0.3);
-  box-shadow: 0 12px 40px rgba(249, 115, 22, 0.2);
+.glass-card-blue:hover {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  box-shadow: 0 12px 40px rgba(59, 130, 246, 0.2);
 }
 
-/* Enhanced scrollbar for cream theme */
+/* Button styles */
+.btn-blue-gradient {
+  @apply bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-400 hover:to-blue-600 text-white font-semibold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg;
+}
+
+.btn-blue-outline {
+  @apply border-2 border-blue-500/50 text-blue-700 hover:bg-blue-100 hover:border-blue-500 font-semibold py-3 px-6 rounded-full transition-all duration-300 backdrop-blur-sm;
+}
+
+/* Text selection and scrollbar */
+::selection {
+  background: rgba(59, 130, 246, 0.3);
+  color: var(--text-primary);
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -627,22 +100,104 @@ html,#root,body{
   background: linear-gradient(to bottom, var(--accent-secondary), var(--accent-primary));
 }
 
-/* Cream theme text selection */
-::selection {
-  background: rgba(249, 115, 22, 0.3);
-  color: var(--text-primary);
+/* Text gradient title */
+.blue-title {
+  background: linear-gradient(-45deg, #ffffff, #1e3a8a, #3b82f6);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-x 3s ease infinite;
+  text-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
 }
 
-/* Enhanced button styles for cream theme */
-.btn-cream-primary {
-  @apply bg-gradient-to-r from-warm-orange-500 to-warm-orange-600 hover:from-warm-orange-400 hover:to-warm-orange-500 text-white font-semibold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-105 shadow-cream hover:shadow-cream-lg;
+/* Animations */
+@keyframes gradient-x {
+  0%, 100% {
+    background-size: 200% 200%;
+    background-position: left center;
+  }
+  50% {
+    background-size: 200% 200%;
+    background-position: right center;
+  }
 }
 
-.btn-cream-secondary {
-  @apply border-2 border-warm-orange-400/50 text-warm-orange-600 hover:bg-warm-orange-400/10 hover:border-warm-orange-400 font-semibold py-3 px-6 rounded-full transition-all duration-300 backdrop-blur-sm;
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
 }
 
-/* Performance optimizations for parallax and 3D effects */
+@keyframes blue-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.4);
+  }
+}
+
+@keyframes text-glow {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Animation utility classes */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-gradient-x {
+  animation: gradient-x 3s ease infinite;
+}
+
+.animate-text-glow {
+  animation: text-glow 3s ease-in-out infinite;
+}
+
+.animate-blue-glow {
+  animation: blue-glow 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* 3D & Performance Optimizations */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.perspective-1500 {
+  perspective: 1500px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
 .transform-gpu {
   transform: translate3d(0, 0, 0);
   will-change: transform;
@@ -656,93 +211,27 @@ html,#root,body{
   will-change: opacity;
 }
 
-.will-change-parallax {
-  will-change: transform, opacity, filter;
-}
-
-/* Cream theme depth layers */
-.depth-layer-cream-1 {
+.translate-z-10 {
   transform: translateZ(10px);
-  filter: drop-shadow(0 4px 8px rgba(249, 115, 22, 0.1));
 }
 
-.depth-layer-cream-2 {
+.translate-z-20 {
   transform: translateZ(20px);
-  filter: drop-shadow(0 8px 16px rgba(249, 115, 22, 0.15));
 }
 
-.depth-layer-cream-3 {
+.translate-z-30 {
   transform: translateZ(30px);
-  filter: drop-shadow(0 12px 24px rgba(249, 115, 22, 0.2));
 }
 
-/* Interactive cream elements */
-.interactive-cream-element {
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.interactive-cream-element:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 25px rgba(249, 115, 22, 0.2);
-}
-
-/* Enhanced cream typography */
-.cream-title {
-  background: linear-gradient(-45deg, #f97316, #ea580c, #dc2626, #b91c1c);
-  background-size: 400% 400%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradient-x 3s ease infinite;
-  text-shadow: 0 0 30px rgba(249, 115, 22, 0.3);
-}
-
-/* Cream theme card shadows */
-.cream-card-shadow {
-  box-shadow: 
-    0 20px 40px rgba(249, 115, 22, 0.1),
-    0 0 20px rgba(249, 115, 22, 0.05),
-    inset 0 0 20px rgba(248, 245, 240, 0.1);
-}
-
-/* Cream theme border utilities */
-.border-cream {
-  border: 2px solid;
-  border-image: linear-gradient(45deg, #f97316, #ea580c, #dc2626) 1;
-}
-
-/* Enhanced cream hover effects */
-.cream-hover-lift {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.cream-hover-lift:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(249, 115, 22, 0.2), 0 0 20px rgba(249, 115, 22, 0.1);
-}
-
-/* Cream theme glow effects */
-.cream-glow {
-  background: radial-gradient(circle, rgba(249, 115, 22, 0.3), transparent);
-  animation: cream-glow 2s ease-in-out infinite;
-}
-
-/* Responsive cream theme adjustments */
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .parallax-element {
-    transform: none !important;
-  }
-  
-  .animate-parallax-float {
+  .animate-float {
     animation-duration: 4s;
   }
 }
 
-/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-  .parallax-element,
-  .animate-float,
-  .animate-parallax-float {
+  .animate-float {
     animation: none;
     transform: none !important;
   }

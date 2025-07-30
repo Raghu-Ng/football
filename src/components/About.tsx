@@ -57,28 +57,6 @@ const About = () => {
     },
   ];
 
-  const stats = [
-    {
-      icon: <Trophy className="w-8 h-8" />,
-      number: "150+",
-      label: "Championships Won",
-    },
-    {
-      icon: <Users className="w-8 h-8" />,
-      number: "500+",
-      label: "Active Players",
-    },
-    {
-      icon: <Award className="w-8 h-8" />,
-      number: "25",
-      label: "Years of Excellence",
-    },
-    {
-      icon: <Target className="w-8 h-8" />,
-      number: "100+",
-      label: "Professional Players",
-    },
-  ];
 
   const [latestWin, setLatestWin] = useState<any | null>(null);
   const [allMatches, setAllMatches] = useState<any[]>([]);
@@ -131,13 +109,13 @@ const About = () => {
   return (
     <section
       id="about"
-      className="py-12 bg-white bg-orange-50/30 dark:bg-gray-900 relative overflow-hidden transition-colors duration-300"
+      className="py-12 bg-white bg-blue-50/30 dark:bg-gray-900 relative overflow-hidden transition-colors duration-300"
     >
       {/* Enhanced Background Effects */}
-      <div className="absolute inset-0 bg-gr`ad`ient-to-br from-orange-50/50 via-red-50/30 to-yellow-50/20 dark:from-gray-900 dark:via-blue-900/10 dark:to-purple-900/10" />
+      <div className="absolute inset-0 bg-gr`ad`ient-to-br from-blue-50/50 via-red-50/30 to-yellow-50/20 dark:from-gray-900 dark:via-blue-900/10 dark:to-purple-900/10" />
 
       <ParallaxSection speed={0.2}>
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/5 dark:bg-cyan-500/5 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/5 dark:bg-cyan-500/5 rounded-full blur-3xl animate-pulse" />
       </ParallaxSection>
       <ParallaxSection speed={0.3}>
         <div
@@ -159,7 +137,7 @@ const About = () => {
               animationDuration: `${8 + Math.random() * 4}s`,
             }}
           >
-            <div className="w-4 h-4 bg-gradient-to-r from-orange-400/30 to-red-600/30 dark:from-cyan-400/30 dark:to-blue-600/30 rounded-full blur-sm" />
+            <div className="w-4 h-4 bg-gradient-to-r from-blue-400/30 to-red-600/30 dark:from-cyan-400/30 dark:to-blue-600/30 rounded-full blur-sm" />
           </div>
         ))}
       </div>
@@ -172,53 +150,53 @@ const About = () => {
                 <div className="mb-16">
                   <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
                     About{" "}
-                    <span className="bg-gradient-to-r from-orange-700 to-red-500 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent">
+                    <span className="text-4xl md:text-5xl font-bold text-Blue-900 dark:text-white mb-6">
                       United FC Kodagu
                     </span>
                   </h2>
                   <p className="text-xl text-gray-700 dark:text-gray-300  mx-auto">
                     Founded in 1999, United FC Kodagu has been at the forefront
                     of developing world-class football talent through
-                    <span className="text-orange-700 dark:text-cyan-400 relative group !font-medium">
+                    <span className="text-blue-700 dark:text-cyan-400 relative group !font-medium">
                       {" "}
                       innovative training methods
-                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-red-500 dark:from-cyan-400 dark:to-blue-500 group-hover:w-full transition-all duration-300" />
+                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-red-500 dark:from-cyan-400 dark:to-blue-500 group-hover:w-full transition-all duration-300" />
                     </span>{" "}
                     and unwavering commitment to excellence.
                   </p>
                 </div>
               </ScrollReveal>
               <div className="flex items-center gap-3 mb-6">
-                {/* <Shield className="w-6 h-6 text-orange-700 dark:text-cyan-400" /> */}
+                {/* <Shield className="w-6 h-6 text-blue-700 dark:text-cyan-400" /> */}
                 <h3 className="text-3xl font-bold text-gray-900 dark:text-white">
                   Our Mission
                 </h3>
               </div>
               <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
                 Our mission is to empower young women through{" "}
-                <span className="text-orange-700 dark:text-cyan-400 font-semibold">
+                <span className="text-blue-700 dark:text-cyan-400 font-semibold">
                   free, professional football training
                 </span>
                 , fostering{" "}
-                <span className="text-orange-700 dark:text-blue-400 font-semibold">
+                <span className="text-blue-700 dark:text-blue-400 font-semibold">
                   talent
                 </span>
                 ,{" "}
-                <span className="text-orange-700 dark:text-purple-400 font-semibold">
+                <span className="text-blue-700 dark:text-purple-400 font-semibold">
                   discipline
                 </span>
                 , and{" "}
-                <span className="text-orange-700 dark:text-cyan-400 font-semibold">
+                <span className="text-blue-700 dark:text-cyan-400 font-semibold">
                   leadership
                 </span>
                 . We are committed to building a strong platform for girls from
                 all backgrounds to thrive in sport, gain exposure, and pursue
                 their dreams with{" "}
-                <span className="text-orange-700 dark:text-blue-400 font-semibold">
+                <span className="text-blue-700 dark:text-blue-400 font-semibold">
                   dignity
                 </span>{" "}
                 and{" "}
-                <span className="text-orange-700 dark:text-purple-400 font-semibold">
+                <span className="text-blue-700 dark:text-purple-400 font-semibold">
                   pride
                 </span>
                 .
@@ -232,37 +210,31 @@ const About = () => {
                 lead both on and off the field.
               </p>
 
-              {/* <button className="group bg-gradient-to-r from-orange-500 to-red-600 dark:from-cyan-500 dark:to-blue-600 hover:from-orange-400 hover:to-red-500 dark:hover:from-cyan-400 dark:hover:to-blue-500 text-white px-8 py-3 rounded-full font-semibold transition-all transform hover:scale-105 shadow-lg shadow-orange-500/25 dark:shadow-cyan-500/25 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <span className="flex items-center gap-2 relative z-10">
-                  Learn More About Us
-                  <Cpu className="w-5 h-5 group-hover:rotate-180 transition-transform duration-500" />
-                </span>
-              </button> */}
+
             </div>
           </ScrollReveal>
 
           <ScrollReveal direction="right" delay={400}>
             <div className="relative group">
-              <div className="relative overflow-hidden rounded-2xl border border-orange-400/20 dark:border-cyan-400/20 shadow-2xl shadow-orange-500/20 dark:shadow-cyan-500/20 transform group-hover:scale-105 transition-all duration-500">
+              <div className="relative overflow-hidden rounded-2xl border border-blue-400/20 dark:border-cyan-400/20 shadow-2xl shadow-blue-500/20 dark:shadow-cyan-500/20 transform group-hover:scale-105 transition-all duration-500">
                 <img
-                  src="https://images.pexels.com/photos/3621104/pexels-photo-3621104.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
+                  src="src\assets\united-fc-kodagu-logo.png"
                   alt="Training session"
                   className="w-full h-auto group-hover:scale-110 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 to-red-600/10 dark:from-cyan-500/10 dark:to-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-red-600/10 dark:from-cyan-500/10 dark:to-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
-              <div className="absolute -bottom-6 -left-6 bg-gradient-to-br from-orange-500 to-red-600 dark:from-cyan-500 dark:to-blue-600 text-white p-6 rounded-2xl shadow-xl border border-orange-400/30 dark:border-cyan-400/30 transform group-hover:scale-110 transition-all duration-500">
+              <div className="absolute -bottom-6 -left-6 bg-gradient-to-br from-blue-500 to-red-600 dark:from-cyan-500 dark:to-blue-600 text-white p-6 rounded-2xl shadow-xl border border-blue-400/30 dark:border-cyan-400/30 transform group-hover:scale-110 transition-all duration-500">
                 <h4 className="text-2xl font-bold">25+</h4>
-                <p className="text-orange-100 dark:text-cyan-100">
+                <p className="text-blue-100 dark:text-cyan-100">
                   Years of Excellence
                 </p>
               </div>
 
               {/* Floating elements around image */}
-              <div className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-yellow-400/30 to-orange-500/30 dark:from-purple-400/30 dark:to-pink-500/30 rounded-full animate-pulse" />
-              <div className="absolute top-1/2 -left-2 w-6 h-6 bg-gradient-to-r from-orange-400/30 to-red-500/30 dark:from-cyan-400/30 dark:to-blue-500/30 rounded-full animate-bounce" />
+              <div className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-yellow-400/30 to-blue-500/30 dark:from-purple-400/30 dark:to-pink-500/30 rounded-full animate-pulse" />
+              <div className="absolute top-1/2 -left-2 w-6 h-6 bg-gradient-to-r from-blue-400/30 to-red-500/30 dark:from-cyan-400/30 dark:to-blue-500/30 rounded-full animate-bounce" />
             </div>
           </ScrollReveal>
         </div>
@@ -281,7 +253,7 @@ const About = () => {
             </div>
             <button
               onClick={() => navigate("/all-matches")}
-              className="group text-sm border border-orange-500 dark:border-cyan-500 text-orange-600 dark:text-cyan-400 bg-orange-50/10 dark:bg-cyan-50/10 hover:bg-orange-100/20 dark:hover:bg-cyan-100/20 px-8 py-3 rounded-full font-semibold transition-all transform hover:scale-105 shadow-md flex items-center gap-2"
+              className="group text-sm border border-blue-500 dark:border-cyan-500 text-blue-600 dark:text-cyan-400 bg-blue-50/10 dark:bg-cyan-50/10 hover:bg-blue-100/20 dark:hover:bg-cyan-100/20 px-8 py-3 rounded-full font-semibold transition-all transform hover:scale-105 shadow-md flex items-center gap-2"
             >
               View All Matches
             </button>
@@ -300,7 +272,7 @@ const About = () => {
                   ease: "easeInOut",
                 }}
                 key={latestWin.id}
-                className="w-full md:flex-1 min-w-0 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white/90 dark:bg-gray-800 shadow-2xl shadow-black/10 flex flex-col justify-between duration-300 hover:border-orange-500"
+                className="w-full md:flex-1 min-w-0 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white/90 dark:bg-gray-800 shadow-2xl shadow-black/10 flex flex-col justify-between duration-300 hover:border-blue-500"
               >
                 <div className="flex flex-col items-center p-6 h-full">
                   <span className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">
@@ -329,7 +301,7 @@ const About = () => {
                     </div>
                   </div>
                   <div className="flex justify-between w-full mt-2">
-                    <span className="text-sm font-bold text-orange-600 dark:text-cyan-400 flex items-center gap-2">
+                    <span className="text-sm font-bold text-blue-600 dark:text-cyan-400 flex items-center gap-2">
                       United FC Kodagu
                     </span>
                     <span className="text-sm font-bold text-gray-700 dark:text-gray-200 flex items-center gap-2">
@@ -356,7 +328,7 @@ const About = () => {
                     ease: "easeInOut",
                   }}
                   key={match.id || i}
-                  className="w-full md:flex-1 min-w-0 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white/90 dark:bg-gray-800 shadow-2xl shadow-black/10 flex flex-col justify-between  duration-300 hover:border-orange-500"
+                  className="w-full md:flex-1 min-w-0 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white/90 dark:bg-gray-800 shadow-2xl shadow-black/10 flex flex-col justify-between  duration-300 hover:border-blue-500"
                 >
                   <div className="flex flex-col items-center p-6 h-full">
                     <span className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">
@@ -388,7 +360,7 @@ const About = () => {
                       </div>
                     </div>
                     <div className="flex justify-between w-full mt-2">
-                      <span className="text-sm font-bold text-orange-600 dark:text-cyan-400 flex items-center gap-2">
+                      <span className="text-sm font-bold text-blue flex items-center gap-2">
                         United FC Kodagu
                       </span>
                       <span className="text-sm font-bold text-gray-700 dark:text-gray-200 flex items-center gap-2">
@@ -421,9 +393,9 @@ const About = () => {
             {achievements.map((item, index) => (
               <div
                 key={index}
-                className="border border-orange-200 dark:border-cyan-600 rounded-lg p-4 shadow-sm bg-white/60 dark:bg-gray-800/40 backdrop-blur-sm transition-all hover:shadow-md"
+                className="border border-blue-200 dark:border-cyan-600 rounded-lg p-4 shadow-sm bg-white/60 dark:bg-gray-800/40 backdrop-blur-sm transition-all hover:shadow-md"
               >
-                <h3 className="text-lg font-semibold text-orange-600 dark:text-cyan-400">
+                <h3 className="text-lg font-semibold text-blue-600 dark:text-cyan-400">
                   {item.title}{" "}
                   <span className="text-sm text-gray-500 dark:text-gray-400">
                     ({item.season})

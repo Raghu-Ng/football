@@ -77,46 +77,7 @@ const Academy = () => {
           </p>
         </div>
 
-        {/* Programs */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-          {programs.map((program, index) => (
-            <div key={index} className={`relative bg-white rounded-2xl p-8 shadow-lg transition-transform hover:scale-105 ${
-              program.popular ? 'ring-2 ring-blue-600' : ''
-            }`}>
-              {program.popular && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-1">
-                    <Star size={16} />
-                    Most Popular
-                  </span>
-                </div>
-              )}
-              
-              <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">{program.title}</h3>
-                <p className="text-gray-600 mb-4">{program.age}</p>
-                <div className="text-4xl font-bold text-blue-600">{program.price}</div>
-              </div>
 
-              <ul className="space-y-3 mb-8">
-                {program.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-center gap-3">
-                    <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
-                    <span className="text-gray-700">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <button className={`w-full py-3 rounded-full font-semibold transition-colors ${
-                program.popular 
-                  ? 'bg-blue-600 text-white hover:bg-blue-700' 
-                  : 'bg-gray-900 text-white hover:bg-gray-800'
-              }`}>
-                Register Now
-              </button>
-            </div>
-          ))}
-        </div>
 
         {/* Coaches */}
         <div>

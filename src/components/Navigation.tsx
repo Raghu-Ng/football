@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useCart } from '../contexts/CartContext';
 import ThemeToggle from './ThemeToggle';
 import { useNavigate } from "react-router-dom";
+import unitedFcLogo from '../assets/united-fc-kodagu-logo.png';
 
 interface NavigationProps {
   onCartOpen: () => void;
@@ -68,9 +69,13 @@ const Navigation: React.FC<NavigationProps> = ({ onCartOpen }) => {
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0">
             <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-red-500 dark:from-cyan-400 dark:to-blue-600 rounded-full flex items-center justify-center border border-orange-400/30 dark:border-cyan-400/30">
-                <span className="font-bold text-lg text-white">FC</span>
-              </div>
+<div className="w-10 h-10">
+  <img
+    src={unitedFcLogo}
+    alt="United FC Kodagu Logo"
+    className="w-full h-full object-contain"
+  />
+</div>
               <span className="font-bold text-xl text-gray-900 dark:text-white">
                 United FC Kodagu
               </span>
