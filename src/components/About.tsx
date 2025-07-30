@@ -4,6 +4,7 @@ import ScrollReveal from "./ScrollReveal";
 import ParallaxSection from "./ParallaxSection";
 import { supabase } from "../lib/supabase";
 import logo from "../assets/images/logo.png";
+import logoImg from '../assets/logo.png';
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -218,15 +219,16 @@ const About = () => {
             <div className="relative group">
               <div className="relative overflow-hidden rounded-2xl border border-blue-400/20 dark:border-cyan-400/20 shadow-2xl shadow-blue-500/20 dark:shadow-cyan-500/20 transform group-hover:scale-105 transition-all duration-500">
                 <img
-                  src="src\assets\united-fc-kodagu-logo.png"
+                  src={logoImg}
                   alt="Training session"
                   className="w-full h-auto group-hover:scale-110 transition-transform duration-700"
-                />
+                  />
+
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent" />
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-red-600/10 dark:from-cyan-500/10 dark:to-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
               <div className="absolute -bottom-6 -left-6 bg-gradient-to-br from-blue-500 to-red-600 dark:from-cyan-500 dark:to-blue-600 text-white p-6 rounded-2xl shadow-xl border border-blue-400/30 dark:border-cyan-400/30 transform group-hover:scale-110 transition-all duration-500">
-                <h4 className="text-2xl font-bold">25+</h4>
+                <h4 className="text-2xl font-bold">5+</h4>
                 <p className="text-blue-100 dark:text-cyan-100">
                   Years of Excellence
                 </p>

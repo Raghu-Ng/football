@@ -53,7 +53,7 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
       price: '$50,000+',
       benefits: ['Stadium naming rights', 'Logo on all jerseys', 'VIP hospitality', 'Media coverage'],
       icon: Crown,
-      color: 'from-yellow-500 to-orange-600'
+      color: 'from-blue-500 to-blue-600'
     },
     {
       id: 'jersey',
@@ -220,13 +220,13 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
 
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-gray-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-yellow-400/30 shadow-2xl shadow-yellow-500/20 relative">
+      <div className="bg-gray-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-blue-400/30 shadow-2xl shadow-blue-500/20 relative">
         {/* Header */}
         <div className="relative p-6 border-b border-gray-700">
-          <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/10 to-orange-600/10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-blue-600/10" />
           <div className="relative flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-full flex items-center justify-center">
+              <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center">
                 <Crown className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -250,7 +250,7 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
                   key={step}
                   className={`flex items-center justify-center w-8 h-8 rounded-full text-sm font-semibold transition-all ${
                     step <= currentStep
-                      ? 'bg-gradient-to-r from-yellow-500 to-orange-600 text-white'
+                      ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white'
                       : 'bg-gray-700 text-gray-400'
                   }`}
                 >
@@ -260,7 +260,7 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
             </div>
             <div className="w-full bg-gray-700 rounded-full h-2">
               <div
-                className="bg-gradient-to-r from-yellow-500 to-orange-600 h-2 rounded-full transition-all duration-500"
+                className="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full transition-all duration-500"
                 style={{ width: `${((currentStep - 1) / 3) * 100}%` }}
               />
             </div>
@@ -273,7 +273,7 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
             <div className="space-y-6">
               <div>
                 <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-                  <Building className="w-5 h-5 text-yellow-400" />
+                  <Building className="w-5 h-5 text-blue-400" />
                   Sponsor Information
                 </h3>
                 <div className="mb-4">
@@ -281,7 +281,7 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
                   <select
                     value={formData.sponsorType}
                     onChange={e => handleInputChange('sponsorType', e.target.value)}
-                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white"
+                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent text-white"
                   >
                     <option value="company">Company</option>
                     <option value="individual">Individual</option>
@@ -295,7 +295,7 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
                         type="text"
                         value={formData.companyName}
                         onChange={e => handleInputChange('companyName', e.target.value)}
-                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white placeholder-gray-400"
+                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent text-white placeholder-gray-400"
                         placeholder="Your Company Name"
                         required={formData.sponsorType === 'company'}
                       />
@@ -307,7 +307,7 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
                         type="text"
                         value={formData.fullName}
                         onChange={e => handleInputChange('fullName', e.target.value)}
-                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white placeholder-gray-400"
+                        className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent text-white placeholder-gray-400"
                         placeholder="Your Full Name"
                         required={formData.sponsorType === 'individual'}
                       />
@@ -319,7 +319,7 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
                       type="text"
                       value={formData.contactName}
                       onChange={e => handleInputChange('contactName', e.target.value)}
-                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white placeholder-gray-400"
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent text-white placeholder-gray-400"
                       placeholder="Contact Person (if different)"
                       required={formData.sponsorType === 'company'}
                     />
@@ -332,7 +332,7 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
                         type="email"
                         value={formData.email}
                         onChange={e => handleInputChange('email', e.target.value)}
-                        className="w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white placeholder-gray-400"
+                        className="w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent text-white placeholder-gray-400"
                         placeholder="john@company.com"
                         required
                       />
@@ -346,7 +346,7 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
                         type="tel"
                         value={formData.phone}
                         onChange={e => handleInputChange('phone', e.target.value)}
-                        className="w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white placeholder-gray-400"
+                        className="w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent text-white placeholder-gray-400"
                         placeholder="+1 (555) 123-4567"
                         required
                       />
@@ -360,7 +360,7 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
                         type="url"
                         value={formData.website}
                         onChange={e => handleInputChange('website', e.target.value)}
-                        className="w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white placeholder-gray-400"
+                        className="w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent text-white placeholder-gray-400"
                         placeholder="https://company.com"
                       />
                     </div>
@@ -370,7 +370,7 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
                     <select
                       value={formData.industry}
                       onChange={e => handleInputChange('industry', e.target.value)}
-                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white"
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent text-white"
                     >
                       <option value="">Select Industry</option>
                       {industries.map((industry) => (
@@ -387,7 +387,7 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
             <div className="space-y-6">
               <div>
                 <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-                  <Handshake className="w-5 h-5 text-yellow-400" />
+                  <Handshake className="w-5 h-5 text-blue-400" />
                   Sponsorship Package
                 </h3>
                 
@@ -399,8 +399,8 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
                       onClick={() => handleInputChange('sponsorshipType', type.id)}
                       className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
                         formData.sponsorshipType === type.id
-                          ? 'border-yellow-400 bg-yellow-400/10'
-                          : 'border-gray-600 hover:border-yellow-400/50'
+                          ? 'border-blue-400 bg-blue-400/10'
+                          : 'border-gray-600 hover:border-blue-400/50'
                       }`}
                     >
                       <div className="flex items-center gap-3 mb-3">
@@ -409,13 +409,13 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
                         </div>
                         <div>
                           <h4 className="font-semibold text-white">{type.name}</h4>
-                          <p className="text-yellow-400 font-bold">{type.price}</p>
+                          <p className="text-blue-400 font-bold">{type.price}</p>
                         </div>
                       </div>
                       <ul className="space-y-1">
                         {type.benefits.map((benefit, index) => (
                           <li key={index} className="text-sm text-gray-300 flex items-center gap-2">
-                            <Star className="w-3 h-3 text-yellow-400" />
+                            <Star className="w-3 h-3 text-blue-400" />
                             {benefit}
                           </li>
                         ))}
@@ -432,7 +432,7 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
                       <select
                         value={formData.budget}
                         onChange={(e) => handleInputChange('budget', e.target.value)}
-                        className="w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white"
+                        className="w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent text-white"
                         required
                       >
                         <option value="">Select Budget Range</option>
@@ -449,7 +449,7 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
                       <select
                         value={formData.duration}
                         onChange={(e) => handleInputChange('duration', e.target.value)}
-                        className="w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white"
+                        className="w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent text-white"
                         required
                       >
                         <option value="">Select Duration</option>
@@ -468,7 +468,7 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
             <div className="space-y-6">
               <div>
                 <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-                  <Target className="w-5 h-5 text-yellow-400" />
+                  <Target className="w-5 h-5 text-blue-400" />
                   Partnership Goals & Message
                 </h3>
                 
@@ -479,7 +479,7 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
                       value={formData.goals}
                       onChange={(e) => handleInputChange('goals', e.target.value)}
                       rows={4}
-                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white placeholder-gray-400"
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent text-white placeholder-gray-400"
                       placeholder="What do you hope to achieve through this partnership? (e.g., brand awareness, community engagement, customer acquisition)"
                       required
                     />
@@ -491,7 +491,7 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
                       value={formData.message}
                       onChange={(e) => handleInputChange('message', e.target.value)}
                       rows={4}
-                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-white placeholder-gray-400"
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent text-white placeholder-gray-400"
                       placeholder="Tell us more about your company and why you'd like to partner with United FC Kodagu..."
                       required
                     />
@@ -521,7 +521,7 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
               </div>
               <button
                 onClick={resetForm}
-                className="bg-gradient-to-r from-yellow-500 to-orange-600 hover:from-yellow-400 hover:to-orange-500 text-white px-8 py-3 rounded-full font-semibold transition-all"
+                className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white px-8 py-3 rounded-full font-semibold transition-all"
               >
                 Close
               </button>
@@ -536,7 +536,7 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
               <button
                 onClick={prevStep}
                 disabled={currentStep === 1}
-                className="px-6 py-3 border border-gray-600 text-gray-300 rounded-full font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:border-yellow-400 hover:text-yellow-400"
+                className="px-6 py-3 border border-gray-600 text-gray-300 rounded-full font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:border-blue-400 hover:text-blue-400"
               >
                 Previous
               </button>
@@ -544,7 +544,7 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
               {currentStep < 3 ? (
                 <button
                   onClick={nextStep}
-                  className="px-6 py-3 bg-gradient-to-r from-yellow-500 to-orange-600 hover:from-yellow-400 hover:to-orange-500 text-white rounded-full font-semibold transition-all"
+                  className="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white rounded-full font-semibold transition-all"
                 >
                   Next Step
                 </button>

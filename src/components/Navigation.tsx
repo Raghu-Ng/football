@@ -28,7 +28,6 @@ const Navigation: React.FC<NavigationProps> = ({ onCartOpen }) => {
   const navItems = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '/#about' },
-    { name: 'Players', href: '/players' },
     { name: 'News', href: '/news' },
     { name: 'Gallery', href: '/#gallery' },
     { name: 'Store', href: '/#store' },
@@ -62,7 +61,7 @@ const Navigation: React.FC<NavigationProps> = ({ onCartOpen }) => {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled 
-        ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-orange-200/50 dark:border-cyan-500/20 shadow-lg shadow-orange-500/10 dark:shadow-cyan-500/10' 
+        ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-blue-200/50 dark:border-cyan-500/20 shadow-lg shadow-blue-500/10 dark:shadow-cyan-500/10' 
         : 'bg-transparent'
     }`}>
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
@@ -89,10 +88,10 @@ const Navigation: React.FC<NavigationProps> = ({ onCartOpen }) => {
                 <button
                   key={item.name}
                   onClick={() => handleNavClick(item.href)}
-                  className="px-3 py-2 text-sm font-medium transition-all hover:text-orange-500 dark:hover:text-cyan-400 text-gray-700 dark:text-gray-300 relative group"
+                  className="px-3 py-2 text-sm font-medium transition-all hover:text-blue-500 dark:hover:text-cyan-400 text-gray-700 dark:text-gray-300 relative group"
                 >
                   {item.name}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-red-500 dark:from-cyan-400 dark:to-blue-500 transition-all group-hover:w-full" />
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-red-500 dark:from-cyan-400 dark:to-blue-500 transition-all group-hover:w-full" />
                 </button>
               ))}
               
@@ -102,11 +101,11 @@ const Navigation: React.FC<NavigationProps> = ({ onCartOpen }) => {
               {/* Cart Button */}
               <button
                 onClick={() => navigate('/cart')}
-                className="relative p-2 rounded-full transition-all text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-cyan-400 hover:bg-orange-400/10 dark:hover:bg-cyan-400/10"
+                className="relative p-2 rounded-full transition-all text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-cyan-400 hover:bg-blue-400/10 dark:hover:bg-cyan-400/10"
               >
                 <ShoppingCart size={20} />
                 {state.items.length > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-gradient-to-r from-orange-500 to-red-600 dark:from-cyan-500 dark:to-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
+                  <span className="absolute -top-1 -right-1 bg-gradient-to-r from-blue-500 to-red-600 dark:from-cyan-500 dark:to-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
                     {state.items.length}
                   </span>
                 )}
@@ -128,7 +127,7 @@ const Navigation: React.FC<NavigationProps> = ({ onCartOpen }) => {
               ) : (
                 <button
                   onClick={() => navigate("/signin")}
-                  className="bg-gradient-to-r from-orange-500 to-red-600 dark:from-cyan-500 dark:to-blue-600 hover:from-orange-400 hover:to-red-500 dark:hover:from-cyan-400 dark:hover:to-blue-500 text-white px-6 py-2 rounded-full font-medium transition-all flex items-center gap-2 shadow-lg shadow-orange-500/25 dark:shadow-cyan-500/25"
+                  className="bg-gradient-to-r from-blue-500 to-red-600 dark:from-cyan-500 dark:to-blue-600 hover:from-blue-400 hover:to-red-500 dark:hover:from-cyan-400 dark:hover:to-blue-500 text-white px-6 py-2 rounded-full font-medium transition-all flex items-center gap-2 shadow-lg shadow-blue-500/25 dark:shadow-cyan-500/25"
                 >
                   <User size={16} />
                   Sign In
@@ -142,18 +141,18 @@ const Navigation: React.FC<NavigationProps> = ({ onCartOpen }) => {
             <ThemeToggle />
             <button
               onClick={() => navigate('/cart')}
-              className="relative p-2 rounded-full text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-cyan-400"
+              className="relative p-2 rounded-full text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-cyan-400"
             >
               <ShoppingCart size={20} />
               {state.items.length > 0 && (
-                <span className="absolute -top-1 -right-1 bg-gradient-to-r from-orange-500 to-red-600 dark:from-cyan-500 dark:to-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-gradient-to-r from-blue-500 to-red-600 dark:from-cyan-500 dark:to-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                   {state.items.length}
                 </span>
               )}
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-cyan-400"
+              className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-cyan-400"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -163,13 +162,13 @@ const Navigation: React.FC<NavigationProps> = ({ onCartOpen }) => {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="md:hidden bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-orange-200/50 dark:border-cyan-500/20">
+        <div className="md:hidden bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-blue-200/50 dark:border-cyan-500/20">
           <div className="px-2 pt-2 pb-3 space-y-1">
             {navItems.map((item) => (
               <button
                 key={item.name}
                 onClick={() => handleNavClick(item.href)}
-                className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-cyan-400 hover:bg-orange-400/10 dark:hover:bg-cyan-400/10 w-full text-left rounded-lg transition-all"
+                className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-cyan-400 hover:bg-blue-400/10 dark:hover:bg-cyan-400/10 w-full text-left rounded-lg transition-all"
               >
                 {item.name}
               </button>
@@ -187,7 +186,7 @@ const Navigation: React.FC<NavigationProps> = ({ onCartOpen }) => {
             ) : (
               <button
                 onClick={() => navigate("/signin")}
-                className="w-full mt-4 bg-gradient-to-r from-orange-500 to-red-600 dark:from-cyan-500 dark:to-blue-600 text-white px-6 py-3 rounded-full font-medium transition-all"
+                className="w-full mt-4 bg-gradient-to-r from-blue-500 to-red-600 dark:from-cyan-500 dark:to-blue-600 text-white px-6 py-3 rounded-full font-medium transition-all"
               >
                 Sign In
               </button>

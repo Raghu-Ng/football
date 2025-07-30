@@ -92,9 +92,7 @@ function App() {
                       <div className="section-background">
                         <Gallery />
                       </div>
-                      <div className="section-background">
-                        <ClubProgramsSection />
-                      </div>
+
                       <div className="section-background">
                         <Store />
                       </div>
