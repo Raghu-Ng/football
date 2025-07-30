@@ -60,7 +60,7 @@ export default function ProductConfigurator({
 			const getDist = (ref: React.RefObject<HTMLDivElement>) => {
 				if (!ref.current) return Infinity;
 				const rect = ref.current.getBoundingClientRect();
-				const mid = window.scrollY + rect.top + rect.height / 2;
+				const mid = window.scrollY + rect.top + rect.height;
 				return Math.abs(center - mid);
 			};
 			const dists = [
@@ -86,15 +86,15 @@ export default function ProductConfigurator({
 				<h2 className="text-2xl md:text-3xl font-bold mb-6 text-gray-900 dark:text-white">
 					<span className="text-orange-500 dark:text-cyan-400"></span> Choose your size.
 				</h2>
-				<div className="flex flex-col gap-6 w-full">
+				<div className="flex  gap-3 w-full">
 					{sizes.map((size) => (
 						<button
 							key={size}
 							onClick={() => handleSize(size)}
-							className={`w-full flex items-center justify-between border-2 rounded-xl px-6 py-5 text-left text-lg font-semibold transition-all duration-300 ${selectedSize === size ? 'border-orange-500 dark:border-cyan-400 bg-orange-50/40 dark:bg-cyan-900/20' : 'border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-orange-400 dark:hover:border-cyan-400'}`}
+							className={`w-full flex items-center justify-between border-2 rounded-xl px-4 py-3 text-left text-lg font-semibold transition-all duration-300 ${selectedSize === size ? 'border-orange-500 dark:border-cyan-400 bg-orange-50/40 dark:bg-cyan-900/20' : 'border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-orange-400 dark:hover:border-cyan-400'}`}
 						>
 							<span>{size}</span>
-							<span className="text-base font-normal text-gray-500 dark:text-gray-300">From ${price.toLocaleString()}</span>
+							{/* <span className="text-base font-normal text-gray-500 dark:text-gray-300">From ${price.toLocaleString()}</span> */}
 						</button>
 					))}
 				</div>
@@ -105,12 +105,12 @@ export default function ProductConfigurator({
 				<h2 className="text-2xl md:text-3xl font-bold mb-6 text-gray-900 dark:text-white">
 					<span className="text-orange-500 dark:text-cyan-400"></span> Pick your favourite colour.
 				</h2>
-				<div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full">
+				<div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full">
 					{DUMMY_COLORS.map((color) => (
 						<button
 							key={color.value}
 							onClick={() => handleColor(color.value)}
-							className={`flex flex-col items-center justify-center border-2 rounded-xl p-6 transition-all duration-300 ${selectedColor === color.value ? 'border-orange-500 dark:border-cyan-400 bg-orange-50/40 dark:bg-cyan-900/20' : 'border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-orange-400 dark:hover:border-cyan-400'}`}
+							className={`flex flex-col items-center justify-center border-2 rounded-xl p-3 transition-all duration-300 ${selectedColor === color.value ? 'border-orange-500 dark:border-cyan-400 bg-orange-50/40 dark:bg-cyan-900/20' : 'border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-orange-400 dark:hover:border-cyan-400'}`}
 						>
 							<span className="w-8 h-8 rounded-full mb-2" style={{ background: color.value, border: '1.5px solid #e5e7eb' }} />
 							<span className="text-gray-700 dark:text-gray-200 font-medium">{color.name}</span>

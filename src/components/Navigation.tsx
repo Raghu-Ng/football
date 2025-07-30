@@ -11,18 +11,18 @@ interface NavigationProps {
 
 const Navigation: React.FC<NavigationProps> = ({ onCartOpen }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(true);
   const { user, signOut } = useAuth();
   const { state } = useCart();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // useEffect`(() => {
+  //   const handleScroll = () => {
+  //     setIsScrolled(window.scrollY > 50);
+  //   };
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => window.removeEventListener('scroll', handleScroll);
+  // }, []);`
 
   const navItems = [
     { name: 'Home', href: '/' },
@@ -64,7 +64,7 @@ const Navigation: React.FC<NavigationProps> = ({ onCartOpen }) => {
         ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-orange-200/50 dark:border-cyan-500/20 shadow-lg shadow-orange-500/10 dark:shadow-cyan-500/10' 
         : 'bg-transparent'
     }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0">
             <div className="flex items-center space-x-2">
@@ -110,9 +110,9 @@ const Navigation: React.FC<NavigationProps> = ({ onCartOpen }) => {
               {/* Auth Button */}
               {user ? (
                 <div className="flex items-center gap-2">
-                  <span className="text-sm text-gray-700 dark:text-gray-300">
-                    {user.email}
-                  </span>
+                  <div className="rounded-full overflow-hidden">
+                    <img src={`https://placehold.co/40x40/blue/white?text=${user.email?.slice(0, 2).toUpperCase()}`} alt="" />
+                  </div>
                   <button
                     onClick={handleSignOut}
                     className="p-2 rounded-full transition-all text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 hover:bg-red-400/10"

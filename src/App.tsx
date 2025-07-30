@@ -10,6 +10,7 @@ import About from "./components/About";
 import Players from "./components/Players";
 import News from "./components/News";
 import Gallery from "./components/Gallery";
+import ClubProgramsSection from "./components/ClubProgramsSection";
 import Store from "./components/Store";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
@@ -90,6 +91,9 @@ function App() {
                       </div>
                       <div className="section-background">
                         <Gallery />
+                      </div>
+                      <div className="section-background">
+                        <ClubProgramsSection />
                       </div>
                       <div className="section-background">
                         <Store />
