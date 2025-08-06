@@ -5,6 +5,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        "primary" : '#001489', // Warm orange
         // Professional cream theme colors
         'cream': {
           50: '#fefcf8',

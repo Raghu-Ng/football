@@ -4,7 +4,7 @@ import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "./contexts/AuthContext";
 import { CartProvider } from "./contexts/CartContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import Navigation from "./components/Navigation";
+// import Navigation from "./components/Navigation";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Players from "./components/Players";
@@ -30,6 +30,9 @@ import NewsArticle from "./components/NewsArticle";
 import People from "./components/People";
 import AllMatchesPage from "./components/AllMatchesPage";
 import { useLocation } from "react-router-dom";
+import NewHome from "./routes/NewHome";
+import Navbar from "./components/layout/Navbar";
+import Navigation from "./components/Navigation";
 
 function App() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -69,14 +72,14 @@ function App() {
               <div className="floating-elements fixed inset-0 pointer-events-none z-10">
                 <FloatingElements />
               </div>
-              <Navigation
-                onCartOpen={() => setIsCartOpen(true)}
-              />
+              <Navbar></Navbar>
               <Routes>
+                <Route path="newhome" element={<NewHome></NewHome>} ></Route>
                 <Route
                   path="/"
                   element={
                     <main className="relative flex flex-col flex-1">
+                      <Navigation></Navigation>
                       <div className="hero-background">
                         <Hero />
                       </div>
@@ -165,9 +168,9 @@ function App() {
                   element={<AllMatchesPage />}
                 />
               </Routes>
-              <div className="section-background">
+              {/* <div className="section-background">
                 <Footer />
-              </div>
+              </div> */}
               <AuthModal
                 isOpen={isAuthModalOpen}
                 onClose={() => setIsAuthModalOpen(false)}
