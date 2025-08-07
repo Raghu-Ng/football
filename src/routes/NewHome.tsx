@@ -9,7 +9,7 @@ import Matches from './Home/Matches'
 import Merch from './Home/Merch'
 import Footer from './Home/Footer'
 import { supabase } from '../lib/supabase'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
 
 const heroImages = [Image, Image1, Image2, Image3];
 
@@ -31,7 +31,7 @@ const StoreSection = () => {
   }, []);
 
   return (
-    <div className='h-fit px-[100px] py-12 flex flex-col'>
+    <div id="store" className='h-fit px-[100px] py-12 flex flex-col'>
       <div className='w-full flex justify-between mb-8'>
         <div className='text-primary font-bold text-6xl flex items-center gap-4 text-center'>Official Store</div>
       </div>
@@ -68,17 +68,7 @@ const StoreSection = () => {
 const NewHome = () => {
   const [current, setCurrent] = useState(0);
   const location = useLocation();
-  const [user, setUser] = useState<any>(null);
-
-  useEffect(() => {
-    const getUser = async () => {
-      const { data } = await supabase.auth.getUser();
-      setUser(data?.user || null);
-    };
-    getUser();
-    const { data: listener } = supabase.auth.onAuthStateChange(() => getUser());
-    return () => { listener?.subscription.unsubscribe(); };
-  }, []);
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -87,20 +77,20 @@ const NewHome = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Scroll to hash section on mount if present
+  // Scroll to section if ?section=... is present in search params
   useEffect(() => {
-    if (location.hash) {
+    const section = searchParams.get('section');
+    if (section) {
       setTimeout(() => {
-        const id = location.hash.replace('#', '');
-        const el = document.getElementById(id);
+        console.log(`Scrolling to section: ${section}`);
+        const el = document.getElementById(section);
+        console.log(`Element found: ${el}`);
         if (el) {
           el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-      }, 300); // Wait for all sections to render
+      }, 300);
     }
-  }, [location.hash]);
-
-  // Pass user state to children if needed, or use context for global state
+  }, [searchParams]);
 
   return (
     <div className='min-h-screen h-fit flex flex-col'>

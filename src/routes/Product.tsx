@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
@@ -15,23 +15,36 @@ const Product = () => {
   const { user, loading: authLoading } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setLoading(true);
-    if (!id) return;
-    supabase
-      .from('jerseys')
-      .select('*')
-      .eq('id', id)
-      .single()
-      .then(({ data, error }) => {
-        if (error || !data) {
-          setJersey(null);
-        } else {
-          setJersey(data);
-        }
-        setLoading(false);
-      });
-  }, [id]);
+  const location = useLocation()
+useEffect(() => {
+  
+  setLoading(true);
+
+  if (!id) {
+    setJersey(null); // Optional: reset data
+    setLoading(false); // Fix: ensure loading stops
+    return;
+  }
+
+  console.log('Fetching jersey with ID:', id);
+  supabase
+    .from('jerseys')
+    .select('*')
+    .eq('id', id)
+    .single()
+    .then(({ data, error }) => {
+      if (error || !data) {
+        console.error('Error fetching jersey:', error);
+        setJersey(null);
+      } else {
+        console.log('Fetched jersey data:', data);
+        setJersey(data);
+      }
+      setLoading(false);
+    });
+}, [id, location.key]);
+
+
 
   if (loading) return <div className="text-center py-20">Loading...</div>;
   if (!jersey) return <div className="text-center py-20">Product not found.</div>;

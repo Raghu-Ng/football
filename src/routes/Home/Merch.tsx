@@ -5,7 +5,7 @@ import Image from "../../assets/images/image23.jpeg";
 const Merch = () => {
   return (
     <>
-      <div className="mt-28 w-full  h-[600px]  relative">
+      <div  className="mt-28 w-full  h-[600px]  relative">
         <div className="w-full px-[100px] py-12 bg-gradient-to-r from-primary via-primary to-transparent h-full absolute flex flex-wrap flex-col z-20 overflow-hidden">
           <div className="w-1/2 flex flex-col h-full">
             <div className="text-6xl text-white font-bold">
