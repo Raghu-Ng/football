@@ -1,32 +1,56 @@
+import React, { useEffect, useState } from 'react'
 import { ArrowRight } from 'lucide-react'
-import React from 'react'
 import Image from "../../assets/images/image40.jpeg"
+import { supabase } from '../../lib/supabase'
+import { Link } from 'react-router-dom'
 
 const News = () => {
+  const [newsItems, setNewsItems] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      const { data } = await supabase
+        .from("news")
+        .select("*")
+        .order("date_posted", { ascending: false })
+        .limit(3);
+      setNewsItems(data || []);
+      setLoading(false);
+    };
+    fetchNews();
+  }, []);
+
   return (
     <div className='h-fit px-[100px] py-12 flex flex-col '>
         <div className='w-full flex justify-between mb-8' >
             <div className='text-primary font-bold text-6xl flex items-center gap-4 text-center' >Latest news <ArrowRight className='translate-y-1' size={40}></ArrowRight></div>
         </div>
         <div className='h-[400px] w-full grid grid-cols-3 gap-12' >
-            <div className='size-full  flex flex-col gap-8 group cursor-pointer' >
-                <div className='h-full w-full relative overflow-hidden ' >
-                    <img src={Image} className='absolute size-full group-hover:scale-125 transition-all duration-700 ease-in-out object-cover' alt="" />
-                </div>
-                <div className='shrink-0 h-12 w-full text-2xl text-primary font-medium' >Premier league tickets: West ham away.</div>
-            </div>
-            <div className='size-full  flex flex-col gap-8 group cursor-pointer' >
-                <div className='h-full w-full relative overflow-hidden ' >
-                    <img src={Image} className='absolute size-full group-hover:scale-125 transition-all duration-700 ease-in-out object-cover' alt="" />
-                </div>
-                <div className='shrink-0 h-12 w-full text-2xl text-primary font-medium' >Premier league tickets: West ham away.</div>
-            </div>
-            <div className='size-full  flex flex-col gap-8 group cursor-pointer' >
-                <div className='h-full w-full relative overflow-hidden ' >
-                    <img src={Image} className='absolute size-full group-hover:scale-125 transition-all duration-700 ease-in-out object-cover' alt="" />
-                </div>
-                <div className='shrink-0 h-12 w-full text-2xl text-primary font-medium' >Premier league tickets: West ham away.</div>
-            </div>
+            {loading ? (
+              <div className='col-span-3 flex items-center justify-center text-xl text-gray-500'>Loading...</div>
+            ) : newsItems.map((item) => (
+                <Link to={`/news/${item.id}`} key={item.id} className='size-full flex flex-col gap-8 group cursor-pointer' >
+                    <div className='h-full w-full relative overflow-hidden ' >
+                        <img 
+                            src={item.image_url || Image} 
+                            className='absolute size-full group-hover:scale-125 transition-all duration-700 ease-in-out object-cover' 
+                            alt={item.title} 
+                        />
+                    </div>
+                    <div className='shrink-0 h-12 w-full text-2xl text-primary font-medium' >{item.title}</div>
+                    {(item.team1 || item.team2) && (
+                        <div className='text-lg text-gray-700' >
+                            {item.team1 && <span>{item.team1}</span>}
+                            {item.team1 && item.team2 && <span> vs </span>}
+                            {item.team2 && <span>{item.team2}</span>}
+                        </div>
+                    )}
+                    {item.venue && (
+                        <div className='text-base text-gray-500' >Venue: {item.venue}</div>
+                    )}
+                </Link>
+            ))}
         </div>
     </div>
   )

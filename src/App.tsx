@@ -18,21 +18,22 @@ import AuthModal from "./components/AuthModal";
 import Cart from "./components/Cart";
 import SuccessPage from "./components/SuccessPage";
 import FloatingElements from "./components/FloatingElements";
-import SignIn from "./components/SignIn";
-import ProductPage from "./components/ProductPage";
-import CartPage from "./components/CartPage";
-import AdminPage from "./components/AdminPage";
+import SignIn from "./routes/SignIn";
+import Product from "./routes/Product";
+import Admin from "./routes/Admin";
 import CheckoutPage from "./components/CheckoutPage";
 import GetStarted from "./components/GetStarted";
 import ScrollHandler from "./components/ScrollHandler";
-import AllNews from "./components/AllNews";
-import NewsArticle from "./components/NewsArticle";
+import AllNews from "./routes/AllNews";
+import NewsArticle from "./routes/NewsArticle";
 import People from "./components/People";
-import AllMatchesPage from "./components/AllMatchesPage";
+import AllMatchesPage from "./routes/AllMatchesPage";
 import { useLocation } from "react-router-dom";
 import NewHome from "./routes/NewHome";
 import Navbar from "./components/layout/Navbar";
 import Navigation from "./components/Navigation";
+import Shop from "./routes/Shop";
+import AdminPage from "./components/AdminPage";
 
 function App() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -74,29 +75,24 @@ function App() {
               </div>
               <Navbar></Navbar>
               <Routes>
-                <Route path="newhome" element={<NewHome></NewHome>} ></Route>
+                <Route path="oldadmin" element={<AdminPage></AdminPage>} ></Route>
+                <Route path="newhome" element={<NewHome />} />
                 <Route
                   path="/"
                   element={
                     <main className="relative flex flex-col flex-1">
-                      <Navigation></Navigation>
+                      <Navigation />
                       <div className="hero-background">
                         <Hero />
                       </div>
                       <div className="section-background">
                         <About />
                       </div>
-                      {/* <div className="section-background">
-                        <Players />
-                      </div> */}
                       <div className="section-background">
                         <News />
                       </div>
                       <div className="section-background">
                         <Gallery />
-                      </div>
-                      <div className="section-background">
-                        <ClubProgramsSection />
                       </div>
                       <div className="section-background">
                         <Store />
@@ -107,38 +103,9 @@ function App() {
                     </main>
                   }
                 />
-                <Route
-                  path="/signin"
-                  element={
-                    <div className="section-background">
-                      <SignIn />
-                    </div>
-                  }
-                />
-                <Route
-                  path="/product/:id"
-                  element={
-                    <div className="section-background">
-                      <ProductPage />
-                    </div>
-                  }
-                />
-                <Route
-                  path="/cart"
-                  element={
-                    <div className="section-background">
-                      <CartPage />
-                    </div>
-                  }
-                />
-                <Route
-                  path="/admin"
-                  element={
-                    <div className="section-background">
-                      <AdminPage />
-                    </div>
-                  }
-                />
+                <Route path="/signin" element={<SignIn />} />
+                <Route path="/product/:id" element={<Product />} />
+                <Route path="/admin" element={<Admin />} />
                 <Route
                   path="/checkout"
                   element={

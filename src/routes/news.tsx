@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import AllNews from '../components/AllNews';
-import NewsArticle from '../components/NewsArticle';
+import AllNews from './AllNews';
+import NewsArticle from './NewsArticle';
 
 const NewsRoutes = () => (
   <Routes>

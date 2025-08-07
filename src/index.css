@@ -16,12 +16,18 @@
 
 /* Professional cream theme variables */
 :root {
-  --cream-primary: #f8f5f0;
-  --cream-secondary: #faf7f2;
-  --cream-accent: #f5f1ea;
-  --warm-orange: #f97316;
-  --rich-orange: #ea580c;
-  --soft-brown: #92400e;
+  --bg-primary: #f8f5f0;
+  --bg-secondary: #ffffff;
+  --bg-accent: #faf7f2;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-accent: #374151;
+  --accent-primary: #f97316;
+  --accent-secondary: #ea580c;
+  --border-primary: #e5e7eb;
+  --border-accent: #f97316;
+  --shadow-primary: rgba(249, 115, 22, 0.1);
+  --shadow-accent: rgba(249, 115, 22, 0.2);
 }
 
 /* Light theme with professional cream colors */
@@ -42,20 +48,7 @@
 }
 
 /* Dark theme specific styles */
-.dark {
-  --bg-primary: #111827;
-  --bg-secondary: #1f2937;
-  --bg-accent: #374151;
-  --text-primary: #f9fafb;
-  --text-secondary: #d1d5db;
-  --text-accent: #e5e7eb;
-  --accent-primary: #22d3ee;
-  --accent-secondary: #3b82f6;
-  --border-primary: #374151;
-  --border-accent: #22d3ee;
-  --shadow-primary: rgba(34, 211, 238, 0.1);
-  --shadow-accent: rgba(34, 211, 238, 0.2);
-}
+
 
 html,#root,body{
   background-color: var(--bg-primary);
