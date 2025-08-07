@@ -9,16 +9,19 @@ const News = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    console.log("Fetching news items...");
     const fetchNews = async () => {
       const { data } = await supabase
         .from("news")
         .select("*")
         .order("date_posted", { ascending: false })
         .limit(3);
+        console.log("Fetched news items:", data);
       setNewsItems(data || []);
       setLoading(false);
     };
     fetchNews();
+    console.log("News items fetched successfully");
   }, []);
 
   return (
