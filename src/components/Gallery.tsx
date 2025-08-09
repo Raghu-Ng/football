@@ -335,7 +335,7 @@ const Gallery = () => {
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t dark:from-gray-900/80 to-transparent p-6">
           <div className="max-w-7xl mx-auto">
             <div className="flex items-center justify-between">
-              <div className="text-2xl font-bold">
+              <div className="text-xl font-bold">
                 <p className="text-sm">{selectedCategory.description}</p>
               </div>
               <div className="flex items-center gap-4">
@@ -406,7 +406,7 @@ const Gallery = () => {
               <div className="text-3xl font-bold text-gray-900 dark:text-white">
                 Gallery
               </div>
-              <div className="text-2xl opacity-70 font-medium">
+              <div className="text-xl opacity-70 font-medium">
                 Explore our gallery
               </div>
             </div>
@@ -435,7 +435,7 @@ const Gallery = () => {
                 <div className="text-4xl font-bold text-gray-900 dark:text-gray-300">
                   Want to be part of our story?
                 </div>
-                <div className="text-2xl font-semibold text-gray-900 dark:text-gray-300">
+                <div className="text-xl font-semibold text-gray-900 dark:text-gray-300">
                   Join United FC Kodagu and create your own memorable moments on
                   the field.
                 </div>
@@ -453,7 +453,7 @@ const Gallery = () => {
               </button>
             </div>
             {/* <div className="bg-gradient-to-r from-white/50 to-gray-100/50 dark:from-gray-800/50 dark:to-gray-700/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-200/50 dark:border-gray-600">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Want to be part of our story?</h3>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Want to be part of our story?</h3>
               <p className="text-gray-700 dark:text-gray-300 mb-6">Join United FC Kodagu and create your own memorable moments on the field.</p>
               <button
                 className="group bg-gradient-to-r from-orange-500 to-red-600 dark:from-cyan-500 dark:to-blue-600 hover:from-orange-400 hover:to-red-500 dark:hover:from-cyan-400 dark:hover:to-blue-500 text-white px-8 py-3 rounded-full font-semibold transition-all transform hover:scale-105 shadow-lg shadow-orange-500/25 dark:shadow-cyan-500/25 flex items-center gap-2 mx-auto"

@@ -34,7 +34,7 @@ const AllNews = () => {
                     <img src={item.image_url} alt={item.title} className="w-full md:w-64 h-48 object-cover rounded-t-2xl md:rounded-l-2xl md:rounded-t-none" />
                   )}
                   <div className="flex-1 p-6">
-                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-orange-500 dark:group-hover:text-cyan-400 transition-colors">{item.title}</h2>
+                    <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-orange-500 dark:group-hover:text-cyan-400 transition-colors">{item.title}</h2>
                     <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-2">
                       <Calendar size={16} />
                       <span>{item.date_posted ? new Date(item.date_posted).toLocaleDateString() : ''}</span>

@@ -91,7 +91,7 @@ const Shop = () => {
       </div>
       {/* Right: Info Section */}
       <div className="flex flex-col gap-4 w-full">
-        <h2 className="text-2xl font-semibold">{jersey.name}</h2>
+        <h2 className="text-xl font-semibold">{jersey.name}</h2>
         <p className="text-xl font-semibold text-gray-800">${jersey.price}</p>
         <p className="text-base text-gray-600">{jersey.description}</p>
         {/* Size Options */}

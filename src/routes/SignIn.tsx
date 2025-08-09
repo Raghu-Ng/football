@@ -30,7 +30,7 @@ const SignIn = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-white px-4">
-      <h1 className="text-primary font-bold text-6xl mb-12">Sign In</h1>
+      <h1 className="text-primary font-bold text-4xl mb-12">Sign In</h1>
       <form onSubmit={handleSignIn} className="flex flex-col gap-6 w-full max-w-md">
         <input
           type="email"

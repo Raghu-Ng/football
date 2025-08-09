@@ -123,7 +123,7 @@ const CheckoutPage: React.FC = () => {
       <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-4xl w-full flex flex-col md:flex-row overflow-hidden border border-orange-400/30 dark:border-blue-400/30">
         {/* Checkout Form Left */}
         <div className="md:w-1/2 flex flex-col p-8 gap-4">
-          <h2 className="text-2xl font-bold text-orange-500 dark:text-blue-400 mb-8">Checkout</h2>
+          <h2 className="text-xl font-bold text-orange-500 dark:text-blue-400 mb-8">Checkout</h2>
           <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <input name="firstName" value={form.firstName} onChange={handleChange} required placeholder="First Name" className="p-3 rounded border border-orange-300 dark:border-blue-500 bg-orange-50 dark:bg-blue-900 text-gray-900 dark:text-white placeholder-orange-300 dark:placeholder-blue-300" />

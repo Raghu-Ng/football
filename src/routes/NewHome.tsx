@@ -31,9 +31,9 @@ const StoreSection = () => {
   }, []);
 
   return (
-    <div id="store" className='h-fit px-[100px] py-12 flex flex-col'>
+    <div id="store" className='h-fit px-[5vw] py-12 flex flex-col'>
       <div className='w-full flex justify-between mb-8'>
-        <div className='text-primary font-bold text-6xl flex items-center gap-4 text-center'>Official Store</div>
+        <div className='text-primary font-bold text-4xl flex items-center gap-4 text-center'>Official Store</div>
       </div>
       <div className='h-[400px] w-full grid grid-cols-3 gap-12'>
         {loading ? (
@@ -54,7 +54,7 @@ const StoreSection = () => {
                   style={{ borderRadius: 0 }}
                 />
               </div>
-              <div className='shrink-0 h-12 w-full text-2xl text-primary font-medium'>{jersey.name}</div>
+              <div className='shrink-0 h-12 w-full text-xl text-primary font-medium'>{jersey.name}</div>
               <div className='text-lg text-gray-700'>{jersey.category}</div>
               <div className='text-xl font-bold text-blue-700'>${jersey.price}</div>
             </div>
@@ -94,7 +94,7 @@ const NewHome = () => {
 
   return (
     <div className='min-h-screen h-fit flex flex-col'>
-      <div className='h-[calc(100vh-120px)] w-full relative overflow-hidden'>
+      <div className='h-[calc(100vh-12vh)] w-full relative overflow-hidden'>
         {/* Slideshow */}
         {heroImages.map((img, idx) => (
           <img
@@ -106,7 +106,7 @@ const NewHome = () => {
           />
         ))}
         <div className='absolute bottom-0 left-0 w-full h-[400px] z-20 bg-gradient-to-t from-black to-transparent'></div>
-        <div className='text-9xl z-30 font-bold text-white absolute bottom-0 left-0 ml-[100px] py-12'>UNITED FC KODAGU</div>
+        <div className='text-6xl z-30 font-bold text-white absolute bottom-0 left-0 ml-[100px] py-12'>UNITED FC KODAGU</div>
       </div>
       <News></News>
       <Gallery></Gallery>

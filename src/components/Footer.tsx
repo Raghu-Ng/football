@@ -47,7 +47,7 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="mb-4 md:mb-0">
-              <h3 className="text-2xl font-bold mb-2 flex items-center gap-2">
+              <h3 className="text-xl font-bold mb-2 flex items-center gap-2">
                 <Zap className="w-6 h-6" />
                 Stay Updated
               </h3>

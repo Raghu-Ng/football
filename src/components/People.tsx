@@ -274,7 +274,7 @@ const People = () => {
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-4">
                     <div>
-                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{selectedPlayer.name}</h3>
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{selectedPlayer.name}</h3>
                       <div className={`inline-block px-3 py-1 rounded-full text-sm font-semibold bg-gradient-to-r ${selectedPlayer.position === 'Forward' ? 'from-red-500 to-orange-500' : selectedPlayer.position === 'Midfielder' ? 'from-green-500 to-emerald-500' : selectedPlayer.position === 'Defender' ? 'from-blue-500 to-cyan-500' : 'from-purple-500 to-pink-500'} text-white shadow-lg`}>
                         <Shield className="w-4 h-4 inline mr-2" />
                         {selectedPlayer.position}
@@ -321,7 +321,7 @@ const People = () => {
                     <div className="grid grid-cols-3 gap-3">
                       {Object.entries(selectedPlayer.stats).map(([key, value]) => (
                         <div key={key} className="text-center bg-gray-100/50 dark:bg-gray-700/50 rounded-xl p-3 border border-gray-200/50 dark:border-gray-600 hover:border-orange-400/50 dark:hover:border-cyan-400/50 transition-all duration-300 group">
-                          <div className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-red-400 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">{value}</div>
+                          <div className="text-xl font-bold bg-gradient-to-r from-orange-400 to-red-400 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">{value}</div>
                           <div className="text-sm text-gray-600 dark:text-gray-400 capitalize mt-1">
                             {key === 'cleanSheets' ? 'Clean Sheets' : key}
                           </div>

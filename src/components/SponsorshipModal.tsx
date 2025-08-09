@@ -230,7 +230,7 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
                 <Crown className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-white">Become a Sponsor</h2>
+                <h2 className="text-xl font-bold text-white">Become a Sponsor</h2>
                 <p className="text-gray-400">Partner with United FC Kodagu and grow together</p>
               </div>
             </div>
@@ -506,7 +506,7 @@ const SponsorshipModal: React.FC<SponsorshipModalProps> = ({ isOpen, onClose }) 
               <div className="w-20 h-20 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
                 <CheckCircle className="w-10 h-10 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4">Application Submitted!</h3>
+              <h3 className="text-xl font-bold text-white mb-4">Application Submitted!</h3>
               <p className="text-gray-300 mb-6 max-w-md mx-auto">
                 Thank you for your interest in partnering with United FC Kodagu. Our sponsorship team will review your application and contact you within 2-3 business days.
               </p>

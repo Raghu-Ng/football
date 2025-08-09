@@ -39,7 +39,7 @@ const SuccessPage = () => {
           <CheckCircle className="w-8 h-8 text-green-400" />
         </div>
         
-        <h1 className="text-2xl font-bold text-white mb-4">
+        <h1 className="text-xl font-bold text-white mb-4">
           Payment <span className="bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">Successful!</span>
         </h1>
         

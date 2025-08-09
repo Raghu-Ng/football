@@ -221,7 +221,7 @@ const Admin = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
         <form onSubmit={handleAdminLogin} className="bg-white p-8 w-full max-w-sm border border-primary flex flex-col gap-4">
-          <h2 className="text-2xl font-bold text-primary mb-4 text-center">Admin Login</h2>
+          <h2 className="text-xl font-bold text-primary mb-4 text-center">Admin Login</h2>
           <input
             type="email"
             placeholder="Email"
@@ -247,8 +247,8 @@ const Admin = () => {
 
   // Main UI
   return (
-    <div className="min-h-screen bg-white px-[100px] py-16">
-      <h1 className="text-primary font-bold text-6xl mb-12">Admin Dashboard</h1>
+    <div className="min-h-screen bg-white px-[5vw] py-16">
+      <h1 className="text-primary font-bold text-4xl mb-12">Admin Dashboard</h1>
       <div className="flex gap-8 mb-8">
         <button onClick={() => setTab('store')} className={`px-6 py-3 font-semibold bg-primary text-white border-none ${tab === 'store' ? '' : 'opacity-60'}`}>Store</button>
         <button onClick={() => setTab('allMatches')} className={`px-6 py-3 font-semibold bg-primary text-white border-none ${tab === 'allMatches' ? '' : 'opacity-60'}`}>All Matches</button>

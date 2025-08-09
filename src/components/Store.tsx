@@ -126,7 +126,7 @@ const Store = () => {
           <div className='flex justify-between mb-10' >
             <div className='flex flex-col' >
               <div className='text-4xl font-bold text-gray-900 dark:text-white' >Our official jerseys</div>
-              <div className='text-2xl font-semibold opacity-70' >Buy our jerseys!</div>
+              <div className='text-xl font-semibold opacity-70' >Buy our jerseys!</div>
             </div>
           </div>
           {/* <div className="text-center mb-16">
@@ -186,7 +186,7 @@ const Store = () => {
                   <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm line-clamp-2">{jersey.description}</p>
                   
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-red-400 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent">${jersey.price}</span>
+                    <span className="text-xl font-bold bg-gradient-to-r from-orange-400 to-red-400 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent">${jersey.price}</span>
                     {/* Rating removed */}
                   </div>
                   
@@ -233,7 +233,7 @@ const Store = () => {
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{selectedJersey.name}</h3>
                   <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">{selectedJersey.description}</p>
-                  <p className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-red-400 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent mb-6">${selectedJersey?.price}</p>
+                  <p className="text-xl font-bold bg-gradient-to-r from-orange-400 to-red-400 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent mb-6">${selectedJersey?.price}</p>
 
                   <div className="mb-6">
                     <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">

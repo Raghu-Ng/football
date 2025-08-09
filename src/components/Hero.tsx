@@ -322,7 +322,7 @@ const Hero = () => {
         filter: 'sepia(0.25)'
       }} />
       <div className="relative z-10 text-center text-gray-900 dark:text-white max-w-6xl mx-auto px-4 flex flex-col items-center justify-center">
-        <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight">
+        <h1 className="text-4xl md:text-8xl font-bold mb-8 leading-tight">
           <span className="bg-gradient-to-r from-orange-400 via-red-400 to-yellow-400 dark:from-green-400 dark:via-blue-400 dark:to-cyan-400 bg-clip-text text-transparent animate-gradient-x relative sports-title">
             United FC Kodagu
           </span>

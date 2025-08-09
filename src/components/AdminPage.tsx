@@ -225,7 +225,7 @@ const AdminPage = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
         <form onSubmit={handleAdminLogin} className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl w-full max-w-sm border border-orange-400/30 dark:border-blue-400/30 flex flex-col gap-4">
-          <h2 className="text-2xl font-bold text-orange-500 dark:text-blue-400 mb-4 text-center">Admin Login</h2>
+          <h2 className="text-xl font-bold text-orange-500 dark:text-blue-400 mb-4 text-center">Admin Login</h2>
           <input
             type="email"
             placeholder="Email"

@@ -16,8 +16,8 @@ const AllMatchesPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white px-[100px] py-16">
-      <h1 className="text-primary font-bold text-6xl mb-12">All Matches</h1>
+    <div className="min-h-screen bg-white px-[5vw] py-16">
+      <h1 className="text-primary font-bold text-4xl mb-12">All Matches</h1>
       {loading ? (
         <div className="text-xl text-gray-500">Loading...</div>
       ) : matches.length === 0 ? (

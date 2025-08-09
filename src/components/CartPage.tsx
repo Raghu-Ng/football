@@ -29,7 +29,7 @@ const CartPage: React.FC = () => {
       <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-4xl w-full flex flex-col md:flex-row overflow-hidden border border-orange-400/30 dark:border-blue-400/30">
         {/* Cart Items Left */}
         <div className="md:w-1/2 flex flex-col p-8 gap-4">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
             <ShoppingBag size={24} className="text-orange-500 dark:text-blue-400" />
             Shopping Cart
           </h2>

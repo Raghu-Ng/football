@@ -5,13 +5,13 @@ import Image from "../../assets/images/image23.jpeg";
 const Merch = () => {
   return (
     <>
-      <div  className="mt-28 w-full  h-[600px]  relative">
-        <div className="w-full px-[100px] py-12 bg-gradient-to-r from-primary via-primary to-transparent h-full absolute flex flex-wrap flex-col z-20 overflow-hidden">
+      <div  className="mt-28 w-full  h-fit min-h-[60vh]  relative">
+        <div className="w-full px-[5vw] py-12 bg-gradient-to-r from-primary via-primary to-transparent h-full absolute flex flex-wrap flex-col z-20 overflow-hidden">
           <div className="w-1/2 flex flex-col h-full">
-            <div className="text-6xl text-white font-bold">
+            <div className="text-4xl text-white font-bold">
               Club merchandise now available!
             </div>
-            <div className="mt-10 text-white text-2xl flex-wrap">
+            <div className="mt-10 text-white text-xl flex-wrap">
               The official merchandise for Kodagu FC is now available on this
               website!
             </div>

@@ -254,7 +254,7 @@ const About = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 to-red-600/10 dark:from-cyan-500/10 dark:to-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
               <div className="absolute -bottom-6 -left-6 bg-gradient-to-br from-orange-500 to-red-600 dark:from-cyan-500 dark:to-blue-600 text-white p-6 rounded-2xl shadow-xl border border-orange-400/30 dark:border-cyan-400/30 transform group-hover:scale-110 transition-all duration-500">
-                <h4 className="text-2xl font-bold">25+</h4>
+                <h4 className="text-xl font-bold">25+</h4>
                 <p className="text-orange-100 dark:text-cyan-100">
                   Years of Excellence
                 </p>

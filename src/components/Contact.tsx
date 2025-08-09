@@ -89,7 +89,7 @@ const Contact = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
           <div className="bg-white/80 dark:bg-gray-800 p-8 rounded-2xl border border-gray-200/50 dark:border-gray-700">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
               <Zap className="w-6 h-6 text-orange-500 dark:text-cyan-400" />
               Send us a message
             </h3>

@@ -83,7 +83,7 @@ export default function ProductConfigurator({
 		<div className="w-full">
 			{/* Size Selection */}
 			<motion.div ref={sizeRef} className="mb-16" style={{ opacity: getOpacity('size'), transition: 'opacity 0.4s' }}>
-				<h2 className="text-2xl md:text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+				<h2 className="text-xl md:text-3xl font-bold mb-6 text-gray-900 dark:text-white">
 					<span className="text-orange-500 dark:text-cyan-400"></span> Choose your size.
 				</h2>
 				<div className="flex  gap-3 w-full">
@@ -102,7 +102,7 @@ export default function ProductConfigurator({
 
 			{/* Color Selection */}
 			<motion.div ref={colorRef} className="mb-16" style={{ opacity: getOpacity('color'), transition: 'opacity 0.4s' }}>
-				<h2 className="text-2xl md:text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+				<h2 className="text-xl md:text-3xl font-bold mb-6 text-gray-900 dark:text-white">
 					<span className="text-orange-500 dark:text-cyan-400"></span> Pick your favourite colour.
 				</h2>
 				<div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full">
@@ -121,7 +121,7 @@ export default function ProductConfigurator({
 
 			{/* Summary */}
 			<motion.div ref={summaryRef} className="mb-4" style={{ opacity: getOpacity('summary'), transition: 'opacity 0.4s' }}>
-				<h2 className="text-2xl md:text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+				<h2 className="text-xl md:text-3xl font-bold mb-6 text-gray-900 dark:text-white">
 					<span className="text-orange-500 dark:text-cyan-400"></span> Review your selection.
 				</h2>
 				<div className="bg-white dark:bg-gray-800 rounded-xl p-6 border-2 border-gray-200 dark:border-gray-700 flex flex-col gap-4 w-full">

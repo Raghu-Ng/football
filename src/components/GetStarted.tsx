@@ -52,7 +52,7 @@ const GetStarted: React.FC = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-orange-50/30 dark:bg-gray-900 py-16">
       <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-2xl w-full flex flex-col overflow-hidden border border-orange-400/30 dark:border-blue-400/30 p-8">
-        <h2 className="text-2xl font-bold text-orange-500 dark:text-blue-400 mb-8">Get Started</h2>
+        <h2 className="text-xl font-bold text-orange-500 dark:text-blue-400 mb-8">Get Started</h2>
         <p className="mb-6 text-gray-700 dark:text-gray-300">Please fill in your basic details to complete your profile.</p>
         {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
         <form onSubmit={handleSubmit} className="space-y-6">

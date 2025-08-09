@@ -17,8 +17,8 @@ const AllNews = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white px-[100px] py-16">
-      <h1 className="text-primary font-bold text-6xl mb-12">All News</h1>
+    <div className="min-h-screen bg-white px-[5vw] py-16">
+      <h1 className="text-primary font-bold text-4xl mb-12">All News</h1>
       {loading ? (
         <div className="text-xl text-gray-500">Loading...</div>
       ) : news.length === 0 ? (
@@ -32,7 +32,7 @@ const AllNews = () => {
                   <img src={item.image_url} alt={item.title} className="w-full h-full object-cover" style={{ borderRadius: 0 }} />
                 )}
               </div>
-              <h2 className="text-primary font-bold text-2xl mb-2">{item.title}</h2>
+              <h2 className="text-primary font-bold text-xl mb-2">{item.title}</h2>
               <div className="text-gray-600 text-sm mb-2">{item.date_posted ? new Date(item.date_posted).toLocaleDateString() : ''}</div>
               <div className="text-gray-700 text-base mb-2 line-clamp-2">{item.content && item.content.split('\n')[0].slice(0, 180)}{item.content && item.content.split('\n')[0].length > 180 ? '...' : ''}</div>
               {(item.team1 || item.team2) && (

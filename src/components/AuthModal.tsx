@@ -41,7 +41,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div className="bg-gray-800 rounded-2xl max-w-md w-full p-6 border border-cyan-400/30 shadow-2xl shadow-cyan-500/20">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+          <h2 className="text-xl font-bold text-white flex items-center gap-2">
             <Zap className="w-6 h-6 text-cyan-400" />
             {isLogin ? 'Sign In' : 'Create Account'}
           </h2>

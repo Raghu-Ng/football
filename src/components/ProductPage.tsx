@@ -135,7 +135,7 @@ const ProductPage: React.FC = () => {
           <p className="text-gray-600 dark:text-gray-400 mb-4 text-base">
             {jersey.description}
           </p>
-          <div className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-red-400 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent mb-6">
+          <div className="text-xl font-bold bg-gradient-to-r from-orange-400 to-red-400 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent mb-6">
             ${jersey.price}
           </div>
           <ProductConfigurator

@@ -36,7 +36,7 @@ const SignIn: React.FC = () => {
     <div className="min-h-screen flex items-center justify-center bg-orange-50/30 dark:bg-gray-900">
       <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-md w-full p-6 border border-orange-400/30 dark:border-blue-400/30 shadow-2xl shadow-orange-500/20 dark:shadow-blue-500/20">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-orange-500 dark:text-blue-400 flex items-center gap-2">
+          <h2 className="text-xl font-bold text-orange-500 dark:text-blue-400 flex items-center gap-2">
             <Zap className="w-6 h-6 text-orange-500 dark:text-blue-400" />
             {isLogin ? 'Sign In' : 'Create Account'}
           </h2>

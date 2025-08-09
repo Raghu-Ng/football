@@ -25,11 +25,11 @@ const News = () => {
   }, []);
 
   return (
-    <div className='h-fit px-[100px] py-12 flex flex-col '>
+    <div className='h-fit px-[5vw] py-12 flex flex-col '>
         <div className='w-full flex justify-between mb-8' >
-            <div className='text-primary font-bold text-6xl flex items-center gap-4 text-center' >Latest news <ArrowRight className='translate-y-1' size={40}></ArrowRight></div>
+            <div className='text-primary font-bold text-4xl flex items-center gap-4 text-center' >Latest news <ArrowRight className='translate-y-1' size={40}></ArrowRight></div>
         </div>
-        <div className='h-[400px] w-full grid grid-cols-3 gap-12' >
+        <div className='h-[25vw] w-full grid grid-cols-3 gap-12' >
             {loading ? (
               <div className='col-span-3 flex items-center justify-center text-xl text-gray-500'>Loading...</div>
             ) : newsItems.map((item) => (
@@ -41,7 +41,7 @@ const News = () => {
                             alt={item.title} 
                         />
                     </div>
-                    <div className='shrink-0 h-12 w-full text-2xl text-primary font-medium' >{item.title}</div>
+                    <div className='shrink-0 h-12 w-full text-xl text-primary font-medium' >{item.title}</div>
                     {(item.team1 || item.team2) && (
                         <div className='text-lg text-gray-700' >
                             {item.team1 && <span>{item.team1}</span>}

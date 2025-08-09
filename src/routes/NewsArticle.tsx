@@ -21,7 +21,7 @@ const NewsArticle = () => {
   if (!article) return <div className="py-20 text-center text-gray-500">Article not found.</div>;
 
   return (
-    <div className="min-h-screen bg-white px-[100px] py-16">
+    <div className="min-h-screen bg-white px-[5vw] py-16">
       <Link to="/news" className="text-primary font-semibold mb-4 inline-block">&larr; All News</Link>
       <h1 className="text-primary font-bold text-5xl mb-6">{article.title}</h1>
       <div className="flex items-center gap-2 text-sm text-gray-500 mb-6">

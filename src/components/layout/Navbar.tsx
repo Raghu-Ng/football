@@ -73,7 +73,7 @@ const Navbar = () => {
                 <X color="white"></X>
               </button>
 
-              <div className="w-[80vw] h-fit text-white text-5xl tracking-tighter flex flex-col gap-6">
+              <div className="w-[80vw] h-fit text-white text-3xl tracking-tighter flex flex-col gap-6">
                 <NavButton onClick={() => handleMenuNav('/newhome')}><button>Home</button></NavButton>
                 <NavButton onClick={() => handleMenuNav('/newhome?section=about')}><button>About</button></NavButton>
                 <NavButton onClick={() => handleMenuNav('/newhome?section=players')}><button>Players</button></NavButton>
@@ -86,11 +86,11 @@ const Navbar = () => {
           </>
         )}
       </AnimatePresence>
-      <div className="flex w-full h-[120px] top-0  z-50 bg-white items-center">
+      <div className="flex w-full h-[12vh] top-0  z-50 bg-white items-center">
         <button onClick={() => navigate("/newhome")} className="h-full shrink-0 aspect-square mx-4">
           <img src={Logo} alt="" />
         </button>
-        <div className="mx-auto h-full text-2xl tracking-tighter  text-primary font-bold flex">
+        <div className="mx-auto h-full text-xl tracking-tighter  text-primary font-bold flex">
           <NavLink onClick={() => navigate('/newhome?section=wins')}><button>WINS</button></NavLink>
           <NavLink onClick={() => navigate('/newhome?section=players')}><button>PLAYERS</button></NavLink>
           <NavLink onClick={() => navigate('/newhome?section=store')}><button>SHOP</button></NavLink>
@@ -101,7 +101,7 @@ const Navbar = () => {
           {user ? (
             <>
               <button
-                className="h-full text-2xl font-bold flex gap-2 text-primary border-l-2 border-primary px-12 items-center justify-center bg-white"
+                className="h-full text-xl font-bold flex gap-2 text-primary border-l-2 border-primary px-12 items-center justify-center bg-white"
               >
                 {user.user_metadata?.name?.[0]?.toUpperCase() || user.email?.[0]?.toUpperCase() || 'U'}
               </button>
@@ -111,7 +111,7 @@ const Navbar = () => {
                   setUser(null);
                   navigate('/newhome');
                 }}
-                className="h-full text-2xl font-bold flex gap-2 text-primary border-l-2 border-primary px-12 items-center justify-center bg-white"
+                className="h-full text-xl font-bold flex gap-2 text-primary border-l-2 border-primary px-12 items-center justify-center bg-white"
               >
                 <LogOut />
               </button>
@@ -119,7 +119,7 @@ const Navbar = () => {
           ) : (
             <button
               onClick={() => navigate('/signin')}
-              className="h-full text-2xl font-bold flex gap-2 text-primary border-l-2 border-primary px-12 items-center justify-center bg-white"
+              className="h-full text-lg font-bold flex gap-2 text-primary border-l-2 border-primary px-12 items-center justify-center bg-white"
             >
               SIGN IN
             </button>
