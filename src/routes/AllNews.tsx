@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { supabase } from '../lib/supabase';
+// import { supabase } from '../lib/supabase';
 import { Link } from 'react-router-dom';
+import { createClient } from '@supabase/supabase-js';
+import { supabase } from '../lib/supabase';
 
 const AllNews = () => {
   const [news, setNews] = useState<any[]>([]);
@@ -8,6 +10,7 @@ const AllNews = () => {
 
   useEffect(() => {
     const fetchNews = async () => {
+      
       setLoading(true);
       const { data } = await supabase.from('news').select('*').order('date_posted', { ascending: false });
       setNews(data || []);

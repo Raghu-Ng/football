@@ -45,7 +45,7 @@ const Matches = () => {
   }, []);
 
   return (
-    <><div id='wins' className='h-[25vw]  w-full bg-blue-700 px-[5vw] py-12 grid grid-cols-3 gap-12'>
+    <><div id='wins' className='h-[20vw]  w-full bg-blue-700 px-[5vw] py-12 grid grid-cols-3 gap-12'>
       {loading ? (
         <div className='col-span-3 flex items-center justify-center text-xl text-white'>Loading...</div>
       ) : recentMatches.map((match) => (

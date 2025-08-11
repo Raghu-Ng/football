@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { supabase } from '../lib/supabase';
+import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
@@ -8,23 +8,19 @@ const SignIn = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { signIn } = useAuth();
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
-    if(supabase.auth.currentUser) {
+    try {
+      await signIn(email, password);
+      navigate('/newhome');
+    } catch (err: any) {
+      setError(err.message || 'Unexpected error during sign in');
+    } finally {
       setLoading(false);
-      navigate('/newhome');
-      return;
-    }
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    setLoading(false);
-    if (error) {
-      setError(error.message);
-      console.error('Sign in error:', error);
-    } else {
-      navigate('/newhome');
     }
   };
 

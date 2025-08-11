@@ -3,7 +3,7 @@ import Logo from "../../assets/images/logo.png";
 import { LogOut, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "../../lib/supabase";
+import { useAuth } from '../../contexts/AuthContext';
 
 const NavLink = ({ children, onClick }: { children: ReactNode, onClick?: () => void }) => {
   return (
@@ -25,19 +25,10 @@ const NavButton = ({ children, onClick }: { children: ReactNode, onClick?: () =>
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const [user, setUser] = useState<any>(null);
+  const { user, signOut } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const getUser = async () => {
-      const { data } = await supabase.auth.getUser();
-      setUser(data?.user || null);
-    };
-    getUser();
-    // Listen for auth changes
-    const { data: listener } = supabase.auth.onAuthStateChange(() => getUser());
-    return () => { listener?.subscription.unsubscribe(); };
-  }, []);
+  // No need for effect, user is managed by context
 
   // Helper for menu modal navigation
   const handleMenuNav = (route: string) => {
@@ -106,9 +97,8 @@ const Navbar = () => {
                 {user.user_metadata?.name?.[0]?.toUpperCase() || user.email?.[0]?.toUpperCase() || 'U'}
               </button>
               <button
-                onClick={() => {
-                  supabase.auth.signOut();
-                  setUser(null);
+                onClick={async () => {
+                  await signOut();
                   navigate('/newhome');
                 }}
                 className="h-full text-xl font-bold flex gap-2 text-primary border-l-2 border-primary px-12 items-center justify-center bg-white"

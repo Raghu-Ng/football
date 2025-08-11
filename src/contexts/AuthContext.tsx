@@ -1,6 +1,6 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { User, Session } from '@supabase/supabase-js';
-import { supabase } from '../lib/supabase';
+import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { User, Session, createClient } from "@supabase/supabase-js";
+
 
 interface AuthContextType {
   user: User | null;
@@ -16,28 +16,55 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+// Timeout helper to prevent infinite waiting
+const withTimeout = <T,>(promise: Promise<T>, ms: number): Promise<T> => {
+  return Promise.race([
+    promise,
+    new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error("Request timed out")), ms)
+    ),
+  ]);
+};
+
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
+  // Only use the useMemo-created client
+  const supabase = useMemo(() => {
+    const url = import.meta.env.VITE_SUPABASE_URL;
+    const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
+    return createClient(url, key);
+  }, []);
 
   useEffect(() => {
-    // Get initial session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
+    
+    console.log("[AuthProvider] Getting initial session...");
+    supabase.auth
+      .getSession()
+      .then(({ data: { session } }) => {
+        console.log("[AuthProvider] Initial session:", session);
+        setSession(session);
+        setUser(session?.user ?? null);
+      })
+      .catch((err) => {
+        console.error("[AuthProvider] getSession error:", err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
 
-    // Listen for auth changes
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
+      console.log("[AuthProvider] Auth state change:", _event, session);
       setSession(session);
       setUser(session?.user ?? null);
       setLoading(false);
@@ -47,24 +74,31 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const signUp = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
+    console.log("[AuthProvider] Signing up...");
+    const { error } = await withTimeout(
+      supabase.auth.signUp({ email, password }),
+      8000
+    );
     if (error) throw error;
+    console.log("[AuthProvider] Sign-up successful");
   };
 
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({
+    
+    console.log("[AuthProvider] Signing in...");
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
     if (error) throw error;
+    console.log("[AuthProvider] Sign-in successful");
   };
 
   const signOut = async () => {
-    const { error } = await supabase.auth.signOut();
+    console.log("[AuthProvider] Signing out...");
+    const { error } = await withTimeout(supabase.auth.signOut(), 5000);
     if (error) throw error;
+    console.log("[AuthProvider] Signed out successfully");
   };
 
   const value = {
