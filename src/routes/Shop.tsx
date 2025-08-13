@@ -19,11 +19,7 @@ const Shop = () => {
 
   return (
     <div className="h-fit px-[5vw] py-12 flex flex-col">
-      <div className="w-full flex justify-between mb-8">
-        <div className="text-primary font-bold text-4xl flex items-center gap-4 text-center">
-          Official Store
-        </div>
-      </div>
+      
       <div className="min-h-[400px] w-full grid grid-cols-1 md:grid-cols-3 gap-12">
         {loading ? (
           <div className="col-span-3 flex items-center justify-center text-xl text-gray-500">
