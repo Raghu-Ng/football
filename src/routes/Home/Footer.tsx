@@ -15,7 +15,7 @@ const Footer = () => {
             Madikeri, Kodagu<br />
             Karnataka 571201
           </div>
-          <div className="flex gap-4 mt-4">
+          <div className=" flex flex-col sm:flex-row gap-4 mt-4">
             {/* Social icons placeholder */}
             <button className="font-bold border border-white px-4 py-2 hover:bg-white hover:text-primary transition duration-100">Facebook</button>
             <button className="font-bold border border-white px-4 py-2 hover:bg-white hover:text-primary transition duration-100">Instagram</button>
@@ -25,7 +25,7 @@ const Footer = () => {
           </div>
         </div>
         {/* Center: Links */}
-        <div className="flex-1 flex flex-col justify-center items-start border-l  border-white/20 px-8 gap-4">
+        <div className="flex-1 flex flex-col justify-center items-start sm:border-l  border-white/20 px-8 gap-4">
           <a href="#" className="text-white hover:underline">About The Club</a>
           <a href="#" className="text-white hover:underline">Contact Us & FAQs</a>
           <a href="#" className="text-white hover:underline">Frequently Asked Questions</a>

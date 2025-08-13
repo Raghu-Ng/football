@@ -72,6 +72,39 @@ const Navbar = () => {
                 <NavButton onClick={() => handleMenuNav('/newhome?section=gallery')}><button>Gallery</button></NavButton>
                 <NavButton onClick={() => handleMenuNav('/newhome?section=store')}><button>Store</button></NavButton>
                 <NavButton onClick={() => handleMenuNav('/newhome?section=contact')}><button>Contact</button></NavButton>
+                {/* Auth buttons for small screens */}
+                <div className="flex md:hidden flex-col gap-4 mt-8">
+                  {user ? (
+                    <>
+                      <button
+                        className="text-xl font-bold flex gap-2 text-white border-t border-white pt-4 items-center justify-center bg-primary"
+                        disabled
+                      >
+                        {user.user_metadata?.name?.[0]?.toUpperCase() || user.email?.[0]?.toUpperCase() || 'U'}
+                      </button>
+                      <button
+                        onClick={async () => {
+                          await signOut();
+                          setOpen(false);
+                          navigate('/newhome');
+                        }}
+                        className="text-xl font-bold flex gap-2 text-white border-t border-white pt-4 items-center justify-center bg-primary"
+                      >
+                        <LogOut /> Sign Out
+                      </button>
+                    </>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        setOpen(false);
+                        navigate('/signin');
+                      }}
+                      className="text-lg font-bold flex gap-2 text-white border-t border-white pt-4 items-center justify-center bg-primary"
+                    >
+                      SIGN IN
+                    </button>
+                  )}
+                </div>
               </div>
             </motion.div>
           </>
@@ -81,39 +114,43 @@ const Navbar = () => {
         <button onClick={() => navigate("/newhome")} className="h-full shrink-0 aspect-square mx-4">
           <img src={Logo} alt="" />
         </button>
-        <div className="mx-auto h-full text-xl tracking-tighter  text-primary font-bold flex">
+        <div className="mx-auto h-full  text-xl tracking-tighter  text-primary font-bold  hidden md:flex">
           <NavLink onClick={() => navigate('/newhome?section=wins')}><button>WINS</button></NavLink>
           <NavLink onClick={() => navigate('/newhome?section=players')}><button>PLAYERS</button></NavLink>
           <NavLink onClick={() => navigate('/shop')}><button>SHOP</button></NavLink>
           <NavLink onClick={() => navigate('/newhome?section=contact')}><button>CONTACT</button></NavLink>
           <NavLink onClick={() => navigate('/news')}><button>LATEST</button></NavLink>
         </div>
-        <div className="h-full w-fit flex">
-          {user ? (
-            <>
+        <div className="h-full w-fit flex ml-auto md:ml-0">
+          {/* Auth buttons only on md and up */}
+          <div className="hidden md:flex h-full">
+            {user ? (
+              <>
+                <button
+                  className="h-full text-xl font-bold flex gap-2 text-primary border-l-2 border-primary px-12 items-center justify-center bg-white"
+                >
+                  {user.user_metadata?.name?.[0]?.toUpperCase() || user.email?.[0]?.toUpperCase() || 'U'}
+                </button>
+                <button
+                  onClick={async () => {
+                    await signOut();
+                    navigate('/newhome');
+                  }}
+                  className="h-full text-xl font-bold flex gap-2 text-primary border-l-2 border-primary px-12 items-center justify-center bg-white"
+                >
+                  <LogOut />
+                </button>
+              </>
+            ) : (
               <button
-                className="h-full text-xl font-bold flex gap-2 text-primary border-l-2 border-primary px-12 items-center justify-center bg-white"
+                onClick={() => navigate('/signin')}
+                className="h-full text-lg font-bold flex gap-2 text-primary border-l-2 border-primary px-12 items-center justify-center bg-white"
               >
-                {user.user_metadata?.name?.[0]?.toUpperCase() || user.email?.[0]?.toUpperCase() || 'U'}
+                SIGN IN
               </button>
-              <button
-                onClick={async () => {
-                  await signOut();
-                  navigate('/newhome');
-                }}
-                className="h-full text-xl font-bold flex gap-2 text-primary border-l-2 border-primary px-12 items-center justify-center bg-white"
-              >
-                <LogOut />
-              </button>
-            </>
-          ) : (
-            <button
-              onClick={() => navigate('/signin')}
-              className="h-full text-lg font-bold flex gap-2 text-primary border-l-2 border-primary px-12 items-center justify-center bg-white"
-            >
-              SIGN IN
-            </button>
-          )}
+            )}
+          </div>
+          {/* Menu button always visible */}
           <button
             onClick={() => setOpen(true)}
             className="h-full shrink-0 aspect-square bg-primary flex items-center justify-center"

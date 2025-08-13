@@ -29,11 +29,11 @@ const News = () => {
         <div className='w-full flex justify-between mb-8' >
             <div className='text-primary font-bold text-4xl flex items-center gap-4 text-center' >Latest news <ArrowRight className='translate-y-1' size={40}></ArrowRight></div>
         </div>
-        <div className='h-[20vw] w-full grid grid-cols-3 gap-12' >
+  <div className='h-fit lg:min-h-[300px] md:min-h-[350px] w-full grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12' >
             {loading ? (
               <div className='col-span-3 flex items-center justify-center text-xl text-gray-500'>Loading...</div>
             ) : newsItems.map((item) => (
-                <Link to={`/news/${item.id}`} key={item.id} className='size-full flex flex-col gap-8 group cursor-pointer' >
+                <Link to={`/news/${item.id}`} key={item.id} className='size-full flex flex-col h-[300px] gap-8 group cursor-pointer' >
                     <div className='h-full w-full relative overflow-hidden ' >
                         <img 
                             src={item.image_url || Image} 

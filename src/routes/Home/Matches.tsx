@@ -6,7 +6,7 @@ import { format } from 'date-fns'
 
 const Match = ({ match }: { match: any }) => {
     return (
-        <div className='bg-white size-full flex flex-col justify-center items-center'>
+        <div className='bg-white h-[200px] lg:h-full size-full flex flex-col justify-center items-center'>
             <div className='font-semibold'>{format(new Date(match.match_date), 'EEE dd MMM yyyy').toUpperCase()}</div>
             <div className='grid grid-cols-3 gap-4 items-center' >
                 <div className='flex flex-col size-full gap-2 items-center justify-center' >
@@ -45,21 +45,24 @@ const Matches = () => {
   }, []);
 
   return (
-    <><div id='wins' className='h-[20vw]  w-full bg-blue-700 px-[5vw] py-12 grid grid-cols-3 gap-12'>
+  <><div id='wins' className='min-h-[300px] md:min-h-[350px] w-full bg-blue-700 px-4 sm:px-8 md:px-12 py-8 md:py-12 flex flex-col'>
       {loading ? (
-        <div className='col-span-3 flex items-center justify-center text-xl text-white'>Loading...</div>
-      ) : recentMatches.map((match) => (
-        <Match key={match.id} match={match} />
-      ))}
-      
+        <div className='flex-1 flex items-center justify-center text-xl text-white'>Loading...</div>
+      ) : (
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 flex-1'>
+          {recentMatches.map((match) => (
+            <Match key={match.id} match={match} />
+          ))}
+        </div>
+      )}
     </div>
     <button
-        onClick={() => navigate('/all-matches')}
-        className='col-span-3 mt-8 bg-primary text-white px-8 py-4 font-bold text-xl w-fit mx-auto'
-        style={{ borderRadius: 0 }}
-      >
-        View All Matches
-      </button></>
+      onClick={() => navigate('/all-matches')}
+      className='mt-8 bg-primary text-white px-8 py-4 font-bold text-xl w-fit mx-auto'
+      style={{ borderRadius: 0 }}
+    >
+      View All Matches
+    </button></>
   )
 }
 

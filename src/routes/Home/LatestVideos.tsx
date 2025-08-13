@@ -54,13 +54,13 @@ const LatestVideos = () => {
   }, [playing]);
 
   return (
-    <div className="h-fit px-[5vw] py-12 flex flex-col ">
+    <div className="h-fit px-4 sm:px-8 md:px-12 py-8 md:py-12 flex flex-col ">
       <div className="w-full flex justify-between mb-8">
-        <div className="text-primary font-bold text-4xl flex items-center gap-4 text-center">
-          Latest Videos <ArrowRight className="translate-y-1" size={40} />
+        <div className="text-primary font-bold text-2xl sm:text-3xl md:text-4xl flex items-center gap-4 text-center">
+          Latest Videos <ArrowRight className="translate-y-1" size={32} />
         </div>
       </div>
-      <div className="h-[20vw] w-full grid grid-cols-3 gap-12">
+      <div className="min-h-[300px] md:min-h-[350px] w-full grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12">
         {loading ? (
           <div className="col-span-3 flex items-center justify-center text-xl text-gray-500">
             Loading...
@@ -69,7 +69,7 @@ const LatestVideos = () => {
           videos.map((item, idx) => (
             <div
               key={item.id}
-              className="size-full flex flex-col gap-8 group cursor-pointer"
+              className="size-full h-[300px] flex flex-col gap-8 group cursor-pointer"
               onMouseEnter={() => setPlaying(idx)}
               onMouseLeave={() => setPlaying(null)}
               onClick={() => setModalVideo(item.video_url)}

@@ -8,20 +8,20 @@ const Gallery = () => {
         <div className='w-full flex justify-between mb-8' >
             <div className='text-primary font-bold text-4xl flex items-center gap-4 text-center' >Gallery <ArrowRight className='translate-y-1' size={40}></ArrowRight></div>
         </div>
-        <div className='h-[20vw] w-full grid grid-cols-3 gap-12' >
-            <div className='size-full  flex flex-col gap-8 group cursor-pointer' >
+        <div className='h-fit lg:h-[20vw] w-full flex flex-col lg:grid lg:grid-cols-3 gap-12' >
+            <div className='size-full h-[300px]  flex flex-col gap-8 group cursor-pointer' >
                 <div className='h-full w-full relative overflow-hidden ' >
                     <img src={Image} className='absolute size-full group-hover:scale-125 transition-all duration-700 ease-in-out object-cover' alt="" />
                 </div>
                 <div className='shrink-0 h-12 w-full text-xl text-primary font-medium' >Premier league tickets: West ham away.</div>
             </div>
-            <div className='size-full  flex flex-col gap-8 group cursor-pointer' >
+            <div className='size-full h-[300px] flex flex-col gap-8 group cursor-pointer' >
                 <div className='h-full w-full relative overflow-hidden ' >
                     <img src={Image} className='absolute size-full group-hover:scale-125 transition-all duration-700 ease-in-out object-cover' alt="" />
                 </div>
                 <div className='shrink-0 h-12 w-full text-xl text-primary font-medium' >Premier league tickets: West ham away.</div>
             </div>
-            <div className='size-full  flex flex-col gap-8 group cursor-pointer' >
+            <div className='size-full h-[300px] flex flex-col gap-8 group cursor-pointer' >
                 <div className='h-full w-full relative overflow-hidden ' >
                     <img src={Image} className='absolute size-full group-hover:scale-125 transition-all duration-700 ease-in-out object-cover' alt="" />
                 </div>
