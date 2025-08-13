@@ -1,115 +1,64 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { supabase } from '../lib/supabase';
-import { useCart } from '../contexts/CartContext';
-import { useAuth } from '../contexts/AuthContext';
-import toast from 'react-hot-toast';
+
+import React, { useEffect, useState } from "react";
+import { supabase } from "../lib/supabase";
+import { useNavigate } from "react-router-dom";
 
 const Shop = () => {
-  const { id } = useParams();
-  const [jersey, setJersey] = useState<any>(null);
+  const [jerseys, setJerseys] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedSize, setSelectedSize] = useState('');
-  const [selectedImage, setSelectedImage] = useState(0);
-  const { dispatch } = useCart();
-  const { user, loading: authLoading } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    setLoading(true);
-    if (!id) return;
-    supabase
-      .from('jerseys')
-      .select('*')
-      .eq('id', id)
-      .single()
-      .then(({ data, error }) => {
-        if (error || !data) {
-          setJersey(null);
-        } else {
-          setJersey(data);
-        }
-        setLoading(false);
-      });
-  }, [id]);
-
-  if (loading) return <div className="text-center py-20">Loading...</div>;
-  if (!jersey) return <div className="text-center py-20">Product not found.</div>;
-
-  const images = jersey.image_urls && jersey.image_urls.length > 0 ? jersey.image_urls : [jersey.image_url];
-  const sizes = jersey.sizes || [];
-
-  const addToCart = () => {
-    if (!user && !authLoading) {
-      navigate('/signin');
-      toast.error('Please sign in to add items to your cart');
-      return;
-    }
-    if (!selectedSize) {
-      toast.error('Please select a size');
-      return;
-    }
-    dispatch({
-      type: 'ADD_ITEM',
-      payload: {
-        id: `${jersey.id}-${selectedSize}`,
-        name: jersey.name,
-        price: jersey.price,
-        image_url: jersey.image_url,
-        size: selectedSize,
-        quantity: 1,
-      },
-    });
-    toast.success('Added to cart!');
-    navigate('/cart');
-  };
+    const fetchJerseys = async () => {
+      const { data } = await supabase.from("jerseys").select("*");
+      setJerseys(data || []);
+      setLoading(false);
+    };
+    fetchJerseys();
+  }, []);
 
   return (
-    <div className="flex flex-col md:flex-row p-8 gap-8 max-w-7xl mx-auto">
-      {/* Left: Image Thumbnails & Main */}
-      <div className="flex gap-4">
-        {/* Thumbnails */}
-        <div className="flex md:flex-col gap-2">
-          {images.map((img: string, index: number) => (
-            <img
-              key={index}
-              src={img}
-              alt={`thumb-${index}`}
-              onClick={() => setSelectedImage(index)}
-              className={`w-16 h-16 object-cover border-2 rounded cursor-pointer ${selectedImage === index ? 'border-black' : 'border-gray-300'}`}
-            />
-          ))}
-        </div>
-        {/* Main Image */}
-        <div className="w-full max-w-md">
-          <img
-            src={images[selectedImage]}
-            alt="main"
-            className="w-full rounded"
-          />
+    <div className="h-fit px-[5vw] py-12 flex flex-col">
+      <div className="w-full flex justify-between mb-8">
+        <div className="text-primary font-bold text-4xl flex items-center gap-4 text-center">
+          Official Store
         </div>
       </div>
-      {/* Right: Info Section */}
-      <div className="flex flex-col gap-4 w-full">
-        <h2 className="text-xl font-semibold">{jersey.name}</h2>
-        <p className="text-xl font-semibold text-gray-800">${jersey.price}</p>
-        <p className="text-base text-gray-600">{jersey.description}</p>
-        {/* Size Options */}
-        <div className="flex gap-2 flex-wrap">
-          {sizes.map((size: string) => (
-            <button
-              key={size}
-              onClick={() => setSelectedSize(size)}
-              className={`border px-4 py-2 rounded ${selectedSize === size ? 'bg-black text-white' : 'bg-white text-black'}`}
+      <div className="min-h-[400px] w-full grid grid-cols-1 md:grid-cols-3 gap-12">
+        {loading ? (
+          <div className="col-span-3 flex items-center justify-center text-xl text-gray-500">
+            Loading...
+          </div>
+        ) : (
+          jerseys.map((jersey) => (
+            <div
+              key={jersey.id}
+              onClick={() => navigate(`/product/${jersey.id}`)}
+              className="size-full flex flex-col gap-8 group cursor-pointer bg-white border border-gray-300 p-6 hover:bg-gray-50 transition-colors"
+              style={{ textDecoration: "none" }}
             >
-              {size}
-            </button>
-          ))}
-        </div>
-        {/* Add to Cart */}
-        <button onClick={addToCart} className="bg-black text-white py-3 rounded font-semibold hover:bg-gray-800 transition">
-          Add to Cart
-        </button>
+              <div className="h-full w-full relative overflow-hidden flex-1 mb-4">
+                <img
+                  src={
+                    jersey.image_urls && jersey.image_urls.length > 0
+                      ? jersey.image_urls[0]
+                      : jersey.image_url
+                  }
+                  className="absolute size-full group-hover:scale-110 transition-all duration-700 ease-in-out object-cover"
+                  alt={jersey.name}
+                  style={{ borderRadius: 0 }}
+                />
+              </div>
+              <div className="shrink-0 h-12 w-full text-xl text-primary font-medium">
+                {jersey.name}
+              </div>
+              <div className="text-lg text-gray-700">{jersey.category}</div>
+              <div className="text-xl font-bold text-blue-700">
+                ${jersey.price}
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

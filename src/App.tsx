@@ -75,6 +75,7 @@ function App() {
               </div>
               <Navbar></Navbar>
               <Routes>
+                <Route path="/shop" element={<Shop />} />
                 <Route path="oldadmin" element={<AdminPage></AdminPage>} ></Route>
                 <Route path="newhome" element={<NewHome />} />
                 <Route

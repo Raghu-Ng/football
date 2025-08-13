@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { User, Session, createClient } from "@supabase/supabase-js";
+import { User, Session } from "@supabase/supabase-js";
+import { supabase } from '../lib/supabase';
 
 
 interface AuthContextType {
@@ -37,12 +38,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
-  // Only use the useMemo-created client
-  const supabase = useMemo(() => {
-    const url = import.meta.env.VITE_SUPABASE_URL;
-    const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
-    return createClient(url, key);
-  }, []);
+  // Use the singleton supabase client from lib/supabase
 
   useEffect(() => {
     

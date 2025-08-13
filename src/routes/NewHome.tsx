@@ -10,6 +10,8 @@ import { supabase } from "../lib/supabase";
 import {AnimatePresence, motion} from "framer-motion"
 import { useNavigate, useSearchParams } from "react-router-dom";
 import LatestVideos from "./Home/LatestVideos";
+import About from "./Home/About";
+import Journey from "./Home/Journey";
 
 
 
@@ -178,12 +180,14 @@ const NewHome = () => {
           </div>
         </div>
       </div>
+      <About />
+      <Journey />
       <News />
       <LatestVideos />
       <Gallery />
       <Matches />
       <Merch />
-      {/* <StoreSection /> */}
+      <StoreSection />
       <Footer />
     </div>
   );

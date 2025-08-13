@@ -84,7 +84,7 @@ const Navbar = () => {
         <div className="mx-auto h-full text-xl tracking-tighter  text-primary font-bold flex">
           <NavLink onClick={() => navigate('/newhome?section=wins')}><button>WINS</button></NavLink>
           <NavLink onClick={() => navigate('/newhome?section=players')}><button>PLAYERS</button></NavLink>
-          <NavLink onClick={() => navigate('/newhome?section=store')}><button>SHOP</button></NavLink>
+          <NavLink onClick={() => navigate('/shop')}><button>SHOP</button></NavLink>
           <NavLink onClick={() => navigate('/newhome?section=contact')}><button>CONTACT</button></NavLink>
           <NavLink onClick={() => navigate('/news')}><button>LATEST</button></NavLink>
         </div>
