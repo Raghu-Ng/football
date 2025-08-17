@@ -4,11 +4,11 @@ import Image from "../../assets/images/image40.jpeg"
 
 const Gallery = () => {
   return (
-    <div className='h-fit px-[5vw] py-12 flex flex-col '>
+    <div className='h-fit px-[5vw]  py-12 flex flex-col '>
         <div className='w-full flex justify-between mb-8' >
             <div className='text-primary font-bold text-4xl flex items-center gap-4 text-center' >Gallery <ArrowRight className='translate-y-1' size={40}></ArrowRight></div>
         </div>
-        <div className='h-fit lg:h-[20vw] w-full flex flex-col lg:grid lg:grid-cols-3 gap-12' >
+        <div className='h-fit lg:h-[30vw] w-full flex flex-col lg:grid lg:grid-cols-3 gap-12' >
             <div className='size-full h-[300px]  flex flex-col gap-8 group cursor-pointer' >
                 <div className='h-full w-full relative overflow-hidden ' >
                     <img src={Image} className='absolute size-full group-hover:scale-125 transition-all duration-700 ease-in-out object-cover' alt="" />

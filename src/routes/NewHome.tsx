@@ -127,7 +127,7 @@ const NewHome = () => {
 
   return (
     <div className="min-h-screen h-fit flex flex-col">
-      <div className="h-[60vh] sm:h-[400px] md:h-[520px] w-full bg-primary relative overflow-hidden">
+      <div className="h-[60vh] sm:h-[400px] md:h-[700px] w-full bg-primary relative overflow-hidden">
         {/* Background image for the current card */}
         <AnimatePresence>
           <motion.img
