@@ -110,7 +110,7 @@ const Navbar = () => {
           </>
         )}
       </AnimatePresence>
-      <div className="flex w-full h-[12vh] top-0  z-50 bg-white items-center">
+      <div className="flex overflow-hidden w-full h-[12vh] top-0  z-50 bg-white items-center">
         <button onClick={() => navigate("/newhome")} className="h-full shrink-0 aspect-square mx-4">
           <img src={Logo} alt="" />
         </button>
@@ -121,9 +121,9 @@ const Navbar = () => {
           <NavLink onClick={() => navigate('/newhome?section=contact')}><button>CONTACT</button></NavLink>
           <NavLink onClick={() => navigate('/news')}><button>LATEST</button></NavLink>
         </div>
-        <div className="h-full w-fit flex ml-auto md:ml-0">
+        <div className="h-full shrink-0 overflow-hidden w-fit flex ml-auto md:ml-0">
           {/* Auth buttons only on md and up */}
-          <div className="hidden md:flex h-full">
+          <div className="hidden md:flex h-full w-fit whitespace-nowrap">
             {user ? (
               <>
                 <button
@@ -153,7 +153,7 @@ const Navbar = () => {
           {/* Menu button always visible */}
           <button
             onClick={() => setOpen(true)}
-            className="h-full shrink-0 aspect-square bg-primary flex items-center justify-center"
+            className="h-full aspect-square shrink-0  bg-primary flex items-center justify-center"
           >
             <Menu color="white"></Menu>
           </button>

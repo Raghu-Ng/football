@@ -19,7 +19,7 @@ const About = () => {
         <>
           <button
             onClick={() => setShowMore(true)}
-            className="bg-primary hover:bg-primary/90 font-bold text-white flex items-center justify-center p-4 mt-4"
+            className=" hover:bg-zinc-200 font-bold text-black flex items-center justify-center p-4 mt-4"
           >
             SHOW MORE
           </button>
@@ -68,7 +68,7 @@ const About = () => {
           </div>
           <button
             onClick={() => setShowMore(false)}
-            className="bg-primary hover:bg-primary/90 font-bold text-white flex items-center justify-center p-4 mt-4"
+            className="hover:bg-zinc-200 font-bold text-black flex items-center justify-center p-4 mt-4"
           >
             SHOW LESS
           </button>
