@@ -71,7 +71,7 @@ function App() {
             <ScrollHandler />
             <div className="min-h-screen flex flex-col  w-full  transition-colors duration-300">
               <div className="floating-elements fixed inset-0 pointer-events-none z-10">
-                <FloatingElements />
+                {/* <FloatingElements /> */}
               </div>
               <Navbar></Navbar>
               <Routes>

@@ -56,7 +56,7 @@ const Matches = () => {
     <>
       <div
         id="wins"
-        className="min-h-[300px] relative md:min-h-[350px] w-full bg-blue-700 px-4 sm:px-8 md:px-12 py-8 md:py-12 flex flex-col"
+        className="min-h-[300px] relative md:h-[350px] w-full bg-blue-700 px-4 sm:px-8 md:px-12 py-8 md:py-12 flex flex-col"
       >
         {loading ? (
           <div className="flex-1 flex items-center justify-center text-xl text-white">
@@ -77,7 +77,7 @@ const Matches = () => {
               {recentMatches.map((match) => (
                 <Match key={match.id} match={match} />
               ))}
-            </div></> : <div className="size-full h-[200px] text-xl flex items-center justify-center text-white font-bold">COMING SOON</div>}
+            </div></> : <div className="size-full h-full min-h-[200px] text-3xl flex items-center justify-center text-white font-bold">COMING SOON</div>}
           </>
         )}
       </div>

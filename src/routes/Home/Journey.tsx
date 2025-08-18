@@ -44,7 +44,7 @@ const Journey = () => {
       </div>
       <div className="mt-8 font-medium text-xl text-black">As we embark on our first season in the top-tier Karnataka Women’s League, United FC Kodagu remains dedicated to our foundational principles. We invite you to join us as we continue to champion women in football, inspire the next generation, and strive for excellence on every pitch.
 </div>
-<div className="w-full sm:grid  flex flex-col sm:grid-cols-2 h-[500px] gap-4 mt-12" >
+<div className="w-full sm:grid  flex flex-col sm:grid-cols-2 h-[300px] gap-4 mt-12" >
     <div className="size-full overflow-hidden relative flex items-center justify-center group" >
         <img className="absolute size-full object-cover group-hover:scale-125 transition-all duration-700" src={Image1} alt="" />
     </div>

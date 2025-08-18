@@ -67,7 +67,7 @@ const Navbar = () => {
               <div className="w-[80vw] h-fit text-white text-3xl tracking-tighter flex flex-col gap-6">
                 <NavButton onClick={() => handleMenuNav('/newhome')}><button>Home</button></NavButton>
                 <NavButton onClick={() => handleMenuNav('/newhome?section=about')}><button>About</button></NavButton>
-                <NavButton onClick={() => handleMenuNav('/newhome?section=players')}><button>Players</button></NavButton>
+                {/* <NavButton onClick={() => handleMenuNav('/newhome?section=players')}><button>Players</button></NavButton> */}
                 <NavButton onClick={() => handleMenuNav('/news')}><button>News</button></NavButton>
                 <NavButton onClick={() => handleMenuNav('/newhome?section=gallery')}><button>Gallery</button></NavButton>
                 <NavButton onClick={() => handleMenuNav('/newhome?section=store')}><button>Store</button></NavButton>
@@ -116,7 +116,7 @@ const Navbar = () => {
         </button>
         <div className="mx-auto h-full  text-xl tracking-tighter  text-primary font-bold  hidden md:flex">
           <NavLink onClick={() => navigate('/newhome?section=wins')}><button>WINS</button></NavLink>
-          <NavLink onClick={() => navigate('/newhome?section=players')}><button>PLAYERS</button></NavLink>
+          {/* <NavLink onClick={() => navigate('/newhome?section=players')}><button>PLAYERS</button></NavLink> */}
           <NavLink onClick={() => navigate('/shop')}><button>SHOP</button></NavLink>
           <NavLink onClick={() => navigate('/newhome?section=contact')}><button>CONTACT</button></NavLink>
           <NavLink onClick={() => navigate('/news')}><button>LATEST</button></NavLink>

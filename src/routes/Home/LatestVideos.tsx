@@ -60,7 +60,7 @@ const LatestVideos = () => {
           Latest Videos <ArrowRight className="translate-y-1" size={32} />
         </div>
       </div>
-      <div className="min-h-[300px] md:min-h-[350px] w-full grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12">
+      <div className="h-fit lg:min-h-[300px] md:min-h-[400px] w-full grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12">
         {loading ? (
           <div className="col-span-3 flex items-center justify-center text-xl text-gray-500">
             Loading...
@@ -69,12 +69,12 @@ const LatestVideos = () => {
           videos.map((item, idx) => (
             <div
               key={item.id}
-              className="size-full h-[300px] flex flex-col gap-8 group cursor-pointer"
+              className="size-full flex flex-col h-fit gap-0 group cursor-pointer"
               onMouseEnter={() => setPlaying(idx)}
               onMouseLeave={() => setPlaying(null)}
               onClick={() => setModalVideo(item.video_url)}
             >
-              <div className="h-full w-full relative overflow-hidden">
+              <div className="h-[240px] w-full relative overflow-hidden shrink-0 ">
                 <video
                   ref={(el) => (videoRefs.current[idx] = el)}
                   src={item.video_url}
@@ -87,20 +87,22 @@ const LatestVideos = () => {
                   style={{ pointerEvents: "none" }}
                 />
                 <AnimatePresence>
-                  
-                    <motion.div
-                        initial={{ scale: 0.95, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                      exit={{ scale: 0.95, opacity: 0 }}
-                      className="absolute left-0 bottom-0 px-4 py-2 bg-primary flex items-center justify-center text-white text-2xl font-bold m-4"
-                    >
-                      <Play fill="white"></Play>
-                    </motion.div>
-                  
+                  <motion.div
+                    initial={{ scale: 0.95, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.95, opacity: 0 }}
+                    className="absolute left-0 bottom-0 px-4 py-2 bg-primary flex items-center justify-center text-white text-2xl font-bold m-4"
+                  >
+                    <Play fill="white"></Play>
+                  </motion.div>
                 </AnimatePresence>
               </div>
-              <div className="shrink-0 h-12 w-full text-xl text-primary font-medium">
+              <div className="shrink-0 mt-4  w-full text-xl text-primary font-medium">
                 {item.title}
+              </div>
+              <div className="w-full h-[2px] mt-12 bg-zinc-300  mb-4"></div>
+              <div className="text-sm font-medium  text-primary flex justify-between w-full">
+                <div>VIDEO</div>
               </div>
             </div>
           ))

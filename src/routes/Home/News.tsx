@@ -42,7 +42,7 @@ const News = () => {
             <Link
               to={`/news/${item.id}`}
               key={item.id}
-              className="size-full flex flex-col h-fit gap-4 group cursor-pointer"
+              className="size-full flex flex-col h-fit gap-0 group cursor-pointer"
             >
               <div className="h-[240px] w-full relative overflow-hidden shrink-0 ">
                 <img
@@ -51,14 +51,23 @@ const News = () => {
                   alt={item.title}
                 />
               </div>
-              <div className="shrink-0 h-12 w-full text-xl text-primary font-medium">
+              <div className="shrink-0 mt-4  w-full text-xl text-primary font-medium">
                 {item.title}
               </div>
-              <div className="shrink-0 h-12 w-full text-xl text-primary font-medium">
-                {item.title}
+              <div className="shrink-0 mb-12 w-full text-lg text-zinc-800  font-medium overflow-hidden overflow-ellipsis whitespace-nowrap ">
+                {item.content.slice(0, 100)}
               </div>
-              <div className="w-full h-1 bg-zinc-300 mt-0"></div>
-              <div className="text-sm">NEWS</div>
+              <div className="w-full h-[2px] bg-zinc-300 mt-0 mb-4"></div>
+              <div className="text-sm font-medium  text-primary flex justify-between w-full">
+                NEWS{" "}
+                <span className="font-bold text-zinc-600">
+                  {new Date(item.date_posted).toLocaleDateString("en-US", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
+                </span>
+              </div>
               {item.venue && (
                 <div className="text-base text-gray-500">
                   Venue: {item.venue}
