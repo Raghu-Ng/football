@@ -48,6 +48,7 @@ const Admin = () => {
     kickoff_time: '',
     venue: '',
     image_url: '',
+    match_center: '',
     opponentLogoFile: null as File | null,
   });
 
@@ -168,6 +169,7 @@ const Admin = () => {
           competition: newMatchModal.competition,
           result: newMatchModal.result,
           image_url: matchImageUrl,
+          match_center: newMatchModal.match_center,
         },
       ]);
       fetchAllMatches();
@@ -185,7 +187,7 @@ const Admin = () => {
       fetchUpcomingMatches();
     }
     setShowMatchModal(false);
-    setNewMatchModal({ opponent: '', score: '', match_date: '', competition: '', result: '', kickoff_time: '', venue: '', image_url: '', opponentLogoFile: null });
+    setNewMatchModal({ opponent: '', score: '', match_date: '', competition: '', result: '', kickoff_time: '', venue: '', image_url: '', match_center: '', opponentLogoFile: null });
   };
 
   // News CRUD
@@ -515,6 +517,7 @@ const Admin = () => {
               <>
                 <input type="text" placeholder="Score (e.g. 2-1)" className="w-full mb-3 p-2 border border-primary text-gray-900 bg-white" value={newMatchModal.score} onChange={e => setNewMatchModal({ ...newMatchModal, score: e.target.value })} />
                 <input type="text" placeholder="Result (win/loss/draw)" className="w-full mb-3 p-2 border border-primary text-gray-900 bg-white" value={newMatchModal.result} onChange={e => setNewMatchModal({ ...newMatchModal, result: e.target.value })} />
+                <input type="url" placeholder="Match Center Link" className="w-full mb-3 p-2 border border-primary text-gray-900 bg-white" value={newMatchModal.match_center} onChange={e => setNewMatchModal({ ...newMatchModal, match_center: e.target.value })} />
               </>
             ) : (
               <>
@@ -524,7 +527,7 @@ const Admin = () => {
             )}
             <div className="flex gap-2 mt-4">
               <button onClick={handleAddMatchModal} className="bg-primary text-white px-4 py-2 font-semibold flex-1 border-none">Add</button>
-              <button onClick={() => { setShowMatchModal(false); setNewMatchModal({ opponent: '', score: '', match_date: '', competition: '', result: '', kickoff_time: '', venue: '', image_url: '', opponentLogoFile: null }); }} className="bg-white text-primary px-4 py-2 font-semibold flex-1 border border-primary">Cancel</button>
+              <button onClick={() => { setShowMatchModal(false); setNewMatchModal({ opponent: '', score: '', match_date: '', competition: '', result: '', kickoff_time: '', venue: '', image_url: '', match_center: '', opponentLogoFile: null }); }} className="bg-white text-primary px-4 py-2 font-semibold flex-1 border border-primary">Cancel</button>
             </div>
           </div>
         </div>

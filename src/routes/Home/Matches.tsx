@@ -29,7 +29,7 @@ const Match = ({ match }: { match: any }) => {
         </div>
       </div>
       <div>{match.venue}</div>
-      <button className="bg-primary  text-white text-sm font-bold text-center p-4 w-full mt-12">MATCH CENTER</button>
+      <a href={match.match_center} className="bg-primary  text-white text-sm font-bold text-center p-4 w-full mt-12">MATCH CENTER</a>
     </div>
   );
 };
