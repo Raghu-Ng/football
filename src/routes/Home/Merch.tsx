@@ -7,7 +7,7 @@ const Merch = () => {
   const navigate = useNavigate()
   return (
     <>
-      <div  className="mt-28 w-full  h-fit min-h-[60vh]  relative">
+      <div  className=" w-full  h-fit min-h-[60vh]  relative">
         <div className="w-full px-[5vw] py-12 bg-gradient-to-r bg-primary h-full  flex md:hidden flex-wrap flex-col z-20 overflow-hidden">
           <div className="w-full flex flex-col h-full">
             <div className="text-4xl text-white font-bold">

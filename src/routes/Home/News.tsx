@@ -68,11 +68,7 @@ const News = () => {
                   })}
                 </span>
               </div>
-              {item.venue && (
-                <div className="text-base text-gray-500">
-                  Venue: {item.venue}
-                </div>
-              )}
+             
             </Link>
           ))
         )}

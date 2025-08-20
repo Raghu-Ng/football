@@ -34,6 +34,7 @@ import Navbar from "./components/layout/Navbar";
 import Navigation from "./components/Navigation";
 import Shop from "./routes/Shop";
 import AdminPage from "./components/AdminPage";
+import Videos from "./routes/Videos";
 
 function App() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -80,7 +81,7 @@ function App() {
                 <Route path="oldadmin" element={<AdminPage></AdminPage>} ></Route>
                 <Route path="/home" element={<NewHome />} />
                 <Route path="/" element={<NewHome />} />
-                
+                <Route  path="/videos" element={<Videos />}/>
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/product/:id" element={<Product />} />
                 <Route path="/admin" element={<Admin />} />
