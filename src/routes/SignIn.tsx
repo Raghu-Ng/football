@@ -28,7 +28,7 @@ const SignIn = () => {
       } else {
         await signIn(email, password);
       }
-      navigate('/newhome');
+      navigate('/home');
     } catch (err: any) {
       setError(err.message || `Unexpected error during ${isSignUp ? 'sign up' : 'sign in'}`);
     } finally {
