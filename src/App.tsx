@@ -77,33 +77,8 @@ function App() {
               <Routes>
                 <Route path="/shop" element={<Shop />} />
                 <Route path="oldadmin" element={<AdminPage></AdminPage>} ></Route>
-                <Route path="newhome" element={<NewHome />} />
-                <Route
-                  path="/"
-                  element={
-                    <main className="relative flex flex-col flex-1">
-                      <Navigation />
-                      <div className="hero-background">
-                        <Hero />
-                      </div>
-                      <div className="section-background">
-                        <About />
-                      </div>
-                      <div className="section-background">
-                        <News />
-                      </div>
-                      <div className="section-background">
-                        <Gallery />
-                      </div>
-                      <div className="section-background">
-                        <Store />
-                      </div>
-                      <div className="section-background">
-                        <Contact />
-                      </div>
-                    </main>
-                  }
-                />
+                <Route path="/home" element={<NewHome />} />
+                
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/product/:id" element={<Product />} />
                 <Route path="/admin" element={<Admin />} />

@@ -111,15 +111,15 @@ const Navbar = () => {
         )}
       </AnimatePresence>
       <div className="flex overflow-hidden w-full h-[12vh] top-0  z-50 bg-white items-center">
-        <button onClick={() => navigate("/newhome")} className="h-full shrink-0 aspect-square mx-4">
+        <button onClick={() => navigate("/")} className="h-full shrink-0 aspect-square mx-4">
           <img src={Logo} alt="" />
         </button>
         <div className="mx-auto h-full  text-xl tracking-tighter  text-primary font-bold  hidden md:flex">
-          <NavLink onClick={() => navigate('/newhome?section=wins')}><button>WINS</button></NavLink>
+          <NavLink onClick={() => navigate('/home?section=wins')}><button>WINS</button></NavLink>
           {/* <NavLink onClick={() => navigate('/newhome?section=players')}><button>PLAYERS</button></NavLink> */}
           <NavLink onClick={() => navigate('/shop')}><button>SHOP</button></NavLink>
-          <NavLink onClick={() => navigate('/newhome?section=contact')}><button>CONTACT</button></NavLink>
-          <NavLink onClick={() => navigate('/news')}><button>LATEST</button></NavLink>
+          <NavLink onClick={() => navigate('/home?section=contact')}><button>CONTACT</button></NavLink>
+          <NavLink onClick={() => navigate('/home?section=latest')}><button>LATEST</button></NavLink>
         </div>
         <div className="h-full shrink-0 overflow-hidden w-fit flex ml-auto md:ml-0">
           {/* Auth buttons only on md and up */}
@@ -134,7 +134,7 @@ const Navbar = () => {
                 <button
                   onClick={async () => {
                     await signOut();
-                    navigate('/newhome');
+                    navigate('/home');
                   }}
                   className="h-full text-xl font-bold flex gap-2 text-primary border-l-2 border-primary px-12 items-center justify-center bg-white"
                 >

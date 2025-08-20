@@ -25,7 +25,7 @@ const News = () => {
   }, []);
 
   return (
-    <div className="h-fit px-[5vw] py-12 flex flex-col ">
+    <div id="latest" className="h-fit px-[5vw] py-12 flex flex-col ">
       <div className="w-full flex justify-between mb-8">
         <div className="text-primary font-bold text-4xl flex items-center gap-4 text-center">
           Latest news{" "}

@@ -30,12 +30,9 @@ const NewsArticle = () => {
       {article.image_url && (
         <img src={article.image_url} alt={article.title} className="w-full h-64 object-cover mb-8" style={{ borderRadius: 0 }} />
       )}
-      <div className="prose max-w-none text-lg text-gray-800 mb-6" style={{ fontSize: '1.2rem', lineHeight: '1.7' }}>
+      <div className="prose whitespace-pre-line max-w-none text-lg text-black font-medium mb-6" style={{ fontSize: '1.2rem', lineHeight: '1.7' }}>
         {article.content}
       </div>
-      {(article.team1 || article.team2) && (
-        <div className="text-base text-gray-700 mb-1">{article.team1}{article.team1 && article.team2 && ' vs '}{article.team2}</div>
-      )}
       {article.venue && (
         <div className="text-base text-gray-500">Venue: {article.venue}</div>
       )}
