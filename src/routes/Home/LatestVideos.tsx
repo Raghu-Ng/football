@@ -8,20 +8,20 @@ const dummyVideos = [
   {
     id: 1,
     title: "Match Highlights: United FC vs Rivals",
-    youtube_url: "https://www.youtube.com/watch?v=V-_O7nl0Ii0",
-    thumbnail: "https://img.youtube.com/vi/V-_O7nl0Ii0/hqdefault.jpg"
+    youtube_url: "https://www.youtube.com/watch?v=BXjexUz3-AI",
+    thumbnail: "https://img.youtube.com/vi/BXjexUz3-AI/hqdefault.jpg"
   },
   {
     id: 2,
     title: "Training Day: Behind the Scenes",
-    youtube_url: "https://www.youtube.com/watch?v=V-_O7nl0Ii0",
-    thumbnail: "https://img.youtube.com/vi/V-_O7nl0Ii0/hqdefault.jpg"
+    youtube_url: "https://www.youtube.com/watch?v=BXjexUz3-AI",
+    thumbnail: "https://img.youtube.com/vi/BXjexUz3-AI/hqdefault.jpg"
   },
   {
     id: 3,
     title: "Fan Reactions: Post-Match",
-    youtube_url: "https://www.youtube.com/watch?v=V-_O7nl0Ii0",
-    thumbnail: "https://img.youtube.com/vi/V-_O7nl0Ii0/hqdefault.jpg"
+    youtube_url: "https://www.youtube.com/watch?v=BXjexUz3-AI",
+    thumbnail: "https://img.youtube.com/vi/BXjexUz3-AI/hqdefault.jpg"
   }
 ];
 

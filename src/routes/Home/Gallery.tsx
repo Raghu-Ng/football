@@ -1,44 +1,72 @@
+// Import training images
+import t1 from "../../assets/images/training/DSC03519.png";
+import t2 from "../../assets/images/training/DSC03521.png";
+import t3 from "../../assets/images/training/DSC03541.png";
+import t4 from "../../assets/images/training/DSC03545.png";
+import t5 from "../../assets/images/training/DSC03574.png";
+import t6 from "../../assets/images/training/DSC03582.png";
+import t7 from "../../assets/images/training/DSC03603.png";
+import t8 from "../../assets/images/training/DSC03610.png";
+import t9 from "../../assets/images/training/DSC03638.png";
+import t10 from "../../assets/images/training/DSC03649.png";
+import t11 from "../../assets/images/training/DSC03651.png";
+import t12 from "../../assets/images/training/DSC03673.png";
+import t13 from "../../assets/images/training/DSC03693.png";
+import t14 from "../../assets/images/training/DSC03788.png";
 import { ArrowRight, X } from "lucide-react";
 import React, { useState } from "react";
-import img17 from "../../assets/images/image17.png";
-import img18 from "../../assets/images/image18.png";
-import img19 from "../../assets/images/image19.jpeg";
-import img20 from "../../assets/images/image20.jpeg";
-import img21 from "../../assets/images/image21.jpeg";
+
+// Import match images
+import match1 from "../../assets/images/matches/1.jpg";
+import match2 from "../../assets/images/matches/2.jpg";
+import match2_2 from "../../assets/images/matches/2_2.jpg";
+import match3 from "../../assets/images/matches/3.jpg";
+import match4 from "../../assets/images/matches/4.jpg";
+import match5 from "../../assets/images/matches/5.jpg";
+import match5_2 from "../../assets/images/matches/5_2.jpg";
+import match5_3 from "../../assets/images/matches/5_3.jpg";
+import match8 from "../../assets/images/matches/8.jpg";
+import match9 from "../../assets/images/matches/9.jpg";
+import match10 from "../../assets/images/matches/10.jpg";
+import match10_2 from "../../assets/images/matches/10_2.jpg";
+import match11 from "../../assets/images/matches/11.jpg";
+import match13 from "../../assets/images/matches/13.jpg";
+import match13_2 from "../../assets/images/matches/13_2.jpg";
+
+
+
+const matchImages = [
+  match1, match2, match2_2, match3, match4, match5, match5_2, match5_3, match8, match9, match10, match10_2, match11, match13, match13_2
+];
+
+// For now, keep the other two gallery items random as before
+
 import img22 from "../../assets/images/image22.jpeg";
-import img23 from "../../assets/images/image23.jpeg";
-import img24 from "../../assets/images/image24.jpeg";
-import img39 from "../../assets/images/image39.jpeg";
-import img40 from "../../assets/images/image40.jpeg";
+
 import img41 from "../../assets/images/image41.jpeg";
+import imgHero from "../../assets/images/hero_team.jpeg"
 
-const allImages = [img17, img18, img19, img20, img21, img22, img23, img24, img39, img40, img41];
 
-function getRandomImages(count: number) {
-  // Shuffle a copy of the array
-  const arr = [...allImages].sort(() => Math.random() - 0.5);
-  return arr.slice(0, count);
-}
+
+
+
+const trainingImages = [
+  t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14
+];
 
 const GALLERY_ITEMS = [
+  {
+    title: "Match day",
+    thumbnail: matchImages[0],
+    subimages: matchImages,
+  },
+  {
+    title: "Training Day",
+    thumbnail: trainingImages[0],
+    subimages: trainingImages,
+  },
   (() => {
-    const imgs = getRandomImages(4);
-    return {
-      title: "Match day",
-      thumbnail: imgs[0],
-      subimages: imgs,
-    };
-  })(),
-  (() => {
-    const imgs = getRandomImages(4);
-    return {
-      title: "Training Day",
-      thumbnail: imgs[0],
-      subimages: imgs,
-    };
-  })(),
-  (() => {
-    const imgs = getRandomImages(4);
+    const imgs = [ imgHero,img41,img22];
     return {
       title: "Team",
       thumbnail: imgs[0],
