@@ -10,6 +10,7 @@
 
 /* Enhanced theme transition for smooth switching */
 * {
+  scrollbar-width: auto;
   font-family: "Inter", sans-serif !important;
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -620,19 +621,16 @@ html,#root,body{
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, var(--accent-primary), var(--accent-secondary));
-  border-radius: 4px;
+  background: #001489;
+  border-radius: 0px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, var(--accent-secondary), var(--accent-primary));
+  background: #1632d3
 }
 
 /* Cream theme text selection */
-::selection {
-  background: rgba(249, 115, 22, 0.3);
-  color: var(--text-primary);
-}
+
 
 /* Enhanced button styles for cream theme */
 .btn-cream-primary {
