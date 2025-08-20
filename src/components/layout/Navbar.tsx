@@ -65,13 +65,13 @@ const Navbar = () => {
               </button>
 
               <div className="w-[80vw] h-fit text-white text-3xl tracking-tighter flex flex-col gap-6">
-                <NavButton onClick={() => handleMenuNav('/newhome')}><button>Home</button></NavButton>
-                <NavButton onClick={() => handleMenuNav('/newhome?section=about')}><button>About</button></NavButton>
+                <NavButton onClick={() => handleMenuNav('/home')}><button>Home</button></NavButton>
+                <NavButton onClick={() => handleMenuNav('/home?section=about')}><button>About</button></NavButton>
                 {/* <NavButton onClick={() => handleMenuNav('/newhome?section=players')}><button>Players</button></NavButton> */}
-                <NavButton onClick={() => handleMenuNav('/news')}><button>News</button></NavButton>
-                <NavButton onClick={() => handleMenuNav('/newhome?section=gallery')}><button>Gallery</button></NavButton>
-                <NavButton onClick={() => handleMenuNav('/newhome?section=store')}><button>Store</button></NavButton>
-                <NavButton onClick={() => handleMenuNav('/newhome?section=contact')}><button>Contact</button></NavButton>
+                <NavButton onClick={() => handleMenuNav('/news?section=latest')}><button>News</button></NavButton>
+                <NavButton onClick={() => handleMenuNav('/home?section=gallery')}><button>Gallery</button></NavButton>
+                <NavButton onClick={() => handleMenuNav('/shop')}><button>Store</button></NavButton>
+                <NavButton onClick={() => handleMenuNav('/home?section=contact')}><button>Contact</button></NavButton>
                 {/* Auth buttons for small screens */}
                 <div className="flex md:hidden flex-col gap-4 mt-8">
                   {user ? (
@@ -86,7 +86,7 @@ const Navbar = () => {
                         onClick={async () => {
                           await signOut();
                           setOpen(false);
-                          navigate('/newhome');
+                          navigate('/home');
                         }}
                         className="text-xl font-bold flex gap-2 text-white border-t border-white pt-4 items-center justify-center bg-primary"
                       >
@@ -111,7 +111,7 @@ const Navbar = () => {
         )}
       </AnimatePresence>
       <div className="flex overflow-hidden w-full h-[12vh] top-0  z-50 bg-white items-center">
-        <button onClick={() => navigate("/")} className="h-full shrink-0 aspect-square mx-4">
+        <button onClick={() => navigate("/home")} className="h-full shrink-0 aspect-square mx-4">
           <img src={Logo} alt="" />
         </button>
         <div className="mx-auto h-full  text-xl tracking-tighter  text-primary font-bold  hidden md:flex">

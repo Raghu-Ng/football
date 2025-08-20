@@ -75,9 +75,11 @@ function App() {
               </div>
               <Navbar></Navbar>
               <Routes>
+                
                 <Route path="/shop" element={<Shop />} />
                 <Route path="oldadmin" element={<AdminPage></AdminPage>} ></Route>
                 <Route path="/home" element={<NewHome />} />
+                <Route path="/" element={<NewHome />} />
                 
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/product/:id" element={<Product />} />

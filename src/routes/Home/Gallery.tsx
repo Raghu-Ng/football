@@ -24,7 +24,7 @@ const GALLERY_ITEMS = [
   (() => {
     const imgs = getRandomImages(4);
     return {
-      title: "Premier League: West Ham Away",
+      title: "Match day",
       thumbnail: imgs[0],
       subimages: imgs,
     };
@@ -32,7 +32,7 @@ const GALLERY_ITEMS = [
   (() => {
     const imgs = getRandomImages(4);
     return {
-      title: "Training Day Highlights",
+      title: "Training Day",
       thumbnail: imgs[0],
       subimages: imgs,
     };
@@ -40,7 +40,7 @@ const GALLERY_ITEMS = [
   (() => {
     const imgs = getRandomImages(4);
     return {
-      title: "Matchday Moments",
+      title: "Team",
       thumbnail: imgs[0],
       subimages: imgs,
     };

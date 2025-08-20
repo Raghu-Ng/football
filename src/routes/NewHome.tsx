@@ -157,7 +157,7 @@ const NewHome = () => {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 key={cards[current].image + "-bg-test"}
                 src={newsItems[current].image_url}
-                className="absolute inset-0 w-full h-full object-cover  z-10 brightness-75"
+                className="absolute inset-0 w-full h-full object-cover  z-10 brightness-50"
                 alt=""
                 // style={{ transitionProperty: "opacity" }}
               />
@@ -168,9 +168,9 @@ const NewHome = () => {
                 <div className="w-full sm:w-2/3 text-2xl sm:text-4xl md:text-5xl">
                   {newsItems[current].title}
                 </div>
-                <div className="w-full sm:w-2/3 text-lg sm:text-2xl md:text-4xl">
+                {/* <div className="w-full sm:w-2/3 text-lg sm:text-2xl md:text-4xl">
                   {newsItems[current].content.slice(0, 100)}...
-                </div>
+                </div> */}
               </div>
 
               <div className="w-full h-fit flex-col sm:grid sm:grid-cols-3 bg-zinc-300 text-xs sm:text-sm hidden sm:flex text-primary relative overflow-x-auto">
