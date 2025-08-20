@@ -57,7 +57,7 @@ const Matches = () => {
   return (
     <>
       <div
-        id="wins"
+        id="matches"
         className="min-h-[300px] relative md:h-[400px] w-full bg-blue-700 px-4 sm:px-8 md:px-12 py-8 md:py-12 flex flex-col"
       >
         <div className="absolute top-0 left-0 size-full overflow-hidden bg-white z-0">

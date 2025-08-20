@@ -115,11 +115,12 @@ const Navbar = () => {
           <img src={Logo} alt="" />
         </button>
         <div className="mx-auto h-full  text-xl tracking-tighter  text-primary font-bold  hidden md:flex">
-          <NavLink onClick={() => navigate('/home?section=wins')}><button>WINS</button></NavLink>
+           <NavLink onClick={() => navigate('/home?section=latest')}><button>LATEST</button></NavLink>
+          <NavLink onClick={() => navigate('/home?section=matches')}><button>MATCHES</button></NavLink>
           {/* <NavLink onClick={() => navigate('/newhome?section=players')}><button>PLAYERS</button></NavLink> */}
           <NavLink onClick={() => navigate('/shop')}><button>SHOP</button></NavLink>
           <NavLink onClick={() => navigate('/home?section=contact')}><button>CONTACT</button></NavLink>
-          <NavLink onClick={() => navigate('/home?section=latest')}><button>LATEST</button></NavLink>
+         
         </div>
         <div className="h-full shrink-0 overflow-hidden w-fit flex ml-auto md:ml-0">
           {/* Auth buttons only on md and up */}
