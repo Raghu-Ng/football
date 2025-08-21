@@ -100,6 +100,26 @@ const Admin = () => {
     }
   }, [isAuthenticated]);
 
+  const handleDeleteMatch = async (id: number, type: 'all' | 'upcoming') => {
+    if (type === 'all') {
+      await supabase.from('matches').delete().eq('id', id);
+      fetchAllMatches();
+    } else {
+      await supabase.from('upcoming_matches').delete().eq('id', id);
+      fetchUpcomingMatches();
+    }
+  };
+
+  const handleDeleteTransaction = async (id: number) => {
+    await supabase.from('transactions').delete().eq('id', id);
+    fetchTransactions();
+  };
+
+  const handleDeleteNews = async (id: number) => {
+    await supabase.from('news').delete().eq('id', id);
+    fetchNewsList();
+  };
+
   // Auth handler
   const handleAdminLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -365,6 +385,7 @@ const Admin = () => {
                 <th className="py-3 px-2">Date</th>
                 <th className="py-3 px-2">Competition</th>
                 <th className="py-3 px-2">Result</th>
+                <th className="py-3 px-2">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -376,6 +397,9 @@ const Admin = () => {
                   <td className="py-2 px-2">{match.match_date}</td>
                   <td className="py-2 px-2">{match.competition}</td>
                   <td className="py-2 px-2">{match.result || '-'}</td>
+                  <td className="py-2 px-2">
+                    <button onClick={() => handleDeleteMatch(match.id, 'all')} className="text-primary font-bold mr-2 border-none bg-white hover:text-red-600">Delete</button>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -403,6 +427,7 @@ const Admin = () => {
                 <th className="py-3 px-2">Kickoff</th>
                 <th className="py-3 px-2">Competition</th>
                 <th className="py-3 px-2">Venue</th>
+                <th className="py-3 px-2">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -414,6 +439,9 @@ const Admin = () => {
                   <td className="py-2 px-2">{match.kickoff_time}</td>
                   <td className="py-2 px-2">{match.competition}</td>
                   <td className="py-2 px-2">{match.venue}</td>
+                  <td className="py-2 px-2">
+                    <button onClick={() => handleDeleteMatch(match.id, 'upcoming')} className="text-primary font-bold mr-2 border-none bg-white hover:text-red-600">Delete</button>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -432,6 +460,7 @@ const Admin = () => {
                 <th className="py-3 px-2">Amount</th>
                 <th className="py-3 px-2">Status</th>
                 <th className="py-3 px-2">Created At</th>
+                <th className="py-3 px-2">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -442,6 +471,9 @@ const Admin = () => {
                   <td className="py-2 px-2">₹{tx.amount}</td>
                   <td className="py-2 px-2">{tx.status}</td>
                   <td className="py-2 px-2">{tx.created_at ? new Date(tx.created_at).toLocaleString() : ''}</td>
+                  <td className="py-2 px-2">
+                    <button onClick={() => handleDeleteTransaction(tx.id)} className="text-primary font-bold mr-2 border-none bg-white hover:text-red-600">Delete</button>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -485,11 +517,13 @@ const Admin = () => {
               {newsTab.newsList.map((n) => (
                 <li key={n.id} className="bg-white border border-primary p-3 flex items-center gap-4">
                   {n.image_url && <img src={n.image_url} alt={n.title} className="w-16 h-16 object-cover" />}
-                  <div>
+                  <div className="flex-1">
                     <div className="font-semibold text-primary">{n.title}</div>
                     <div className="text-sm text-primary line-clamp-2">{n.content}</div>
                     <div className="text-xs text-primary">{n.date_posted ? new Date(n.date_posted).toLocaleString() : ''}</div>
                   </div>
+                  {/* <div>test</div> */}
+                  <button onClick={() => handleDeleteNews(n.id)} className="text-primary font-bold mr-2 border-none bg-white hover:text-red-600">Delete</button>
                 </li>
               ))}
             </ul>

@@ -1,20 +1,36 @@
 import React, { ReactNode, useState, useEffect } from "react";
 import Logo from "../../assets/images/logo.png";
-import { LogOut, Menu, X } from "lucide-react";
+import { LogOut, Menu, ShoppingCart, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from "../../contexts/AuthContext";
+import { useCart } from "../../contexts/CartContext";
 
-const NavLink = ({ children, onClick }: { children: ReactNode, onClick?: () => void }) => {
+const NavLink = ({
+  children,
+  onClick,
+}: {
+  children: ReactNode;
+  onClick?: () => void;
+}) => {
   return (
-    <button className="h-full flex items-center justify-center px-4 relative group" onClick={onClick}>
+    <button
+      className="h-full flex items-center justify-center px-4 relative group"
+      onClick={onClick}
+    >
       {children}
-      <div className="absolute group-hover:h-[10px] h-0 transition-all duration-100 ease-in-out w-full bg-primary bottom-0 group-hover:opacity-100 opacity-0" ></div>
+      <div className="absolute group-hover:h-[10px] h-0 transition-all duration-100 ease-in-out w-full bg-primary bottom-0 group-hover:opacity-100 opacity-0"></div>
     </button>
   );
 };
 
-const NavButton = ({ children, onClick }: { children: ReactNode, onClick?: () => void }) => {
+const NavButton = ({
+  children,
+  onClick,
+}: {
+  children: ReactNode;
+  onClick?: () => void;
+}) => {
   return (
     <div className="group relative cursor-pointer" onClick={onClick}>
       <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-[200%] group-hover:-translate-x-[150%] group-hover:opacity-100 opacity-0 transition-all h-1 w-6 bg-orange-400"></div>
@@ -38,13 +54,13 @@ const Navbar = () => {
 
   const scrollToHash = (hash: string) => {
     if (!hash) return;
-    const id = hash.replace('#', '');
+    const id = hash.replace("#", "");
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
-
+  const {state} = useCart();
   return (
     <>
       <AnimatePresence>
@@ -65,13 +81,31 @@ const Navbar = () => {
               </button>
 
               <div className="w-[80vw] h-fit text-white text-3xl tracking-tighter flex flex-col gap-6">
-                <NavButton onClick={() => handleMenuNav('/home')}><button>Home</button></NavButton>
-                <NavButton onClick={() => handleMenuNav('/home?section=about')}><button>About</button></NavButton>
+                <NavButton onClick={() => handleMenuNav("/home")}>
+                  <button>Home</button>
+                </NavButton>
+                <NavButton onClick={() => handleMenuNav("/home?section=about")}>
+                  <button>About</button>
+                </NavButton>
                 {/* <NavButton onClick={() => handleMenuNav('/newhome?section=players')}><button>Players</button></NavButton> */}
-                <NavButton onClick={() => handleMenuNav('/news?section=latest')}><button>News</button></NavButton>
-                <NavButton onClick={() => handleMenuNav('/home?section=gallery')}><button>Gallery</button></NavButton>
-                <NavButton onClick={() => handleMenuNav('/shop')}><button>Store</button></NavButton>
-                <NavButton onClick={() => handleMenuNav('/home?section=contact')}><button>Contact</button></NavButton>
+                <NavButton
+                  onClick={() => handleMenuNav("/news?section=latest")}
+                >
+                  <button>News</button>
+                </NavButton>
+                <NavButton
+                  onClick={() => handleMenuNav("/home?section=gallery")}
+                >
+                  <button>Gallery</button>
+                </NavButton>
+                <NavButton onClick={() => handleMenuNav("/shop")}>
+                  <button>Store</button>
+                </NavButton>
+                <NavButton
+                  onClick={() => handleMenuNav("/home?section=contact")}
+                >
+                  <button>Contact</button>
+                </NavButton>
                 {/* Auth buttons for small screens */}
                 <div className="flex md:hidden flex-col gap-4 mt-8">
                   {user ? (
@@ -80,13 +114,15 @@ const Navbar = () => {
                         className="text-xl font-bold flex gap-2 text-white border-t border-white pt-4 items-center justify-center bg-primary"
                         disabled
                       >
-                        {user.user_metadata?.name?.[0]?.toUpperCase() || user.email?.[0]?.toUpperCase() || 'U'}
+                        {user.user_metadata?.name?.[0]?.toUpperCase() ||
+                          user.email?.[0]?.toUpperCase() ||
+                          "U"}
                       </button>
                       <button
                         onClick={async () => {
                           await signOut();
                           setOpen(false);
-                          navigate('/home');
+                          navigate("/home");
                         }}
                         className="text-xl font-bold flex gap-2 text-white border-t border-white pt-4 items-center justify-center bg-primary"
                       >
@@ -97,7 +133,7 @@ const Navbar = () => {
                     <button
                       onClick={() => {
                         setOpen(false);
-                        navigate('/signin');
+                        navigate("/signin");
                       }}
                       className="text-lg font-bold flex gap-2 text-white border-t border-white pt-4 items-center justify-center bg-primary"
                     >
@@ -111,41 +147,55 @@ const Navbar = () => {
         )}
       </AnimatePresence>
       <div className="flex overflow-hidden w-full h-[12vh] top-0  z-50 bg-white items-center">
-        <button onClick={() => navigate("/home")} className="h-full shrink-0 aspect-square mx-4">
+        <button
+          onClick={() => navigate("/home")}
+          className="h-full shrink-0 aspect-square mx-4"
+        >
           <img src={Logo} alt="" />
         </button>
         <div className="mx-auto h-full  text-xl tracking-tighter  text-primary font-bold  hidden md:flex">
-           <NavLink onClick={() => navigate('/home?section=latest')}><button>LATEST</button></NavLink>
-          <NavLink onClick={() => navigate('/home?section=matches')}><button>MATCHES</button></NavLink>
+          <NavLink onClick={() => navigate("/home?section=latest")}>
+            <button>LATEST</button>
+          </NavLink>
+          <NavLink onClick={() => navigate("/home?section=matches")}>
+            <button>MATCHES</button>
+          </NavLink>
           {/* <NavLink onClick={() => navigate('/newhome?section=players')}><button>PLAYERS</button></NavLink> */}
-          <NavLink onClick={() => navigate('/shop')}><button>SHOP</button></NavLink>
-          <NavLink onClick={() => navigate('/home?section=contact')}><button>CONTACT</button></NavLink>
-         
+          <NavLink onClick={() => navigate("/shop")}>
+            <button>SHOP</button>
+          </NavLink>
+          <NavLink onClick={() => navigate("/home?section=contact")}>
+            <button>CONTACT</button>
+          </NavLink>
         </div>
         <div className="h-full shrink-0 overflow-hidden w-fit flex ml-auto md:ml-0">
           {/* Auth buttons only on md and up */}
           <div className="hidden md:flex h-full w-fit whitespace-nowrap">
             {user ? (
               <>
-                <button
-                  className="h-full text-xl font-bold flex gap-2 text-primary border-l-2 border-primary px-12 items-center justify-center bg-white"
-                >
-                  {user.user_metadata?.name?.[0]?.toUpperCase() || user.email?.[0]?.toUpperCase() || 'U'}
+                <button onClick={() => navigate("/cart")} className="h-full border-l border-primary px-12 text-primary transition-colors duration-75 hover:bg-primary hover:text-white flex gap-4 items-center justify-center" >
+                  <ShoppingCart />
+                  <div className="font-bold">${state.total}</div>
+                </button>
+                <button className="h-full text-xl font-bold flex gap-2 text-primary border-l-2 border-primary px-12 items-center justify-center bg-white transition-colors duration-75 hover:bg-primary hover:text-white">
+                  {user.user_metadata?.name?.[0]?.toUpperCase() ||
+                    user.email?.[0]?.toUpperCase() ||
+                    "U"}
                 </button>
                 <button
                   onClick={async () => {
                     await signOut();
-                    navigate('/home');
+                    navigate("/home");
                   }}
-                  className="h-full text-xl font-bold flex gap-2 text-primary border-l-2 border-primary px-12 items-center justify-center bg-white"
+                  className="h-full text-xl font-bold flex gap-2 text-primary border-l-2 border-primary px-12 items-center justify-center bg-white transition-colors duration-75 hover:bg-primary hover:text-white"
                 >
                   <LogOut />
                 </button>
               </>
             ) : (
               <button
-                onClick={() => navigate('/signin')}
-                className="h-full text-lg font-bold flex gap-2 text-primary border-l-2 border-primary px-12 items-center justify-center bg-white"
+                onClick={() => navigate("/signin")}
+                className="h-full text-lg font-bold flex gap-2 text-primary border-l-2 border-primary px-12 items-center justify-center bg-white transition-colors duration-75 hover:bg-primary hover:text-white"
               >
                 SIGN IN
               </button>

@@ -12,7 +12,7 @@ interface Jersey {
   name: string;
   price: number;
   image_url: string;
-  image_urls?: string[];
+  image_urls: string[];
   description: string;
   category: string;
   sizes: string[];
@@ -73,15 +73,16 @@ const ProductPage: React.FC = () => {
       toast.error("Please select a color");
       return;
     }
+    console.log(images[mainImageIdx]);
     dispatch({
       type: "ADD_ITEM",
       payload: {
         id: `${jersey.id}-${size}-${color}`,
         name: jersey.name,
         price: jersey.price,
-        image_url: jersey.image_url,
+        image_url: images[mainImageIdx],
         size,
-        color,
+       
         quantity: 1,
       },
     });

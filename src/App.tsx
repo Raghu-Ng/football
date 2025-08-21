@@ -1,39 +1,27 @@
-import React, { useLayoutEffect, useState } from "react";
-import { HashRouter as Router, Routes, Route, ScrollRestoration } from "react-router-dom";
+import { useState } from "react";
 import { Toaster } from "react-hot-toast";
+import { Route, HashRouter as Router, Routes } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { CartProvider } from "./contexts/CartContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 // import Navigation from "./components/Navigation";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Players from "./components/Players";
-import News from "./components/News";
-import Gallery from "./components/Gallery";
-import ClubProgramsSection from "./components/ClubProgramsSection";
-import Store from "./components/Store";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
+import AdminPage from "./components/AdminPage";
 import AuthModal from "./components/AuthModal";
-import Cart from "./components/Cart";
-import SuccessPage from "./components/SuccessPage";
-import FloatingElements from "./components/FloatingElements";
-import SignIn from "./routes/SignIn";
-import Product from "./routes/Product";
-import Admin from "./routes/Admin";
+import Cart from "./routes/Cart";
 import CheckoutPage from "./components/CheckoutPage";
 import GetStarted from "./components/GetStarted";
-import ScrollHandler from "./components/ScrollHandler";
-import AllNews from "./routes/AllNews";
-import NewsArticle from "./routes/NewsArticle";
-import People from "./components/People";
-import AllMatchesPage from "./routes/AllMatchesPage";
-import { useLocation } from "react-router-dom";
-import NewHome from "./routes/NewHome";
 import Navbar from "./components/layout/Navbar";
-import Navigation from "./components/Navigation";
+import People from "./components/People";
+import ScrollHandler from "./components/ScrollHandler";
+import SuccessPage from "./components/SuccessPage";
+import Admin from "./routes/Admin";
+import AllMatchesPage from "./routes/AllMatchesPage";
+import AllNews from "./routes/AllNews";
+import NewHome from "./routes/NewHome";
+import NewsArticle from "./routes/NewsArticle";
+import Product from "./routes/Product";
 import Shop from "./routes/Shop";
-import AdminPage from "./components/AdminPage";
+import SignIn from "./routes/SignIn";
 import Videos from "./routes/Videos";
 
 function App() {
@@ -76,7 +64,7 @@ function App() {
               </div>
               <Navbar></Navbar>
               <Routes>
-                
+                <Route path="/cart" element={<Cart />} />
                 <Route path="/shop" element={<Shop />} />
                 <Route path="oldadmin" element={<AdminPage></AdminPage>} ></Route>
                 <Route path="/home" element={<NewHome />} />
@@ -121,14 +109,7 @@ function App() {
                 isOpen={isAuthModalOpen}
                 onClose={() => setIsAuthModalOpen(false)}
               />
-              <Cart
-                isOpen={isCartOpen}
-                onClose={() => setIsCartOpen(false)}
-                onAuthRequired={() => {
-                  setIsCartOpen(false);
-                  setIsAuthModalOpen(true);
-                }}
-              />
+              
               <Toaster position="top-right" />
             </div>
           </CartProvider>
