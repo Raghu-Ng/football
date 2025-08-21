@@ -101,11 +101,15 @@ const Navbar = () => {
                 <NavButton onClick={() => handleMenuNav("/shop")}>
                   <button>Store</button>
                 </NavButton>
+                <NavButton onClick={() => handleMenuNav("/cart")}>
+                  <button>Cart</button>
+                </NavButton>
                 <NavButton
                   onClick={() => handleMenuNav("/home?section=contact")}
                 >
                   <button>Contact</button>
                 </NavButton>
+
                 {/* Auth buttons for small screens */}
                 <div className="flex md:hidden flex-col gap-4 mt-8">
                   {user ? (
