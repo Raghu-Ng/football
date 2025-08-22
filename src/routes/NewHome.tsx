@@ -12,7 +12,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import LatestVideos from "./Home/LatestVideos";
 import About from "./Home/About";
 import Journey from "./Home/Journey";
-
+import PartnerLogo from "../assets/logo.svg"
 // 3 cards for the bottom bar
 const cards = [
   {
@@ -214,13 +214,17 @@ const NewHome = () => {
           </>
         )}
       </div>
-      <About />
-      <Matches />
+      {/* <`About` /> */}
       <Journey />
+      <Matches />
       <News />
       <LatestVideos />
       <Gallery />
       <Merch />
+      <div className="w-full h-[400px] flex flex-col gap-6 items-center justify-center" >
+        <div className="italic font-bold text-zinc-600 text-sm" >PARTNERS</div>
+        <img src={PartnerLogo} alt="" />
+      </div>
       {/* <StoreSection /> */}
       <Footer />
     </div>

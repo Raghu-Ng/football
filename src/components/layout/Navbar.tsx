@@ -60,7 +60,7 @@ const Navbar = () => {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
-  const {state} = useCart();
+  const { state } = useCart();
   return (
     <>
       <AnimatePresence>
@@ -150,68 +150,95 @@ const Navbar = () => {
           </>
         )}
       </AnimatePresence>
-      <div className="flex overflow-hidden w-full h-[12vh] top-0  z-50 bg-white items-center">
-        <button
-          onClick={() => navigate("/home")}
-          className="h-full shrink-0 aspect-square mx-4"
-        >
-          <img src={Logo} alt="" />
-        </button>
-        <div className="mx-auto h-full  text-xl tracking-tighter  text-primary font-bold  hidden md:flex">
-          <NavLink onClick={() => navigate("/home?section=latest")}>
-            <button>LATEST</button>
-          </NavLink>
-          <NavLink onClick={() => navigate("/home?section=matches")}>
-            <button>MATCHES</button>
-          </NavLink>
-          {/* <NavLink onClick={() => navigate('/newhome?section=players')}><button>PLAYERS</button></NavLink> */}
-          <NavLink onClick={() => navigate("/shop")}>
-            <button>SHOP</button>
-          </NavLink>
-          <NavLink onClick={() => navigate("/home?section=contact")}>
-            <button>CONTACT</button>
-          </NavLink>
-        </div>
-        <div className="h-full shrink-0 overflow-hidden w-fit flex ml-auto md:ml-0">
-          {/* Auth buttons only on md and up */}
-          <div className="hidden md:flex h-full w-fit whitespace-nowrap">
-            {user ? (
-              <>
-                <button onClick={() => navigate("/cart")} className="h-full border-l border-primary px-12 text-primary transition-colors duration-75 hover:bg-primary hover:text-white flex gap-4 items-center justify-center" >
-                  <ShoppingCart />
-                  <div className="font-bold">${state.total}</div>
-                </button>
-                <button className="h-full text-xl font-bold flex gap-2 text-primary border-l-2 border-primary px-12 items-center justify-center bg-white transition-colors duration-75 hover:bg-primary hover:text-white">
-                  {user.user_metadata?.name?.[0]?.toUpperCase() ||
-                    user.email?.[0]?.toUpperCase() ||
-                    "U"}
-                </button>
-                <button
-                  onClick={async () => {
-                    await signOut();
-                    navigate("/home");
-                  }}
-                  className="h-full text-xl font-bold flex gap-2 text-primary border-l-2 border-primary px-12 items-center justify-center bg-white transition-colors duration-75 hover:bg-primary hover:text-white"
-                >
-                  <LogOut />
-                </button>
-              </>
-            ) : (
+      <div className="flex flex-col w-full">
+        <div className="w-full text-sm font-medium  &:hover:text-primary text-600 h-[8vh] border-b border-zinc-200 flex items-center justify-end">
+          {/* Show email and sign out if logged in, else show LOGIN and REGISTER */}
+          {user ? (
+            <>
+              <span className="ml-auto px-4 h-full flex items-center justify-center text-primary font-bold">
+                {user.email}
+              </span>
               <button
-                onClick={() => navigate("/signin")}
-                className="h-full text-lg font-bold flex gap-2 text-primary border-l-2 border-primary px-12 items-center justify-center bg-white transition-colors duration-75 hover:bg-primary hover:text-white"
+                onClick={async () => {
+                  await signOut();
+                  navigate("/home");
+                }}
+                className="px-4 h-full flex items-center justify-center hover:text-primary text-primary font-bold"
               >
-                SIGN IN
+                <LogOut className="mr-2" /> Sign Out
               </button>
-            )}
-          </div>
-          {/* Menu button always visible */}
+            </>
+          ) : (
+            <>
+              <button
+                className="ml-auto px-4 h-full items-center justify-center hover:text-primary"
+                onClick={() => navigate("/signin")}
+              >
+                LOGIN
+              </button>
+              <button
+                className="px-4 h-full flex items-center justify-center hover:text-primary"
+                onClick={() => navigate("/signin?mode=signup")}
+              >
+                REGISTER
+              </button>
+            </>
+          )}
+        </div>
+        <div className="flex overflow-hidden w-full h-[12vh] top-0  z-50 bg-white items-center">
           <button
-            onClick={() => setOpen(true)}
-            className="h-full aspect-square shrink-0  bg-primary flex items-center justify-center"
+            onClick={() => navigate("/home")}
+            className="h-full shrink-0 aspect-square mx-4"
           >
-            <Menu color="white"></Menu>
+            <img src={Logo} alt="" />
           </button>
+          <div className="mx-auto h-full  text-xl tracking-tighter  text-primary font-bold  hidden md:flex">
+            <NavLink onClick={() => navigate("/home?section=latest")}>
+              <button>LATEST</button>
+            </NavLink>
+            <NavLink onClick={() => navigate("/home?section=matches")}>
+              <button>MATCHES</button>
+            </NavLink>
+            {/* <NavLink onClick={() => navigate('/newhome?section=players')}><button>PLAYERS</button></NavLink> */}
+            <NavLink onClick={() => navigate("/shop")}>
+              <button>SHOP</button>
+            </NavLink>
+            <NavLink onClick={() => navigate("/home?section=contact")}>
+              <button>CONTACT</button>
+            </NavLink>
+          </div>
+          <div className="h-full shrink-0 overflow-hidden w-fit flex ml-auto md:ml-0">
+            {/* Auth buttons only on md and up */}
+            <div className="hidden md:flex h-full w-fit whitespace-nowrap">
+              {user ? (
+                <>
+                  <button
+                    onClick={() => navigate("/cart")}
+                    className="h-full border-l border-primary px-12 text-primary transition-colors duration-75 hover:bg-primary hover:text-white flex gap-4 items-center justify-center"
+                  >
+                    <ShoppingCart />
+                    <div className="font-bold">${state.total}</div>
+                  </button>
+                  
+                  
+                </>
+              ) : (
+                <button
+                  onClick={() => navigate("/signin")}
+                  className="h-full text-lg font-bold flex gap-2 text-primary border-l-2 border-primary px-12 items-center justify-center bg-white transition-colors duration-75 hover:bg-primary hover:text-white"
+                >
+                  SIGN IN
+                </button>
+              )}
+            </div>
+            {/* Menu button always visible */}
+            <button
+              onClick={() => setOpen(true)}
+              className="h-full aspect-square shrink-0  bg-primary flex items-center justify-center"
+            >
+              <Menu color="white"></Menu>
+            </button>
+          </div>
         </div>
       </div>
     </>

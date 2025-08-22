@@ -3,7 +3,7 @@ import Logo from "../../assets/images/logo.png"
 
 const Footer = () => {
   return (
-    <div id='contact' className='mt-28 bg-primary w-full'>
+    <div id='contact' className=' bg-primary w-full'>
       <div className="w-full mx-auto px-[5vw] text-white py-12 flex flex-col md:flex-row justify-between gap-12">
         {/* Left: Logo, Address, Socials */}
         <div className="flex-1 flex flex-col gap-4">
