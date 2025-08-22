@@ -23,6 +23,7 @@ import Product from "./routes/Product";
 import Shop from "./routes/Shop";
 import SignIn from "./routes/SignIn";
 import Videos from "./routes/Videos";
+import About from "./routes/Home/About";
 
 function App() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -64,6 +65,7 @@ function App() {
               </div>
               <Navbar></Navbar>
               <Routes>
+                <Route path="about" element={<About />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/shop" element={<Shop />} />
                 <Route path="oldadmin" element={<AdminPage></AdminPage>} ></Route>

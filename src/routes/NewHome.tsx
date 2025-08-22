@@ -190,10 +190,10 @@ const NewHome = () => {
                     }}
                     style={{ cursor: idx !== current ? "pointer" : "default" }}
                   >
-                    <div className="text-lg sm:text-2xl font-semibold mb-1 sm:mb-2 text-left">
+                    <div className="text-lg sm:text-base font-semibold mb-1 sm:mb-2 text-left">
                       {card.title}
                     </div>
-                    <div className="mb-2 sm:mb-4 text-left text-base sm:text-lg">
+                    <div className="mb-2 sm:mb-4 text-left text-sm sm:text-sm">
                       {card.content.slice(0, 60)}...
                     </div>
                     {/* Progress bar for each card */}

@@ -17,7 +17,7 @@
 
 /* Professional cream theme variables */
 :root {
-  --bg-primary: #f8f5f0;
+  --bg-primary: #ffffff;
   --bg-secondary: #ffffff;
   --bg-accent: #faf7f2;
   --text-primary: #1f2937;
@@ -33,7 +33,7 @@
 
 /* Light theme with professional cream colors */
 .light {
-  --bg-primary: #f8f5f0;
+  --bg-primary: #ffffff;
   --bg-secondary: #ffffff;
   --bg-accent: #faf7f2;
   --text-primary: #1f2937;
@@ -59,15 +59,15 @@ html,#root,body{
 
 /* Professional cream background utilities */
 .bg-cream-light {
-  background-color: #f8f5f0;
+  background-color: #ffffff;
 }
 
 .bg-cream-soft {
-  background-color: #faf7f2;
+  background-color: #ffffff;
 }
 
 .bg-cream-rich {
-  background-color: #f5f1ea;
+  background-color: #ffffff;
 }
 
 .bg-cream-gradient {

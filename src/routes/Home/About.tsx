@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { ArrowRight } from "lucide-react";
 
 const About = () => {
-  const [showMore, setShowMore] = useState(false);
+  const [showMore, setShowMore] = useState(true);
   return (
     <div className="h-fit px-[5vw] py-12 flex flex-col ">
       <div className="w-full flex justify-between mb-8">
         <div className="text-primary font-bold text-4xl flex items-center gap-4 text-center">
-          About<ArrowRight className="translate-y-1" size={40}></ArrowRight>
+          About
         </div>
       </div>
       <div className="text-xl font-medium text-black">
@@ -15,16 +15,7 @@ const About = () => {
         football club based in Bengaluru with a profound commitment to
         developing talent and empowering women in sports.
       </div>
-      {!showMore && (
-        <>
-          <button
-            onClick={() => setShowMore(true)}
-            className=" hover:bg-zinc-200 font-bold text-black flex items-center justify-center p-4 mt-4"
-          >
-            SHOW MORE
-          </button>
-        </>
-      )}
+      
       {showMore && (
         <>
           <div className="text-xl font-medium text-black flex flex-col gap-4">
@@ -66,12 +57,7 @@ const About = () => {
               core mission.
             </p>
           </div>
-          <button
-            onClick={() => setShowMore(false)}
-            className="hover:bg-zinc-200 font-bold text-black flex items-center justify-center p-4 mt-4"
-          >
-            SHOW LESS
-          </button>
+          
         </>
       )}
     </div>
