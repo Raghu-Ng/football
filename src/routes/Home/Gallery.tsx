@@ -1,57 +1,82 @@
 // Import training images
-import t1 from "../../assets/images/training/DSC03519.png";
-import t2 from "../../assets/images/training/DSC03521.png";
-import t3 from "../../assets/images/training/DSC03541.png";
-import t4 from "../../assets/images/training/DSC03545.png";
-import t5 from "../../assets/images/training/DSC03574.png";
-import t6 from "../../assets/images/training/DSC03582.png";
-import t7 from "../../assets/images/training/DSC03603.png";
-import t8 from "../../assets/images/training/DSC03610.png";
-import t9 from "../../assets/images/training/DSC03638.png";
-import t10 from "../../assets/images/training/DSC03649.png";
-import t11 from "../../assets/images/training/DSC03651.png";
-import t12 from "../../assets/images/training/DSC03673.png";
-import t13 from "../../assets/images/training/DSC03693.png";
-import t14 from "../../assets/images/training/DSC03788.png";
 import { ArrowRight, X } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
+import t1 from "../../assets/images/training/DSC03519 (1).webp";
+import t2 from "../../assets/images/training/DSC03521 (1).webp";
+import t3 from "../../assets/images/training/DSC03541 (1).webp";
+import t4 from "../../assets/images/training/DSC03545 (1).webp";
+import t5 from "../../assets/images/training/DSC03574 (1).webp";
+import t6 from "../../assets/images/training/DSC03582 (1).webp";
+import t7 from "../../assets/images/training/DSC03603 (1).webp";
+import t8 from "../../assets/images/training/DSC03610 (1).webp";
+import t9 from "../../assets/images/training/DSC03638 (1).webp";
+import t10 from "../../assets/images/training/DSC03649 (1).webp";
+import t11 from "../../assets/images/training/DSC03651 (1).webp";
+import t12 from "../../assets/images/training/DSC03673 (1).webp";
+import t13 from "../../assets/images/training/DSC03693 (1).webp";
+import t14 from "../../assets/images/training/DSC03788 (1).webp";
+
 
 // Import match images
-import match1 from "../../assets/images/matches/1.jpg";
-import match2 from "../../assets/images/matches/2.jpg";
-import match2_2 from "../../assets/images/matches/2_2.jpg";
-import match3 from "../../assets/images/matches/3.jpg";
-import match4 from "../../assets/images/matches/4.jpg";
-import match5 from "../../assets/images/matches/5.jpg";
-import match5_2 from "../../assets/images/matches/5_2.jpg";
-import match5_3 from "../../assets/images/matches/5_3.jpg";
-import match8 from "../../assets/images/matches/8.jpg";
-import match9 from "../../assets/images/matches/9.jpg";
-import match10 from "../../assets/images/matches/10.jpg";
-import match10_2 from "../../assets/images/matches/10_2.jpg";
-import match11 from "../../assets/images/matches/11.jpg";
-import match13 from "../../assets/images/matches/13.jpg";
-import match13_2 from "../../assets/images/matches/13_2.jpg";
-
-
+import match1 from "../../assets/images/matches/1.webp";
+import match2 from "../../assets/images/matches/2.webp";
+import match2_2 from "../../assets/images/matches/2 (1).webp";
+import match3 from "../../assets/images/matches/3 (2).webp";
+import match4 from "../../assets/images/matches/4.webp";
+import match5 from "../../assets/images/matches/5.webp";
+import match5_2 from "../../assets/images/matches/5 (1).webp";
+import match5_3 from "../../assets/images/matches/5 (2).webp";
+import match8 from "../../assets/images/matches/8.webp";
+import match9 from "../../assets/images/matches/9.webp";
+import match10 from "../../assets/images/matches/10.webp";
+import match10_2 from "../../assets/images/matches/10 (1).webp";
+import match11 from "../../assets/images/matches/11.webp";
+import match13 from "../../assets/images/matches/13.webp";
+import match13_2 from "../../assets/images/matches/13 (1).webp";
 
 const matchImages = [
-  match1, match2, match2_2, match3, match4, match5, match5_2, match5_3, match8, match9, match10, match10_2, match11, match13, match13_2
+  match1,
+  match2,
+  match2_2,
+  match3,
+  match4,
+  match5,
+  match5_2,
+  match5_3,
+  match8,
+  match9,
+  match10,
+  match10_2,
+  match11,
+  match13,
+  match13_2,
 ];
 
 // For now, keep the other two gallery items random as before
 
-import img22 from "../../assets/images/image22.jpeg";
+import { AnimatePresence, motion } from "framer-motion";
 
-import img41 from "../../assets/images/image41.jpeg";
-import imgHero from "../../assets/images/hero_team.jpeg"
-
-
-
-
+import team3 from "../../assets/images/team/3 (1).webp";
+import team7568 from "../../assets/images/team/IMG_7568.webp";
+import team7580 from "../../assets/images/team/IMG_7580.webp";
+import team7589 from "../../assets/images/team/IMG_7589.webp";
+import team7589_2 from "../../assets/images/team/IMG_7589 (1).webp";
 
 const trainingImages = [
-  t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14
+  t1,
+  t2,
+  t3,
+  t4,
+  t5,
+  t6,
+  t7,
+  t8,
+  t9,
+  t10,
+  t11,
+  t12,
+  t13,
+  t14,
 ];
 
 const GALLERY_ITEMS = [
@@ -66,7 +91,7 @@ const GALLERY_ITEMS = [
     subimages: trainingImages,
   },
   (() => {
-    const imgs = [ imgHero,img41,img22];
+    const imgs = [team3, team7568, team7580, team7589, team7589_2];
     return {
       title: "Team",
       thumbnail: imgs[0],
@@ -74,7 +99,6 @@ const GALLERY_ITEMS = [
     };
   })(),
 ];
-import { AnimatePresence, motion } from "framer-motion";
 
 const Gallery = () => {
   const [open, setOpen] = useState(false);
@@ -136,13 +160,17 @@ const Gallery = () => {
                     {galleryItem.subimages.map((img, idx) => (
                       <div
                         key={idx}
-                        className={`h-[10vw] shrink-0 w-full relative overflow-hidden border ${selectedImageIdx === idx ? 'border-primary' : 'border-transparent'} cursor-pointer`}
+                        className={`h-[10vw] shrink-0 w-full relative overflow-hidden border ${
+                          selectedImageIdx === idx
+                            ? "border-primary"
+                            : "border-transparent"
+                        } cursor-pointer`}
                         onClick={() => setSelectedImageIdx(idx)}
                       >
                         <img
                           src={img}
                           className="absolute size-full object-cover"
-                          alt={galleryItem.title + ' subimage'}
+                          alt={galleryItem.title + " subimage"}
                         />
                       </div>
                     ))}
@@ -153,7 +181,7 @@ const Gallery = () => {
           </>
         )}
       </AnimatePresence>
-      <div className="h-fit px-[5vw] mb-12 py-12 flex flex-col ">
+      <div id="gallery" className="h-fit px-[5vw] mb-12 py-12 flex flex-col ">
         <div className="w-full flex justify-between mb-8">
           <div className="text-primary font-bold text-4xl flex items-center gap-4 text-center">
             Gallery{" "}
@@ -162,7 +190,7 @@ const Gallery = () => {
         </div>
         <div className="h-fit lg:min-h-[300px] md:min-h-[400px] w-full grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12">
           {GALLERY_ITEMS.map((item, idx) => (
-            <div  
+            <div
               onClick={() => handleOpen(idx)}
               key={item.title}
               className="size-full flex flex-col h-fit gap-0 group cursor-pointer"

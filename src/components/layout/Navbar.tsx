@@ -84,14 +84,14 @@ const Navbar = () => {
                 <NavButton onClick={() => handleMenuNav("/home")}>
                   <button>Home</button>
                 </NavButton>
-                <NavButton onClick={() => handleMenuNav("/home?section=about")}>
+                <NavButton onClick={() => handleMenuNav("/about")}>
                   <button>About</button>
                 </NavButton>
                 {/* <NavButton onClick={() => handleMenuNav('/newhome?section=players')}><button>Players</button></NavButton> */}
                 <NavButton
                   onClick={() => handleMenuNav("/news?section=latest")}
                 >
-                  <button>News</button>
+                  <button>Latest</button>
                 </NavButton>
                 <NavButton
                   onClick={() => handleMenuNav("/home?section=gallery")}
@@ -99,7 +99,7 @@ const Navbar = () => {
                   <button>Gallery</button>
                 </NavButton>
                 <NavButton onClick={() => handleMenuNav("/shop")}>
-                  <button>Store</button>
+                  <button>Shop</button>
                 </NavButton>
                 <NavButton onClick={() => handleMenuNav("/cart")}>
                   <button>Cart</button>
@@ -152,6 +152,7 @@ const Navbar = () => {
       </AnimatePresence>
       <div className="flex flex-col w-full">
         <div className="w-full text-sm font-medium  &:hover:text-primary text-600 h-[8vh] border-b border-zinc-200 flex items-center justify-end">
+          <div className="mr-auto ml-4 font-bold">UNITED FC KODAGU</div>
           {/* Show email and sign out if logged in, else show LOGIN and REGISTER */}
           {user ? (
             <>
@@ -193,11 +194,17 @@ const Navbar = () => {
             <img src={Logo} alt="" />
           </button>
           <div className="mx-auto h-full  text-xl tracking-tighter  text-primary font-bold  hidden md:flex">
-            <NavLink onClick={() => navigate("/home?section=latest")}>
-              <button>LATEST</button>
+            <NavLink onClick={() => navigate("/about")}>
+              <button>ABOUT US</button>
+            </NavLink>
+            <NavLink onClick={() => navigate("/home?section=videos")}>
+              <button>WATCH</button>
             </NavLink>
             <NavLink onClick={() => navigate("/home?section=matches")}>
               <button>MATCHES</button>
+            </NavLink>
+             <NavLink onClick={() => navigate("/home?section=gallery")}>
+              <button>GALLERY</button>
             </NavLink>
             {/* <NavLink onClick={() => navigate('/newhome?section=players')}><button>PLAYERS</button></NavLink> */}
             <NavLink onClick={() => navigate("/shop")}>
@@ -223,12 +230,7 @@ const Navbar = () => {
                   
                 </>
               ) : (
-                <button
-                  onClick={() => navigate("/signin")}
-                  className="h-full text-lg font-bold flex gap-2 text-primary border-l-2 border-primary px-12 items-center justify-center bg-white transition-colors duration-75 hover:bg-primary hover:text-white"
-                >
-                  SIGN IN
-                </button>
+<></>
               )}
             </div>
             {/* Menu button always visible */}

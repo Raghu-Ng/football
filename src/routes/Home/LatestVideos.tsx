@@ -41,7 +41,7 @@ const LatestVideos = () => {
   }, []);
   const navigate = useNavigate()
   return (
-    <div className="h-fit px-4 sm:px-8 md:px-[5vw] py-8 md:py-12 flex flex-col ">
+    <div id="videos" className="h-fit px-4 sm:px-8 md:px-[5vw] py-8 md:py-12 flex flex-col ">
       <div className="w-full flex items-center justify-between mb-8">
         <div className="text-primary font-bold text-2xl sm:text-3xl md:text-4xl flex items-center gap-4 text-center">
           Latest Videos <ArrowRight className="translate-y-1" size={32} />

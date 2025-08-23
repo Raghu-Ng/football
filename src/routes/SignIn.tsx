@@ -1,17 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const SignIn = () => {
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [isSignUp, setIsSignUp] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState('');
+
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { signIn, signUp } = useAuth();
+
+  // 🔑 Sync query param with state
+  useEffect(() => {
+    const mode = searchParams.get('mode');
+    setIsSignUp(mode === 'signup');
+  }, [searchParams]);
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,7 +45,9 @@ const SignIn = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-white px-4">
-      <h1 className="text-primary font-bold text-4xl mb-12">{isSignUp ? 'Sign Up' : 'Sign In'}</h1>
+      <h1 className="text-primary font-bold text-4xl mb-12">
+        {isSignUp ? 'Sign Up' : 'Sign In'}
+      </h1>
       <form onSubmit={handleAuth} className="flex flex-col gap-6 w-full max-w-md">
         <input
           type="email"
@@ -69,20 +78,30 @@ const SignIn = () => {
           className="bg-primary text-white px-6 py-4 font-semibold text-lg"
           disabled={loading}
         >
-          {loading ? (isSignUp ? 'Signing up...' : 'Signing in...') : (isSignUp ? 'Sign Up' : 'Sign In')}
+          {loading
+            ? (isSignUp ? 'Signing up...' : 'Signing in...')
+            : (isSignUp ? 'Sign Up' : 'Sign In')}
         </button>
         <div className="text-center mt-2">
           {isSignUp ? (
             <>
               Already have an account?{' '}
-              <button type="button" className="text-primary underline" onClick={() => { setIsSignUp(false); setConfirmPassword(''); }}>
+              <button
+                type="button"
+                className="text-primary underline"
+                onClick={() => navigate('/auth?mode=signin')}
+              >
                 Sign In
               </button>
             </>
           ) : (
             <>
               Don't have an account?{' '}
-              <button type="button" className="text-primary underline" onClick={() => setIsSignUp(true)}>
+              <button
+                type="button"
+                className="text-primary underline"
+                onClick={() => navigate('/auth?mode=signup')}
+              >
                 Sign Up
               </button>
             </>
