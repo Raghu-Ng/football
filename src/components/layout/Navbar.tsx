@@ -224,7 +224,7 @@ const Navbar = () => {
                     className="h-full border-l border-primary px-12 text-primary transition-colors duration-75 hover:bg-primary hover:text-white flex gap-4 items-center justify-center"
                   >
                     <ShoppingCart />
-                    <div className="font-bold">${state.total}</div>
+                    <div className="font-bold">₹{state.total}</div>
                   </button>
                   
                   
