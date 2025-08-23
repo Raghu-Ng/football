@@ -312,7 +312,7 @@ const Admin = () => {
                   <td className="py-2 px-2">{j.description}</td>
                   <td className="py-2 px-2">{j.category}</td>
                   <td className="py-2 px-2">{Array.isArray(j.sizes) ? j.sizes.join(', ') : ''}</td>
-                  <td className="py-2 px-2">${j.price}</td>
+                  <td className="py-2 px-2">₹{j.price}</td>
                   <td className="py-2 px-2">{j.stock}</td>
                   <td className="py-2 px-2">
                     <button onClick={() => handleDeleteJersey(j.id)} className="text-primary font-bold mr-2 border-none bg-white">Delete</button>
