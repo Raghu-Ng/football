@@ -51,7 +51,7 @@ const Shop = () => {
               <div className="shrink-0 mt-4 w-full text-xl text-primary font-medium">
                 {jersey.name}
               </div>
-              <div className="mt-2 text-sm mb-4">${jersey.price}</div>
+              <div className="mt-2 text-sm mb-4">₹{jersey.price}</div>
               <button className="bg-primary text-white flex items-center justify-center font-bold p-4 text-sm hover:bg-blue-800 mb-4" >BUY NOW </button>
               <div className="text-sm font-medium text-primary flex justify-between w-full">
                 <div>PRODUCT</div>

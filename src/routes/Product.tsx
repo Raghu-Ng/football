@@ -112,7 +112,7 @@ const Product = () => {
       <div className="flex flex-col gap-4 w-full">
         <h2 className="text-primary font-bold text-5xl mb-2">{jersey.name}</h2>
         <p className="text-xl font-semibold text-gray-800 mb-2">
-          ${jersey.price}
+          ₹{jersey.price}
         </p>
         <p className="text-base text-gray-600 mb-4">{jersey.description}</p>
         {/* Size Options */}
