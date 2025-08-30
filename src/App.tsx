@@ -24,6 +24,7 @@ import Shop from "./routes/Shop";
 import SignIn from "./routes/SignIn";
 import Videos from "./routes/Videos";
 import About from "./routes/Home/About";
+import Gallery from "./routes/Gallery";
 
 function App() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -59,12 +60,13 @@ function App() {
           <CartProvider>
             
             <ScrollHandler />
-            <div className="min-h-screen flex flex-col  w-full  transition-colors duration-300">
+            <div className="min-h-screen flex flex-col items-center w-full  transition-colors duration-300">
               <div className="floating-elements fixed inset-0 pointer-events-none z-10">
                 {/* <FloatingElements /> */}
               </div>
               <Navbar></Navbar>
               <Routes>
+                <Route path="/gallery" element={<Gallery  />} />
                 <Route path="about" element={<About />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/shop" element={<Shop />} />

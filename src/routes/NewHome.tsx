@@ -12,7 +12,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import LatestVideos from "./Home/LatestVideos";
 import About from "./Home/About";
 import Journey from "./Home/Journey";
-import PartnerLogo from "../assets/logo.svg"
+import PartnerLogo from "../assets/logo.svg";
 // 3 cards for the bottom bar
 const cards = [
   {
@@ -144,15 +144,17 @@ const NewHome = () => {
     console.log("News items fetched successfully");
   }, []);
 
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen h-fit flex flex-col">
       <div className="h-[60vh] sm:h-[400px] md:h-[700px] w-full bg-primary relative overflow-hidden">
-        {(newsItems && newsItems.length > 0) && (
+        {newsItems && newsItems.length > 0 && (
           <>
             {/* Background image for the current card */}
             <AnimatePresence mode="sync">
               <motion.img
-                initial={{ opacity: 0}}
+                initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
                 key={cards[current].image + "-bg-test"}
@@ -173,7 +175,10 @@ const NewHome = () => {
                 </div> */}
               </div>
 
-              <div className="w-full h-fit flex-col sm:grid sm:grid-cols-3 bg-zinc-300 text-xs sm:text-sm hidden sm:flex text-primary relative overflow-x-auto">
+              <button
+                onClick={() => navigate(`/news/${newsItems[current].id}`)}
+                className="!cursor-pointer w-full h-fit flex-col sm:grid sm:grid-cols-3 bg-zinc-300 text-xs sm:text-sm hidden  text-primary relative overflow-x-auto"
+              >
                 {newsItems.map((card, idx) => (
                   <div
                     key={idx}
@@ -209,7 +214,7 @@ const NewHome = () => {
                     />
                   </div>
                 ))}
-              </div>
+              </button>
             </div>
           </>
         )}
@@ -221,8 +226,8 @@ const NewHome = () => {
       <LatestVideos />
       <Gallery />
       <Merch />
-      <div className="w-full h-[400px] flex flex-col gap-6 items-center justify-center" >
-        <div className="italic font-bold text-zinc-600 text-sm" >PARTNERS</div>
+      <div className="w-full h-[400px] flex flex-col gap-6 items-center justify-center">
+        <div className="italic font-bold text-zinc-600 text-sm">PARTNERS</div>
         <img src={PartnerLogo} alt="" />
       </div>
       {/* <StoreSection /> */}
