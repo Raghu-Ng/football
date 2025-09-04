@@ -182,7 +182,7 @@ const NewHome = () => {
                 {newsItems.map((card, idx) => (
                   <div
                     key={idx}
-                    className={`p-3 sm:p-4 pb-8 sm:pb-10 flex flex-col relative min-w-[220px] sm:min-w-0
+                    className={`p-3 sm:p-4  flex flex-col relative min-w-[220px] sm:min-w-0
                   ${idx === current ? "bg-white" : "bg-zinc-300"}
                   ${
                     idx !== 0
@@ -198,9 +198,9 @@ const NewHome = () => {
                     <div className="text-lg sm:text-base font-semibold mb-1 sm:mb-2 text-left">
                       {card.title}
                     </div>
-                    <div className="mb-2 sm:mb-4 text-left text-sm sm:text-sm">
+                    {/* <div className="mb-2 sm:mb-4 text-left text-sm sm:text-sm">
                       {card.content.slice(0, 60)}...
-                    </div>
+                    </div> */}
                     {/* Progress bar for each card */}
                     <motion.div
                       className="h-1 bg-primary z-20 absolute bottom-0 left-0"

@@ -39,6 +39,8 @@ import { useSearchParams } from "react-router-dom";
 import {motion, AnimatePresence} from "framer-motion"
 import { useState } from "react";
 
+import Logo from "../assets/images/logo.png"
+
 type GalleryProps = {
   query: "matches" | "training" | "team";
 };
@@ -111,13 +113,16 @@ const Gallery = () => {
                   const randomHeight =
                     heights[Math.floor(Math.random() * heights.length)];
                   return (
-                    <div className="bg-primary/20">
+                    <div className="bg-primary/100 relative flex items-center justify-center">
+                      <div className="absolute z-10 size-[150px]">
+                        <img src={Logo} className="size-full" alt="" />
+                      </div>
                         <img
                       key={`${colIdx}-${idx}`}
                       src={img}
                       alt={`${query}-col${colIdx}-${idx}`}
                       style={{ height: `${randomHeight}px` }}
-                      className="w-full object-cover  cursor-pointer"
+                      className="w-full object-cover z-20  cursor-pointer"
                       onClick={() => setSelectedImage(img)}
                     />
                     </div>

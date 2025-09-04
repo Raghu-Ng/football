@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { supabase } from "../lib/supabase";
 import { useNavigate } from "react-router-dom";
 
@@ -7,6 +8,9 @@ const Shop = () => {
   const [jerseys, setJerseys] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  // Slideshow state
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     const fetchJerseys = async () => {
@@ -17,13 +21,39 @@ const Shop = () => {
     fetchJerseys();
   }, []);
 
+  // Slideshow logic
+  useEffect(() => {
+    if (jerseys.length === 0) return;
+    const timer = setTimeout(() => {
+      setCurrentSlide((prev) => (prev + 1) % Math.min(jerseys.length, 3));
+    }, 4000);
+    return () => clearTimeout(timer);
+  }, [currentSlide, jerseys]);
+
   return (
-    <div className="h-fit px-[5vw] py-12 flex flex-col">
-      <div className="w-full flex items-center justify-between mb-8">
-        <div className="text-primary font-bold text-2xl sm:text-3xl md:text-4xl flex items-center gap-4 text-center">
-          Shop
+    <div className="h-fit px-4 max-w-[1200px] w-full py-12 flex flex-col">
+      {/* Hero Slideshow Section - auto change, no overlay, no dots */}
+      {jerseys.length > 0 && (
+        <div className="w-full h-[320px] md:h-[400px] relative mb-8 rounded-lg overflow-hidden">
+          <AnimatePresence mode="sync">
+            <motion.img
+              key={jerseys[currentSlide].id}
+              src={
+                jerseys[currentSlide].image_urls && jerseys[currentSlide].image_urls.length > 0
+                  ? jerseys[currentSlide].image_urls[0]
+                  : jerseys[currentSlide].image_url
+              }
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.7 }}
+              className="absolute inset-0 w-full h-full object-cover"
+              alt={jerseys[currentSlide].name}
+            />
+          </AnimatePresence>
         </div>
-      </div>
+      )}
+      {/* Product Grid Section */}
       <div className="h-fit min-h-[400px] w-full grid grid-cols-1 md:grid-cols-3 gap-6 place-items-stretch items-stretch md:gap-12">
         {loading ? (
           <div className="col-span-3 flex items-center justify-center text-xl text-gray-500">

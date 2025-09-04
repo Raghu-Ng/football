@@ -150,7 +150,7 @@ const Navbar = () => {
           </>
         )}
       </AnimatePresence>
-      <div className="flex flex-col w-full max-w-[1400px] ">
+      <div className="flex flex-col w-full max-w-[1200px] ">
         <div className="w-full text-sm font-medium  &:hover:text-primary text-600 h-[6vh] border-b border-zinc-200 flex items-center justify-end">
           <div className="mr-auto ml-4 font-bold">UNITED FC KODAGU</div>
           {/* Show email and sign out if logged in, else show LOGIN and REGISTER */}
@@ -193,7 +193,7 @@ const Navbar = () => {
           >
             <img src={Logo} alt="" />
           </button>
-          <div className="h-full w-full justify-evenly text-xl tracking-tighter  text-primary font-bold  hidden md:flex">
+          <div className="h-full w-full justify-center text-xl tracking-tighter  text-primary font-bold  hidden md:flex">
             <NavLink onClick={() => navigate("/about")}>
               <button>ABOUT US</button>
             </NavLink>
@@ -214,7 +214,7 @@ const Navbar = () => {
               <button>CONTACT</button>
             </NavLink>
           </div>
-          <div className="h-full shrink-0 overflow-hidden w-fit flex ml-auto md:ml-0">
+          <div className="h-full  shrink-0 overflow-hidden w-fit flex ml-auto md:ml-0">
             {/* Auth buttons only on md and up */}
             <div className="hidden md:flex h-full w-fit whitespace-nowrap">
               {user ? (
