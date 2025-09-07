@@ -32,9 +32,9 @@ const News = () => {
           <ArrowRight className="translate-y-1" size={40}></ArrowRight>
         </div>
       </div>
-      <div className="h-fit lg:min-h-[300px] md:min-h-[400px] w-full grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12">
+      <div className="h-fit items-stretch lg:min-h-[300px] md:min-h-[400px] w-full grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12">
         {loading ? (
-          <div className="col-span-3 flex items-center justify-center text-xl text-gray-500">
+          <div className="col-span-3 flex items-stretch justify-center text-xl text-gray-500">
             Loading...
           </div>
         ) : (
@@ -42,7 +42,7 @@ const News = () => {
             <Link
               to={`/news/${item.id}`}
               key={item.id}
-              className="size-full flex flex-col h-fit gap-0 group cursor-pointer"
+              className="w-full flex-1 flex flex-col h-full gap-0 group cursor-pointer"
             >
               <div className="h-[240px] w-full relative overflow-hidden shrink-0 ">
                 <img
@@ -58,7 +58,7 @@ const News = () => {
                 {item.content.slice(0, 100)}
               </div>
               <div className="w-full h-[2px] bg-zinc-300 mt-0 mb-4"></div>
-              <div className="text-sm font-medium  text-primary flex justify-between w-full">
+              <div className="text-sm font-medium mt-auto  text-primary flex justify-between w-full">
                 NEWS{" "}
                 <span className="font-bold text-zinc-600">
                   {new Date(item.date_posted).toLocaleDateString("en-US", {
